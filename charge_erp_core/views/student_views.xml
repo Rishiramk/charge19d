@@ -138,7 +138,7 @@
                         <t t-name="card">
                             <div class="oe_kanban_global_click">
                                 <div class="o_kanban_image">
-                                    <img t-att-src="record.image_128.raw_value" alt="Student"/>
+                                    <field name="image_128" widget="kanban_image"/>
                                 </div>
                                 <div class="oe_kanban_details">
                                     <strong><field name="name"/></strong>

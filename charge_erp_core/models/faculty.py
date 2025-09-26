@@ -14,6 +14,7 @@ class OpFaculty(models.Model):
     first_name = fields.Char('First Name', required=True)
     middle_name = fields.Char('Middle Name')
     last_name = fields.Char('Last Name', required=True)
+    name = fields.Char(compute='_compute_name', store=True)
 
     birth_date = fields.Date('Birth Date', required=True)
     blood_group = fields.Selection([
