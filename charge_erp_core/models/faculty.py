@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -11,7 +12,15 @@ class OpFaculty(models.Model):
     middle_name = fields.Char('Middle Name', size=128)
     last_name = fields.Char('Last Name', size=128, required=True)
     name = fields.Char(string='Name', compute='_compute_name', store=True)
+
+    # New Fields
+    employee_id = fields.Char(string='Employee ID')
+    email = fields.Char(string='Email')
+    phone = fields.Char(string='Phone')
+    mobile = fields.Char(string='Mobile')
+
     birth_date = fields.Date('Birth Date', required=True)
+    age = fields.Integer(string='Age', compute='_compute_age')
     blood_group = fields.Selection([
         ('A+', 'A+ve'), ('B+', 'B+ve'), ('O+', 'O+ve'), ('AB+', 'AB+ve'),
         ('A-', 'A-ve'), ('B-', 'B-ve'), ('O-', 'O-ve'), ('AB-', 'AB-ve')
@@ -42,3 +51,14 @@ class OpFaculty(models.Model):
         for record in self:
             if record.birth_date and record.birth_date > fields.Date.today():
                 raise ValidationError(_("Birth Date can't be greater than current date!"))
+
+    @api.depends('birth_date')
+    def _compute_age(self):
+        for record in self:
+            if record.birth_date:
+                today = date.today()
+                record.age = today.year - record.birth_date.year - \
+                    ((today.month, today.day) <
+                     (record.birth_date.month, record.birth_date.day))
+            else:
+                record.age = 0

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields
+from datetime import date
+from odoo import api, models, fields
 
 class OpStudent(models.Model):
     _name = 'op.student'
@@ -18,6 +19,7 @@ class OpStudent(models.Model):
         ('other', 'Other')
     ], string='Gender')
     birth_date = fields.Date(string='Birth Date')
+    age = fields.Integer(string='Age', compute='_compute_age')
     blood_group = fields.Selection([
         ('A+', 'A+'), ('A-', 'A-'),
         ('B+', 'B+'), ('B-', 'B-'),
@@ -37,6 +39,7 @@ class OpStudent(models.Model):
         'res.partner', 'op_student_parent_rel', 'student_id', 'parent_id', string='Parents')
 
     # Other Information
+    student_id = fields.Char(string='Student ID')
     registration_number = fields.Char(string='Registration Number')
     library_card = fields.Char(string='Library Card')
     badge_id = fields.Char(string='Badge ID')
@@ -52,3 +55,14 @@ class OpStudent(models.Model):
     def _compute_session_count(self):
         for student in self:
             student.session_count = len(student.session_ids)
+
+    @api.depends('birth_date')
+    def _compute_age(self):
+        for record in self:
+            if record.birth_date:
+                today = date.today()
+                record.age = today.year - record.birth_date.year - \
+                    ((today.month, today.day) <
+                     (record.birth_date.month, record.birth_date.day))
+            else:
+                record.age = 0
