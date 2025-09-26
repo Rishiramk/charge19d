@@ -87,7 +87,13 @@
 
                             <!-- Courses -->
                             <page string="Courses">
-                                <field name="course_detail_ids"/>
+                                <field name="course_detail_ids">
+                                    <tree editable="bottom">
+                                        <field name="course_id"/>
+                                        <field name="academic_year_id"/>
+                                        <field name="status"/>
+                                    </tree>
+                                </field>
                             </page>
 
                             <!-- Other Information -->
@@ -127,12 +133,12 @@
                     <field name="name"/>
                     <field name="batch_id"/>
                     <field name="status"/>
-                    <field name="image_1920"/>
+                    <field name="partner_id"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click">
                                 <div class="o_kanban_image">
-                                    <img t-att-src="kanban_image('op.student', 'image_1920', record.id.raw_value)" alt="Student"/>
+                                    <img t-att-src="kanban_image('res.partner', 'image_1920', record.partner_id.raw_value)" alt="Student"/>
                                 </div>
                                 <div class="oe_kanban_details">
                                     <strong><field name="name"/></strong>

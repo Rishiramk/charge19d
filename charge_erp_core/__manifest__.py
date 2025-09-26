@@ -15,7 +15,6 @@
         'wizard/attendee_wizard_views.xml',
         'views/session_views.xml',
         'views/student_views.xml',
-        'views/student_course_views.xml',
         'views/course_views.xml',
         'views/faculty_views.xml',
         'views/subject_views.xml',
