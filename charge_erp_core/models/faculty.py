@@ -14,6 +14,7 @@ class OpFaculty(models.Model):
     )
 
     employee_id = fields.Char(string='Employee ID')
+    mobile = fields.Char(string='Mobile')
 
     birth_date = fields.Date('Birth Date', required=True)
     age = fields.Integer(string='Age', compute='_compute_age')
