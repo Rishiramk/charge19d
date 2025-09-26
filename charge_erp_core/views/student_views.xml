@@ -13,6 +13,7 @@
                     <field name="phone"/>
                     <field name="mobile"/>
                     <field name="registration_number"/>
+                    <field name="category_id"/>
                 </list>
             </field>
         </record>
@@ -24,7 +25,7 @@
             <field name="arch" type="xml">
                 <form string="Student">
                     <header>
-                        <field name="status" widget="statusbar" statusbar_visible="active,graduated"/>
+                        <field name="status" widget="statusbar" statusbar_visible="active,graduated,on_leave"/>
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
@@ -84,6 +85,17 @@
                                 <field name="parent_ids" widget="many2many_tags"/>
                             </page>
 
+                            <!-- Courses -->
+                            <page string="Courses">
+                                <field name="course_detail_ids">
+                                    <tree editable="bottom">
+                                        <field name="course_id"/>
+                                        <field name="academic_year_id"/>
+                                        <field name="status"/>
+                                    </tree>
+                                </field>
+                            </page>
+
                             <!-- Other Information -->
                             <page string="Other Information">
                                 <group>
@@ -91,11 +103,17 @@
                                     <field name="id_number"/>
                                     <field name="library_card"/>
                                     <field name="badge_id"/>
-                                    <field name="category"/>
-                                    <field name="user_id"/>
+                                    <field name="category_id"/>
                                     <field name="batch_id"/>
                                     <field name="program_id"/>
                                     <field name="miscellaneous"/>
+                                </group>
+                            </page>
+
+                            <!-- Portal Access -->
+                            <page string="Portal Access">
+                                <group>
+                                    <field name="user_id"/>
                                 </group>
                             </page>
 
@@ -105,11 +123,42 @@
             </field>
         </record>
 
+        <!-- Kanban View -->
+        <record id="view_op_student_kanban" model="ir.ui.view">
+            <field name="name">op.student.kanban</field>
+            <field name="model">op.student</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="batch_id"/>
+                    <field name="status"/>
+                    <field name="image_1920"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('op.student', 'image_1920', record.id.raw_value)" alt="Student"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong><field name="name"/></strong>
+                                    <ul>
+                                        <li>Batch: <field name="batch_id"/></li>
+                                        <li>Status: <field name="status"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <!-- Action -->
         <record id="action_op_student" model="ir.actions.act_window">
             <field name="name">Students</field>
             <field name="res_model">op.student</field>
-            <field name="view_mode">list,form</field>
+            <field name="view_mode">kanban,list,form</field>
         </record>
 
         <!-- Menu -->

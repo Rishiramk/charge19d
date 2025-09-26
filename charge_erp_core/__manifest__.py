@@ -22,6 +22,7 @@
         'views/program_level_views.xml',
         'views/program_views.xml',
         'views/department_views.xml',
+        'views/category_views.xml',
         'views/academic_term_views.xml',
         'views/academic_year_views.xml',
         'views/student_user_action.xml',
