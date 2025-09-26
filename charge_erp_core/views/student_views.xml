@@ -133,12 +133,12 @@
                     <field name="name"/>
                     <field name="batch_id"/>
                     <field name="status"/>
-                    <field name="partner_id"/>
+                    <field name="image_128"/>
                     <templates>
                         <t t-name="card">
                             <div class="oe_kanban_global_click">
                                 <div class="o_kanban_image">
-                                    <img t-att-src="kanban_image('res.partner', 'image_1920', record.partner_id.raw_value)" alt="Student"/>
+                                    <img t-att-src="record.image_128.raw_value" alt="Student"/>
                                 </div>
                                 <div class="oe_kanban_details">
                                     <strong><field name="name"/></strong>
