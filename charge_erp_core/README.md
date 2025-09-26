@@ -67,7 +67,7 @@ The faculty management system has been refactored to align with Odoo best practi
 
 - **Odoo 19 View Compatibility**: This development cycle included fixes for several view rendering errors specific to Odoo 19. This involved:
     - Replacing a deprecated `<tree>` tag with `<list>` for an inline list view definition.
-    - Correcting the Kanban view image rendering by replacing the deprecated `kanban_image()` function with a direct reference to the image field's raw value (`record.image_128.raw_value`).
+    - Correcting the Kanban view image rendering by using the `kanban_image` widget instead of a raw `<img>` tag.
     - Resolving a "Missing 'card' template" error by renaming the Kanban QWeb template to `card`.
 
 ## How to Deploy
