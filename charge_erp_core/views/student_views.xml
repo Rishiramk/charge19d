@@ -135,7 +135,7 @@
                     <field name="status"/>
                     <field name="partner_id"/>
                     <templates>
-                        <t t-name="kanban-box">
+                        <t t-name="card">
                             <div class="oe_kanban_global_click">
                                 <div class="o_kanban_image">
                                     <img t-att-src="kanban_image('res.partner', 'image_1920', record.partner_id.raw_value)" alt="Student"/>
