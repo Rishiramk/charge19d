@@ -138,7 +138,8 @@
                         <t t-name="card">
                             <div class="oe_kanban_global_click">
                                 <div class="o_kanban_image">
-                                    <field name="image_128" widget="kanban_image"/>
+                                    <!-- ✅ FIXED: use widget="image" instead of kanban_image() -->
+                                    <field name="image_128" widget="image" class="o_kanban_image"/>
                                 </div>
                                 <div class="oe_kanban_details">
                                     <strong><field name="name"/></strong>
@@ -169,4 +170,3 @@
 
     </data>
 </odoo>
-
