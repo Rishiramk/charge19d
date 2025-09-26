@@ -7,17 +7,13 @@ from odoo.exceptions import ValidationError
 class OpFaculty(models.Model):
     _name = "op.faculty"
     _description = "Faculty"
+    _inherits = {'res.partner': 'partner_id'}
 
-    first_name = fields.Char('First Name', translate=True, required=True)
-    middle_name = fields.Char('Middle Name', size=128)
-    last_name = fields.Char('Last Name', size=128, required=True)
-    name = fields.Char(string='Name', compute='_compute_name', store=True)
+    partner_id = fields.Many2one(
+        'res.partner', string='Partner', required=True, ondelete='cascade'
+    )
 
-    # New Fields
     employee_id = fields.Char(string='Employee ID')
-    email = fields.Char(string='Email')
-    phone = fields.Char(string='Phone')
-    mobile = fields.Char(string='Mobile')
 
     birth_date = fields.Date('Birth Date', required=True)
     age = fields.Integer(string='Age', compute='_compute_age')
@@ -37,14 +33,6 @@ class OpFaculty(models.Model):
     def _compute_session_count(self):
         for faculty in self:
             faculty.session_count = len(faculty.session_ids)
-
-    @api.depends('first_name', 'middle_name', 'last_name')
-    def _compute_name(self):
-        for record in self:
-            fname = record.first_name or ""
-            mname = record.middle_name or ""
-            lname = record.last_name or ""
-            record.name = " ".join(filter(None, [fname, mname, lname]))
 
     @api.constrains('birth_date')
     def _check_birthdate(self):
