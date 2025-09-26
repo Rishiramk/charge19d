@@ -23,6 +23,9 @@
             <field name="model">op.student</field>
             <field name="arch" type="xml">
                 <form string="Student">
+                    <header>
+                        <field name="status" widget="statusbar" statusbar_visible="active,graduated"/>
+                    </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                             <button name="%(charge_erp_core.session_list_action)d"

@@ -8,8 +8,13 @@ class Session(models.Model):
     name = fields.Char(required=True)
     start_date = fields.Date()
     duration = fields.Float(digits=(6, 2), help="Duration in days")
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('in_progress', 'In Progress'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled')
+    ], string='Status', default='draft', required=True)
     seats = fields.Integer(string="Number of seats")
-    classroom_id = fields.Many2one('op.classroom', string='Classroom')
     faculty_ids = fields.Many2many(
         'op.faculty', 'op_session_faculty_rel', 'session_id', 'faculty_id', string="Faculties")
     course_id = fields.Many2one('op.course', ondelete='cascade', string="Course", required=True)

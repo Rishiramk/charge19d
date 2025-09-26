@@ -17,6 +17,11 @@ class OpStudent(models.Model):
         ('female', 'Female'),
         ('other', 'Other')
     ], string='Gender')
+    status = fields.Selection([
+        ('active', 'Active'),
+        ('graduated', 'Graduated'),
+        ('on_leave', 'On Leave')
+    ], string='Status', default='active', required=True)
     birth_date = fields.Date(string='Birth Date')
     blood_group = fields.Selection([
         ('A+', 'A+'), ('A-', 'A-'),
