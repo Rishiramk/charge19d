@@ -21,7 +21,15 @@
         <record id="group_op_manager" model="res.groups">
             <field name="name">Manager</field>
             <field name="implied_ids" eval="[(4, ref('group_op_faculty'))]"/>
-            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+
+        <!-- Add admin and root user to the new Manager group -->
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('charge_erp_core.group_op_manager'))]"/>
+        </record>
+
+        <record id="base.user_root" model="res.users">
+            <field name="groups_id" eval="[(4, ref('charge_erp_core.group_op_manager'))]"/>
         </record>
 
     </data>
