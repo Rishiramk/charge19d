@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View for Student Course -->
+        <record id="view_op_student_course_tree" model="ir.ui.view">
+            <field name="name">op.student.course.tree</field>
+            <field name="model">op.student.course</field>
+            <field name="arch" type="xml">
+                <tree string="Courses" editable="bottom">
+                    <field name="course_id"/>
+                    <field name="academic_year_id"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
