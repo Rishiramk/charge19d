@@ -9,6 +9,10 @@
             <field name="arch" type="xml">
                 <form string="Session Form">
                     <header>
+                        <button name="action_start_session" string="Start Session" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                        <button name="action_mark_completed" string="Mark as Completed" type="object" class="oe_highlight" invisible="state != 'in_progress'"/>
+                        <button name="action_cancel" string="Cancel" type="object" invisible="state in ['completed', 'cancelled']"/>
+                        <button name="action_reset_to_draft" string="Reset to Draft" type="object" invisible="state != 'cancelled'"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,completed"/>
                         <button name="%(charge_erp_core.action_op_attendee_wizard)d"
                                 type="action"

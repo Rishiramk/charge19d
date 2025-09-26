@@ -31,3 +31,15 @@ class Session(models.Model):
             if len(r.attendee_ids) > r.seats:
                 raise ValidationError(_(
                     "There are more attendees than available seats."))
+
+    def action_start_session(self):
+        self.write({'state': 'in_progress'})
+
+    def action_mark_completed(self):
+        self.write({'state': 'completed'})
+
+    def action_cancel(self):
+        self.write({'state': 'cancelled'})
+
+    def action_reset_to_draft(self):
+        self.write({'state': 'draft'})
