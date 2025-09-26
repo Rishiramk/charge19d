@@ -10,4 +10,5 @@ access_op_department,access.op.department,model_op_department,base.group_user,1,
 access_op_academic_term,access.op.academic.term,model_op_academic_term,base.group_user,1,1,1,1
 access_op_academic_year,access.op.academic.year,model_op_academic_year,base.group_user,1,1,1,1
 access_op_session,access.op.session,model_op_session,base.group_user,1,1,1,1
+access_op_classroom,op.classroom,model_op_classroom,base.group_user,1,1,1,1
 access_op_attendee_wizard,access.op.attendee.wizard,model_op_attendee_wizard,base.group_user,1,1,1,1

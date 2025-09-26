@@ -9,7 +9,6 @@
             <field name="arch" type="xml">
                 <list string="Students">
                     <field name="name"/>
-                    <field name="student_id"/>
                     <field name="email"/>
                     <field name="phone"/>
                     <field name="mobile"/>
@@ -48,7 +47,6 @@
                                     <group>
                                         <field name="gender"/>
                                         <field name="birth_date"/>
-                                        <field name="age"/>
                                         <field name="blood_group"/>
                                     </group>
                                     <group>
@@ -86,7 +84,6 @@
                             <!-- Other Information -->
                             <page string="Other Information">
                                 <group>
-                                    <field name="student_id"/>
                                     <field name="registration_number"/>
                                     <field name="id_number"/>
                                     <field name="library_card"/>
