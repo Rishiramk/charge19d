@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 class OpFaculty(models.Model):
     _name = "op.faculty"
     _description = "Faculty"
+    _inherits = {'res.partner': 'partner_id'}
 
-    first_name = fields.Char('First Name', translate=True, required=True)
-    middle_name = fields.Char('Middle Name', size=128)
-    last_name = fields.Char('Last Name', size=128, required=True)
-    name = fields.Char(string='Name', compute='_compute_name', store=True)
+    partner_id = fields.Many2one(
+        'res.partner', string='Partner', required=True, ondelete='cascade'
+    )
+
     birth_date = fields.Date('Birth Date', required=True)
     blood_group = fields.Selection([
         ('A+', 'A+ve'), ('B+', 'B+ve'), ('O+', 'O+ve'), ('AB+', 'AB+ve'),
@@ -19,8 +19,10 @@ class OpFaculty(models.Model):
     gender = fields.Selection([
         ('male', 'Male'), ('female', 'Female')
     ], 'Gender', required=True)
-    nationality = fields.Many2one('res.country', 'Nationality')
-    active = fields.Boolean(default=True)
+    department_id = fields.Many2one('op.department', string='Department')
+    program_id = fields.Many2one('op.program', string='Program')
+    subject_ids = fields.Many2many('op.subject', string='Subjects')
+
     session_ids = fields.Many2many(
         'op.session', 'op_session_faculty_rel', 'faculty_id', 'session_id', string="Sessions")
     session_count = fields.Integer(string='Session Count', compute='_compute_session_count')
@@ -28,14 +30,6 @@ class OpFaculty(models.Model):
     def _compute_session_count(self):
         for faculty in self:
             faculty.session_count = len(faculty.session_ids)
-
-    @api.depends('first_name', 'middle_name', 'last_name')
-    def _compute_name(self):
-        for record in self:
-            fname = record.first_name or ""
-            mname = record.middle_name or ""
-            lname = record.last_name or ""
-            record.name = " ".join(filter(None, [fname, mname, lname]))
 
     @api.constrains('birth_date')
     def _check_birthdate(self):

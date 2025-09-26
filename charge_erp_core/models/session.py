@@ -15,8 +15,7 @@ class Session(models.Model):
         ('cancelled', 'Cancelled')
     ], string='Status', default='draft', required=True)
     seats = fields.Integer(string="Number of seats")
-    faculty_ids = fields.Many2many(
-        'op.faculty', 'op_session_faculty_rel', 'session_id', 'faculty_id', string="Faculties")
+    faculty_id = fields.Many2one('op.faculty', string="Faculty")
     course_id = fields.Many2one('op.course', ondelete='cascade', string="Course", required=True)
     attendee_ids = fields.Many2many(
         'op.student', 'op_session_student_rel', 'session_id', 'student_id', string="Attendees")
