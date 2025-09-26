@@ -10,6 +10,7 @@ class OpStudent(models.Model):
     partner_id = fields.Many2one(
         'res.partner', string='Partner', required=True, ondelete='cascade'
     )
+    image_128 = fields.Image(related='partner_id.image_128', readonly=True)
 
     # Personal Information
     gender = fields.Selection([
