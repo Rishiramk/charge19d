@@ -12,7 +12,6 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
-        'views/menu_views.xml',
         'wizard/attendee_wizard_views.xml',
         'views/session_views.xml',
         'views/student_views.xml',
@@ -27,6 +26,7 @@
         'views/academic_term_views.xml',
         'views/academic_year_views.xml',
         'views/student_user_action.xml',
+        'views/menu_views.xml',
     ],
     'installable': True,
     'application': True,
