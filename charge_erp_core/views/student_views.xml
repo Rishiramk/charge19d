@@ -36,11 +36,32 @@
                                 context="{'search_default_attendee_ids': id}">
                                 <field name="session_count" widget="statinfo" string="Sessions"/>
                             </button>
+                            <button name="action_view_assignments"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-pencil-square-o">
+                                <field name="assignment_count" widget="statinfo" string="Assignments"/>
+                            </button>
+                            <button name="action_view_fees"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-money">
+                                <field name="fee_due_count" widget="statinfo" string="Fees"/>
+                            </button>
+                            <button name="action_view_attendance"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-square-o">
+                                <field name="attendance_count" widget="statinfo" string="Attendance"/>
+                            </button>
                         </div>
                         <field name="image_1920" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
+                            <field name="name" invisible="1" force_save="1"/>
                             <h1>
-                                <field name="name" placeholder="Student's Name"/>
+                                <field name="first_name" placeholder="First Name" style="width: 33%"/>
+                                <field name="middle_name" placeholder="Middle Name" style="width: 33%"/>
+                                <field name="last_name" placeholder="Last Name" style="width: 34%" required="1"/>
                             </h1>
                         </div>
                         <notebook>
@@ -162,11 +183,6 @@
             <field name="view_mode">kanban,list,form</field>
         </record>
 
-        <!-- Menu -->
-        <menuitem id="menu_op_student" name="Students"
-                  parent="menu_op_school_root"
-                  action="action_op_student"
-                  sequence="10"/>
 
     </data>
 </odoo>

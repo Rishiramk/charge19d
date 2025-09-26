@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields
+from odoo.exceptions import UserError
 
 class OpStudent(models.Model):
     _name = 'op.student'
@@ -56,7 +57,31 @@ class OpStudent(models.Model):
     session_ids = fields.Many2many(
         'op.session', 'op_session_student_rel', 'student_id', 'session_id', string="Sessions")
     session_count = fields.Integer(string='Session Count', compute='_compute_session_count')
+    assignment_count = fields.Integer(string='Assignment Count', compute='_compute_assignment_count')
+    fee_due_count = fields.Integer(string='Fee Due Count', compute='_compute_fee_due_count')
+    attendance_count = fields.Integer(string='Attendance Count', compute='_compute_attendance_count')
 
     def _compute_session_count(self):
         for student in self:
             student.session_count = len(student.session_ids)
+
+    def _compute_assignment_count(self):
+        for student in self:
+            student.assignment_count = 0
+
+    def _compute_fee_due_count(self):
+        for student in self:
+            student.fee_due_count = 0
+
+    def _compute_attendance_count(self):
+        for student in self:
+            student.attendance_count = 0
+
+    def action_view_assignments(self):
+        raise UserError("The 'Assignments' module is not yet installed.")
+
+    def action_view_fees(self):
+        raise UserError("The 'Fees' module is not yet installed.")
+
+    def action_view_attendance(self):
+        raise UserError("The 'Attendance' module is not yet installed.")

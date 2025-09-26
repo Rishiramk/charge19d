@@ -10,6 +10,7 @@
     'category': 'Education',
     'depends': ['base', 'mail'],
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/menu_views.xml',
         'wizard/attendee_wizard_views.xml',

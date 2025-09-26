@@ -13,4 +13,5 @@ from . import academic_year
 from . import student_user
 from . import session
 from . import category
+from . import res_partner
 from . import student_course

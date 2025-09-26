@@ -17,6 +17,9 @@ class OpCourse(models.Model):
     active = fields.Boolean(default=True)
     session_ids = fields.One2many(
         'op.session', 'course_id', string="Sessions")
+    student_course_ids = fields.One2many(
+        'op.student.course', 'course_id',
+        string='Student Courses')
     session_count = fields.Integer(
         string='Session Count', compute='_compute_session_count')
 
