@@ -15,11 +15,10 @@ class OpFaculty(models.Model):
     middle_name = fields.Char('Middle Name')
     last_name = fields.Char('Last Name', required=True)
 
-    # override the inherited partner "name" (not a new field, but computed + stored in res.partner)
     name = fields.Char(
         compute='_compute_name',
         store=True,
-        readonly=False,  # allow manual editing if needed
+        readonly=False,
     )
 
     birth_date = fields.Date('Birth Date', required=True)
@@ -53,3 +52,28 @@ class OpFaculty(models.Model):
         for record in self:
             if record.birth_date and record.birth_date > fields.Date.today():
                 raise ValidationError(_("Birth Date can't be greater than current date!"))
+
+    # 🔑 Ensure partner.name is always filled at creation
+    @api.model
+    def create(self, vals):
+        # Build a name if not explicitly given
+        fname = vals.get("first_name") or ""
+        mname = vals.get("middle_name") or ""
+        lname = vals.get("last_name") or ""
+        full_name = " ".join(filter(None, [fname, mname, lname])) or _("Unnamed Faculty")
+
+        # inject into partner
+        if "partner_id" not in vals:
+            partner_vals = {
+                "name": full_name,
+                "is_company": False,
+            }
+            partner = self.env["res.partner"].create(partner_vals)
+            vals["partner_id"] = partner.id
+        else:
+            # if partner exists but no name set, force update
+            partner = self.env["res.partner"].browse(vals["partner_id"])
+            if not partner.name:
+                partner.name = full_name
+
+        return super(OpFaculty, self).create(vals)
