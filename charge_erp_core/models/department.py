@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 class OpDepartment(models.Model):
     _name = "op.department"
@@ -9,3 +9,15 @@ class OpDepartment(models.Model):
     name = fields.Char('Name', required=True)
     code = fields.Char('Code', required=True)
     parent_id = fields.Many2one('op.department', 'Parent Department')
+
+    @api.model
+    def create(self, vals):
+        """
+        Overrides the create method to auto-generate a department code
+        from the name if it's not provided.
+        """
+        if vals.get('name') and not vals.get('code'):
+            name = vals.get('name')
+            # A simple way to generate a code: take the first letter of each word.
+            vals['code'] = ''.join(word[0] for word in name.split()).upper()
+        return super(OpDepartment, self).create(vals)
