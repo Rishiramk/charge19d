@@ -11,11 +11,6 @@ class OpFaculty(models.Model):
         'res.partner', string='Partner', required=True, ondelete='cascade'
     )
 
-    first_name = fields.Char('First Name', required=True)
-    middle_name = fields.Char('Middle Name')
-    last_name = fields.Char('Last Name', required=True)
-    name = fields.Char(compute='_compute_name', store=True)
-
     birth_date = fields.Date('Birth Date', required=True)
     blood_group = fields.Selection([
         ('A+', 'A+ve'), ('B+', 'B+ve'), ('O+', 'O+ve'), ('AB+', 'AB+ve'),
@@ -35,14 +30,6 @@ class OpFaculty(models.Model):
     def _compute_session_count(self):
         for faculty in self:
             faculty.session_count = len(faculty.session_ids)
-
-    @api.depends('first_name', 'middle_name', 'last_name')
-    def _compute_name(self):
-        for record in self:
-            fname = record.first_name or ""
-            mname = record.middle_name or ""
-            lname = record.last_name or ""
-            record.name = " ".join(filter(None, [fname, mname, lname]))
 
     @api.constrains('birth_date')
     def _check_birthdate(self):
