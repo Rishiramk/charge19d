@@ -11,6 +11,17 @@ class OpFaculty(models.Model):
         'res.partner', string='Partner', required=True, ondelete='cascade'
     )
 
+    first_name = fields.Char('First Name', required=True)
+    middle_name = fields.Char('Middle Name')
+    last_name = fields.Char('Last Name', required=True)
+
+    # override the inherited partner "name" (not a new field, but computed + stored in res.partner)
+    name = fields.Char(
+        compute='_compute_name',
+        store=True,
+        readonly=False,  # allow manual editing if needed
+    )
+
     birth_date = fields.Date('Birth Date', required=True)
     blood_group = fields.Selection([
         ('A+', 'A+ve'), ('B+', 'B+ve'), ('O+', 'O+ve'), ('AB+', 'AB+ve'),
@@ -30,6 +41,12 @@ class OpFaculty(models.Model):
     def _compute_session_count(self):
         for faculty in self:
             faculty.session_count = len(faculty.session_ids)
+
+    @api.depends('first_name', 'middle_name', 'last_name')
+    def _compute_name(self):
+        for record in self:
+            parts = [record.first_name, record.middle_name, record.last_name]
+            record.name = " ".join(filter(None, parts)) or _("Unnamed Faculty")
 
     @api.constrains('birth_date')
     def _check_birthdate(self):
