@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+# Base User Group (Read-only access for all internal users)
 access_op_student_user,access.op.student.user,model_op_student,base.group_user,1,0,0,0
 access_op_course_user,access.op.course.user,model_op_course,base.group_user,1,0,0,0
 access_op_faculty_user,access.op.faculty.user,model_op_faculty,base.group_user,1,0,0,0
@@ -13,6 +14,8 @@ access_op_session_user,access.op.session.user,model_op_session,base.group_user,1
 access_op_attendee_wizard_user,access.op.attendee.wizard.user,model_op_attendee_wizard,base.group_user,1,0,0,0
 access_op_category_user,access.op.category.user,model_op_category,base.group_user,1,0,0,0
 access_op_student_course_user,access.op.student.course.user,model_op_student_course,base.group_user,1,0,0,0
+
+# Student Group
 access_op_student_student,access.op.student.student,model_op_student,charge_erp_core.group_op_student,1,0,0,0
 access_op_course_student,access.op.course.student,model_op_course,charge_erp_core.group_op_student,1,0,0,0
 access_op_faculty_student,access.op.faculty.student,model_op_faculty,charge_erp_core.group_op_student,1,0,0,0
@@ -27,6 +30,8 @@ access_op_session_student,access.op.session.student,model_op_session,charge_erp_
 access_op_attendee_wizard_student,access.op.attendee.wizard.student,model_op_attendee_wizard,charge_erp_core.group_op_student,1,0,0,0
 access_op_category_student,access.op.category.student,model_op_category,charge_erp_core.group_op_student,1,0,0,0
 access_op_student_course_student,access.op.student.course.student,model_op_student_course,charge_erp_core.group_op_student,1,0,0,0
+
+# Faculty Group
 access_op_student_faculty,access.op.student.faculty,model_op_student,charge_erp_core.group_op_faculty,1,1,0,0
 access_op_course_faculty,access.op.course.faculty,model_op_course,charge_erp_core.group_op_faculty,1,0,0,0
 access_op_faculty_faculty,access.op.faculty.faculty,model_op_faculty,charge_erp_core.group_op_faculty,1,1,0,0
@@ -41,6 +46,8 @@ access_op_session_faculty,access.op.session.faculty,model_op_session,charge_erp_
 access_op_attendee_wizard_faculty,access.op.attendee.wizard.faculty,model_op_attendee_wizard,charge_erp_core.group_op_faculty,1,1,1,0
 access_op_category_faculty,access.op.category.faculty,model_op_category,charge_erp_core.group_op_faculty,1,0,0,0
 access_op_student_course_faculty,access.op.student.course.faculty,model_op_student_course,charge_erp_core.group_op_faculty,1,1,1,0
+
+# Manager Group
 access_op_student_manager,access.op.student.manager,model_op_student,charge_erp_core.group_op_manager,1,1,1,1
 access_op_course_manager,access.op.course.manager,model_op_course,charge_erp_core.group_op_manager,1,1,1,1
 access_op_faculty_manager,access.op.faculty.manager,model_op_faculty,charge_erp_core.group_op_manager,1,1,1,1
@@ -55,3 +62,19 @@ access_op_session_manager,access.op.session.manager,model_op_session,charge_erp_
 access_op_attendee_wizard_manager,access.op.attendee.wizard.manager,model_op_attendee_wizard,charge_erp_core.group_op_manager,1,1,1,1
 access_op_category_manager,access.op.category.manager,model_op_category,charge_erp_core.group_op_manager,1,1,1,1
 access_op_student_course_manager,access.op.student.course.manager,model_op_student_course,charge_erp_core.group_op_manager,1,1,1,1
+
+# System Administrator Group (Full access to all models)
+access_op_student_admin,access.op.student.admin,model_op_student,base.group_system,1,1,1,1
+access_op_course_admin,access.op.course.admin,model_op_course,base.group_system,1,1,1,1
+access_op_faculty_admin,access.op.faculty.admin,model_op_faculty,base.group_system,1,1,1,1
+access_op_subject_admin,access.op.subject.admin,model_op_subject,base.group_system,1,1,1,1
+access_op_batch_admin,access.op.batch.admin,model_op_batch,base.group_system,1,1,1,1
+access_op_program_level_admin,access.op.program.level.admin,model_op_program_level,base.group_system,1,1,1,1
+access_op_program_admin,access.op.program.admin,model_op_program,base.group_system,1,1,1,1
+access_op_department_admin,access.op.department.admin,model_op_department,base.group_system,1,1,1,1
+access_op_academic_term_admin,access.op.academic.term.admin,model_op_academic_term,base.group_system,1,1,1,1
+access_op_academic_year_admin,access.op.academic.year.admin,model_op_academic_year,base.group_system,1,1,1,1
+access_op_session_admin,access.op.session.admin,model_op_session,base.group_system,1,1,1,1
+access_op_attendee_wizard_admin,access.op.attendee.wizard.admin,model_op_attendee_wizard,base.group_system,1,1,1,1
+access_op_category_admin,access.op.category.admin,model_op_category,base.group_system,1,1,1,1
+access_op_student_course_admin,access.op.student.course.admin,model_op_student_course,base.group_system,1,1,1,1
