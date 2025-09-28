@@ -10,6 +10,7 @@ As of the current version, this module includes the following features:
 - Bi-directional relationships between all major academic models.
 - Enhanced views (List, Form, Kanban, Search) for all core models.
 - Role-based access control for Students, Faculty, and Managers.
+- A dedicated "Enrollments" menu to manage student course registrations.
 
 ## Core Enhancements (Recent Development Cycle)
 

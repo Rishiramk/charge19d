@@ -55,6 +55,10 @@ The user interface was significantly upgraded to be more powerful and user-frien
 -   **Refined Form Layouts:**
     -   **Enhancement:** The Student form view was reorganized to be more logical, with all academic information consolidated under a single "Educational" tab.
 
+-   **Enrollment Menu Item:**
+    -   **Enhancement:** Added a dedicated "Enrollments" menu item under "Academics > Course Management" to provide direct access to the `op.course.enrollment` model.
+    -   **Implementation:** This involved creating new list and form views, a window action, and updating the manifest file to make the model accessible from the UI.
+
 ---
 
 ## II. Issues Encountered & Bug Fixes
