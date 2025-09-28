@@ -9,6 +9,12 @@ class OpDepartment(models.Model):
     name = fields.Char('Name', required=True)
     code = fields.Char('Code', required=True)
     parent_id = fields.Many2one('op.department', 'Parent Department')
+    course_ids = fields.One2many('op.course', 'department_id', string='Courses')
+    course_count = fields.Integer(string='Course Count', compute='_compute_course_count')
+
+    def _compute_course_count(self):
+        for department in self:
+            department.course_count = len(department.course_ids)
 
     @api.model
     def create(self, vals_list):

@@ -22,6 +22,14 @@
             <field name="arch" type="xml">
                 <form string="Department">
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="%(charge_erp_core.action_op_course)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-graduation-cap">
+                                <field name="course_count" widget="statinfo" string="Courses"/>
+                            </button>
+                        </div>
                         <group>
                             <field name="name"/>
                             <field name="code"/>

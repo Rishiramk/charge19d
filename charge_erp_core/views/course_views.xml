@@ -37,6 +37,7 @@
                             </group>
                             <group>
                                 <field name="parent_id"/>
+                                <field name="department_id"/>
                                 <field name="evaluation_type"/>
                                 <field name="active"/>
                             </group>

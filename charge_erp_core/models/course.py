@@ -10,6 +10,7 @@ class OpCourse(models.Model):
     name = fields.Char('Name', required=True, translate=True)
     code = fields.Char('Code', size=16, required=True)
     parent_id = fields.Many2one('op.course', 'Parent Course', index=True, ondelete='cascade')
+    department_id = fields.Many2one('op.department', string='Department')
     evaluation_type = fields.Selection(
         [('normal', 'Normal'), ('GPA', 'GPA'),
          ('CWA', 'CWA'), ('CCE', 'CCE')],
