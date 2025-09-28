@@ -7,7 +7,7 @@ This module has recently undergone a major "Phase 1" refactoring to establish a 
 ## Key Features & Recent Improvements
 
 - **Modular Architecture**: Designed to be lean and stable, serving as the core for future extension modules (e.g., Fees, Assignments, Attendance).
-- **Enhanced Data Integrity**: Key models now include database-level uniqueness constraints (`_sql_constraints`) to prevent duplicate records and ensure data quality. For example, student `roll_number` and course `code` must be unique.
+- **Enhanced Data Integrity**: Key models now include uniqueness constraints to prevent duplicate records and ensure data quality. A combination of database-level constraints (`_sql_constraints`) and Python-level constraints (`@api.constrains`) are used to provide the most reliable validation for all models.
 - **Normalized Data Models**:
     - **Student Name**: The `res.partner` model has been extended to include granular `first_name`, `middle_name`, and `last_name` fields, ensuring data consistency. The full name is constructed automatically.
     - **Student Category**: The student category is a relational `Many2one` field, allowing for better management and filtering.
