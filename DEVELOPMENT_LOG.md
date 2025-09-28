@@ -75,3 +75,8 @@ During development, two key issues were identified and resolved.
 -   **Issue:** The "Sessions" smart button on the student form was non-functional. Clicking it would not correctly filter the sessions for that student.
 -   **Root Cause Analysis:** The issue was traced to the button's context (`search_default_attendee_ids`), which relies on a filter being defined in the target model's search view. The `op.session` model was missing a search view entirely.
 -   **Fix:** A new, comprehensive search view was created for the `op.session` model. Crucially, this new view included a `<field name="attendee_ids" ... />` definition, which enabled the `search_default` context to work correctly. This not only fixed the bug but also added valuable search functionality to the Sessions screen.
+
+### Bug 3: Incorrect Display Name for Course Enrollment
+
+-   **Issue:** When creating a new course enrollment record (e.g., from the Student form), the UI would display a generic system ID like "op.course.enrollment,NewId_..." instead of a human-readable name.
+-   **Fix:** A computed `name` field was added to the `op.course.enrollment` model. This field generates a user-friendly name by combining the student's name and the course name (e.g., "John Doe - Introduction to Python"), resolving the display issue.

@@ -46,6 +46,7 @@ The user interface has been significantly upgraded to be more powerful and user-
 
 - **Search View Syntax:** A bug in the initial implementation of the new search views (related to an invalid `<group>` tag) was identified and corrected across all affected views.
 - **Smart Button Action:** A critical bug preventing the Student "Sessions" smart button from working was fixed by adding the required search view for the Session model.
+- **Enrollment Display Name:** Fixed an issue where new course enrollment records would display a generic system ID instead of a user-friendly name. This was resolved by adding a computed `name` field to the `op.course.enrollment` model.
 
 ## How to Deploy
 
