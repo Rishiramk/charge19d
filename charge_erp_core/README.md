@@ -1,58 +1,60 @@
 # Charge ERP Core Module
 
-Welcome to the Charge ERP Core module. This module provides the foundational features for a comprehensive School Information System (SIS) built on Odoo 19. It includes the core data models, security structure, and user interface for managing students, faculty, courses, and other academic entities.
+This module contains the core models and functionality for the Charge ERP system.
 
-This module has recently undergone a major "Phase 1" refactoring to establish a robust and secure foundation for future development.
+## Features
 
-## Key Features & Recent Improvements
+As of the current version, this module includes the following features:
+- A `School` menu in the Odoo interface.
+- Core models for managing: Students, Courses, Faculties, Subjects, Batches, Programs, Departments, and Academic Years.
+- Bi-directional relationships between all major academic models.
+- Enhanced views (List, Form, Kanban, Search) for all core models.
+- Role-based access control for Students, Faculty, and Managers.
 
-- **Modular Architecture**: Designed to be lean and stable, serving as the core for future extension modules (e.g., Fees, Assignments, Attendance).
-- **Normalized Data Models**:
-    - **Student Name**: The `res.partner` model has been extended to include granular `first_name`, `middle_name`, and `last_name` fields, ensuring data consistency. The full name is constructed automatically.
-    - **Student Category**: The student category is a relational `Many2one` field, allowing for better management and filtering.
-- **Restructured UI**: The user interface has been reorganized for clarity, with menus grouped into logical sections:
-    - **People**: For managing Students and Faculty.
-    - **Academics**: For managing Sessions, Courses, Batches, and Subjects.
-    - **Academics > Configuration**: For less-frequently accessed settings like Academic Years, Programs, and Departments.
-- **Enhanced Relationships**:
-    - **Faculty & Sessions**: A bi-directional `One2many` relationship now links faculty to their assigned sessions, with a smart button on the faculty form for easy navigation.
-    - **Faculty & Subjects**: A bi-directional `ManyToManyField` links faculty and subjects, allowing for better academic planning.
-    - **Courses & Departments**: A bi-directional relationship now links courses to their respective academic departments, with a smart button on the department form.
-- **Course Enrollment (`op.course.enrollment`)**: The previous `op.student.course` model has been refactored into `op.course.enrollment` for greater clarity. This model robustly tracks student enrollments in courses for specific academic years.
-- **Role-Based Access Control**: A granular security system has been implemented to control user permissions.
-- **Extensibility**: The student form now includes placeholder "smart buttons" for future modules like Assignments, Fees, and Attendance, ensuring a seamless upgrade path.
+## Core Enhancements (Recent Development Cycle)
 
-## Access Control and Security Setup
+This module has undergone a significant enhancement cycle to improve data integrity, usability, and functionality.
 
-The security of the Charge ERP Core module is built around a role-based access control system. We have defined three primary roles with specific permissions, in addition to the standard Odoo Administrator.
+### 1. Data Model & Relationship Enhancements
 
-### Roles and Permissions
+The core data model has been strengthened by establishing critical bi-directional relationships:
 
-1.  **Student (`charge_erp_core.group_op_student`)**
-    - **Permissions**: Read-only access.
-    - **Description**: This is the most restrictive role, intended for students. Users in this group can view their own information, as well as general academic information like courses and subjects, but cannot create or modify any records.
+- **Faculty & Sessions:** A `One2many` relationship now correctly links faculty to their assigned sessions. A smart button on the Faculty form displays the session count and provides direct navigation.
+- **Faculty & Subjects:** A `ManyToManyField` now links faculty and subjects, allowing the system to track which subjects a faculty can teach and which faculty are available for a given subject.
+- **Courses & Departments:** Courses are now linked to their respective academic departments via a `Many2one` relationship, with a smart button on the Department form to show all associated courses.
+- **Batches, Programs & Academic Years:** Batches are now formally linked to both a Program and an Academic Year, creating a clear academic hierarchy. Smart buttons have been added to the Program and Academic Year forms for easy navigation.
 
-2.  **Faculty (`charge_erp_core.group_op_faculty`)**
-    - **Permissions**: Read access to most academic data, with limited write/create access.
-    - **Description**: This role is for teachers and other faculty members. They can view student profiles and academic structures. Crucially, they have permission to **create and manage Sessions** and **manage student course enrollments**, but they cannot create new students or courses.
+### 2. Course Enrollment Refactoring
 
-3.  **Manager (`charge_erp_core.group_op_manager`)**
-    - **Permissions**: Full Create, Read, Update, Delete (CRUD) access to all models within this module.
-    - **Description**: This is the highest-level role within the Charge ERP module. Users in this group, such as administrative staff, have full control over all academic and user data. They can create new students, faculty, courses, and configure all academic settings.
+To improve clarity and align with best practices, the student enrollment system was refactored:
+- **Model Rename:** The ambiguous `op.student.course` model has been renamed to `op.course.enrollment`.
+- **Field Rename:** The corresponding `One2many` fields on the student and course models have been renamed to the more intuitive `enrollment_ids`.
+- **Security & Views:** All related security rules and views have been updated to reflect the new model name.
 
-4.  **System Administrator (`base.group_system`)**
-    - **Permissions**: Full CRUD access to all models.
-    - **Description**: The standard Odoo Administrator group has been granted full permissions for all models in this module. Any user in this group (like the `devops` user) will have complete access, including the ability to see all "New" buttons.
+### 3. UI/UX Improvements
 
-### How to Assign Roles to Users
+The user interface has been significantly upgraded to be more powerful and user-friendly:
 
-To grant users the appropriate permissions, you must assign them to one of the groups listed above. This is done by a System Administrator.
+- **Powerful Search Views:** New search views have been added for Students, Faculty, Courses, and Sessions. These views provide robust search fields, pre-defined filters (e.g., "Active Students"), and powerful "Group By" options (e.g., group students by batch, group faculty by department).
+- **Informative Kanban Views:**
+    - The **Student Kanban** view is now color-coded based on status (Active, On Leave, Graduated) and includes more details like the student's program and email.
+    - The **Faculty Kanban** view now displays the faculty member's email and phone number directly on the card.
+- **Refined Form Layouts:** The Student form view has been reorganized to be more logical, with all academic information consolidated under a single "Educational" tab.
 
-1.  Navigate to **Settings > Users & Companies > Users**.
-2.  Select the user you wish to modify.
-3.  Click **Edit**.
-4.  In the **Access Rights** tab, under the "Charge ERP" section, you will see the available roles (Student, Faculty, Manager).
-5.  Check the box next to the desired role for the user. A user can have multiple roles, and they will inherit the highest level of permission granted by their roles.
-6.  Click **Save**.
+### 4. Bug Fixes
 
-The user's permissions will be updated immediately. For example, to give a user the ability to create new students, you would add them to the **Manager** group.
+- **Search View Syntax:** A bug in the initial implementation of the new search views (related to an invalid `<group>` tag) was identified and corrected across all affected views.
+- **Smart Button Action:** A critical bug preventing the Student "Sessions" smart button from working was fixed by adding the required search view for the Session model.
+
+## How to Deploy
+
+To deploy this module, please follow these steps:
+
+1.  **Ensure you have a running Odoo 19 instance.**
+2.  **Add this module to your addons path.** Place the `charge_erp_core` directory into the `addons` directory of your Odoo installation.
+3.  **Restart your Odoo server.** This is necessary for Odoo to recognize the new module.
+4.  **Activate Developer Mode.** In your Odoo instance, go to `Settings` -> `General Settings` and click on `Activate the developer mode`.
+5.  **Update the Apps List.** Go to `Apps` in the main menu and click on `Update Apps List` in the secondary menu. You will be prompted to confirm the update.
+6.  **Install or Upgrade the Module.** Search for `Charge ERP Core` in the Apps list (you may need to remove the default "Apps" filter to see it). Click the "Install" or "Upgrade" button on the module.
+
+Once the installation is complete, you will see a new "School" menu in your Odoo instance where you can manage the new models.

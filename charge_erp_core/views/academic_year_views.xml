@@ -23,6 +23,14 @@
             <field name="arch" type="xml">
                 <form string="Academic Year">
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="%(charge_erp_core.action_op_batch)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-sitemap">
+                                <field name="batch_count" widget="statinfo" string="Batches"/>
+                            </button>
+                        </div>
                         <group>
                             <field name="name"/>
                             <field name="start_date"/>

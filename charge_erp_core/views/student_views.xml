@@ -108,8 +108,8 @@
                                 <field name="parent_ids" widget="many2many_tags"/>
                             </page>
 
-                            <!-- Academic Information -->
-                            <page string="Academic">
+                            <!-- Educational -->
+                            <page string="Educational">
                                 <group>
                                     <group>
                                         <field name="roll_number"/>
