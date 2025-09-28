@@ -23,8 +23,8 @@ class OpFaculty(models.Model):
     ], 'Gender', required=True)
 
     # Contact Information
-    phone = fields.Char(related='partner_id.phone', readonly=False)
-    mobile = fields.Char(related='partner_id.mobile', readonly=False)
+    phone = fields.Char(string='Phone')
+    mobile = fields.Char(string='Mobile')
     email = fields.Char(related='partner_id.email', readonly=False)
     street = fields.Char(related='partner_id.street', readonly=False)
     street2 = fields.Char(related='partner_id.street2', readonly=False)
