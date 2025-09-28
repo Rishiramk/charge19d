@@ -7,6 +7,12 @@
             <field name="tag">charge_erp_core.dashboard</field>
         </record>
 
+        <!-- Fallback action to prevent errors if a user's home action is set to a missing dashboard -->
+        <record id="action_spreadsheet_dashboard" model="ir.actions.client">
+            <field name="name">Dashboard</field>
+            <field name="tag">charge_erp_core.dashboard</field>
+        </record>
+
         <menuitem
             id="menu_charge_erp_dashboard"
             name="Dashboard"
