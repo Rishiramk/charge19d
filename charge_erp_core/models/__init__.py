@@ -14,5 +14,5 @@ from . import student_user
 from . import session
 from . import category
 from . import res_partner
-from . import student_course
+from . import student_subject_enrollment
 from . import res_users

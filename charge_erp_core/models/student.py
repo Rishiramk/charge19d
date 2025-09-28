@@ -67,8 +67,8 @@ class OpStudent(models.Model):
     batch_id = fields.Many2one('op.batch', string='Batch')
     program_id = fields.Many2one('op.program', string='Program')
     miscellaneous = fields.Text(string='Miscellaneous')
-    course_detail_ids = fields.One2many(
-        'op.student.course', 'student_id', string='Course Details')
+    subject_enrollment_ids = fields.One2many(
+        'op.student.subject.enrollment', 'student_id', string='Subject Enrollments')
     session_ids = fields.Many2many(
         'op.session', 'op_session_student_rel', 'student_id', 'session_id', string="Sessions")
     session_count = fields.Integer(string='Session Count', compute='_compute_session_count')
