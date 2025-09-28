@@ -75,6 +75,7 @@
                                         <field name="blood_group"/>
                                     </group>
                                     <group>
+                                        <field name="lang"/>
                                         <field name="nationality"/>
                                         <field name="visa_info"/>
                                         <field name="is_an_alumni"/>
@@ -90,6 +91,7 @@
                                     <field name="email"/>
                                     <field name="emergency_contact_id"/>
                                 </group>
+                                <field name="address_type"/>
                                 <label for="street"/>
                                 <div class="o_address_format">
                                     <field name="street"/>
@@ -106,8 +108,18 @@
                                 <field name="parent_ids" widget="many2many_tags"/>
                             </page>
 
-                            <!-- Courses -->
-                            <page string="Courses">
+                            <!-- Educational -->
+                            <page string="Educational">
+                                <group>
+                                    <group>
+                                        <field name="roll_number"/>
+                                        <field name="registration_number"/>
+                                        <field name="batch_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="program_id"/>
+                                    </group>
+                                </group>
                                 <field name="course_detail_ids">
                                     <list editable="bottom">
                                         <field name="course_id"/>
@@ -120,13 +132,11 @@
                             <!-- Other Information -->
                             <page string="Other Information">
                                 <group>
-                                    <field name="registration_number"/>
                                     <field name="id_number"/>
                                     <field name="library_card"/>
                                     <field name="badge_id"/>
+                                    <field name="pin"/>
                                     <field name="category_id"/>
-                                    <field name="batch_id"/>
-                                    <field name="program_id"/>
                                     <field name="miscellaneous"/>
                                 </group>
                             </page>
