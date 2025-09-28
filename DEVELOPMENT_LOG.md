@@ -59,13 +59,16 @@ The user interface was significantly upgraded to be more powerful and user-frien
     -   **Enhancement:** Added a dedicated "Enrollments" menu item under "Academics > Course Management" to provide direct access to the `op.course.enrollment` model.
     -   **Implementation:** This involved creating new list and form views, a window action, and updating the manifest file to make the model accessible from the UI.
 
-### 4. Enhanced Data Integrity with Uniqueness Constraints
+### 4. Refactored Data Integrity for Consistency
 
-To improve data quality and prevent duplicate records, uniqueness constraints were added to several key models, strengthening the reliability of the core data.
+To improve data quality and long-term maintainability, all uniqueness validations were refactored to use a consistent, reliable pattern. All models now use Python-level constraints (`@api.constrains`) instead of database-level SQL constraints. This ensures predictable behavior across the entire module, especially for models with complex inheritance.
 
--   **Student:** Enforced uniqueness on `roll_number` and `registration_number` using a Python-level constraint (`@api.constrains`). This method was chosen for reliability, as standard SQL constraints can be problematic with the `_inherits` delegation used in this model.
--   **Course, Subject, Department, Program & Academic Year:** Enforced uniqueness on their `code` or `name` fields using standard database-level SQL constraints (`_sql_constraints`).
--   **Batch:** Enforced uniqueness on the combination of `name` and `program_id` using a composite SQL constraint, allowing same-named batches across different programs.
+The following fields are now guaranteed to be unique:
+-   **Student:** `roll_number` and `registration_number`.
+-   **Course & Subject:** `code`.
+-   **Department, Program & Academic Year:** `name`.
+-   **Program:** `code`.
+-   **Batch:** `code`, and the combination of `name` and `program_id`.
 
 ---
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 class OpProgram(models.Model):
     _name = "op.program"
@@ -22,7 +23,10 @@ class OpProgram(models.Model):
         for program in self:
             program.batch_count = len(program.batch_ids)
 
-    _sql_constraints = [
-        ('unique_program_code', 'unique(code)', 'Code should be unique per program!'),
-        ('name_unique', 'unique(name)', 'Program Name must be unique!'),
-    ]
+    @api.constrains('name', 'code')
+    def _check_unique_name_code(self):
+        for program in self:
+            if self.search_count([('name', '=', program.name), ('id', '!=', program.id)]):
+                raise ValidationError(_('The Program Name must be unique.'))
+            if self.search_count([('code', '=', program.code), ('id', '!=', program.id)]):
+                raise ValidationError(_('The Program Code must be unique.'))

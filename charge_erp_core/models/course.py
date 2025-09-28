@@ -7,10 +7,6 @@ class OpCourse(models.Model):
     _name = "op.course"
     _description = "Course"
 
-    _sql_constraints = [
-        ('code_unique', 'unique(code)', 'Course Code must be unique!'),
-    ]
-
     name = fields.Char('Name', required=True, translate=True)
     code = fields.Char('Code', size=16, required=True)
     parent_id = fields.Many2one('op.course', 'Parent Course', index=True, ondelete='cascade')
@@ -31,6 +27,12 @@ class OpCourse(models.Model):
     def _compute_session_count(self):
         for course in self:
             course.session_count = len(course.session_ids)
+
+    @api.constrains('code')
+    def _check_unique_code(self):
+        for course in self:
+            if self.search_count([('code', '=', course.code), ('id', '!=', course.id)]):
+                raise ValidationError(_('The Course Code must be unique.'))
 
     @api.constrains('parent_id')
     def _check_category_recursion(self):
