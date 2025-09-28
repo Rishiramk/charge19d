@@ -39,8 +39,8 @@ class OpStudent(models.Model):
 
     # Contact Information
     address_type = fields.Selection(related='partner_id.type', string="Address Type", readonly=False)
-    phone = fields.Char(related='partner_id.phone_sanitized', readonly=False)
-    mobile = fields.Char(related='partner_id.phone', readonly=False)
+    phone = fields.Char(string='Phone')
+    mobile = fields.Char(string='Mobile')
     email = fields.Char(related='partner_id.email', readonly=False)
     street = fields.Char(related='partner_id.street', readonly=False)
     street2 = fields.Char(related='partner_id.street2', readonly=False)

@@ -32,22 +32,6 @@
                             <button name="action_view_sessions" type="object" class="oe_stat_button" icon="fa-calendar">
                                 <field name="session_count" widget="statinfo" string="Sessions"/>
                             </button>
-                            <button name="action_view_assignments" type="object" class="oe_stat_button" icon="fa-pencil-square-o"
-                                attrs="{'invisible': [('has_assignment_module', '=', False)]}">
-                                <field name="assignment_count" widget="statinfo" string="Assignments"/>
-                            </button>
-                            <button name="action_view_timetable" type="object" class="oe_stat_button" icon="fa-table"
-                                attrs="{'invisible': [('has_timetable_module', '=', False)]}">
-                                <field name="timetable_count" widget="statinfo" string="Time Table"/>
-                            </button>
-                            <button name="action_view_health" type="object" class="oe_stat_button" icon="fa-heartbeat"
-                                attrs="{'invisible': [('has_health_module', '=', False)]}">
-                                <field name="health_count" widget="statinfo" string="Health"/>
-                            </button>
-                            <button name="action_view_media" type="object" class="oe_stat_button" icon="fa-file-image-o"
-                                attrs="{'invisible': [('has_media_module', '=', False)]}">
-                                <field name="media_count" widget="statinfo" string="Media"/>
-                            </button>
                         </div>
                         <field name="image_1920" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
@@ -75,7 +59,6 @@
                                         <field name="email"/>
                                         <field name="emergency_contact_id"/>
                                         <field name="company_id" invisible="1"/>
-                                        <field name="employee_id"/>
                                         <field name="department_id"/>
                                         <field name="allowed_department_ids" widget="many2many_tags"/>
                                     </group>
