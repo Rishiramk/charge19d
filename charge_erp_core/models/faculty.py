@@ -38,8 +38,8 @@ class OpFaculty(models.Model):
     program_id = fields.Many2one('op.program', string='Program')
     subject_ids = fields.Many2many('op.subject', string='Subjects')
 
-    session_ids = fields.Many2many(
-        'op.session', 'op_session_faculty_rel', 'faculty_id', 'session_id', string="Sessions")
+    session_ids = fields.One2many(
+        'op.session', 'faculty_id', string="Sessions")
     session_count = fields.Integer(string='Session Count', compute='_compute_session_count')
 
     def _compute_session_count(self):
