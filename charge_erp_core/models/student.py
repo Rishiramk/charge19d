@@ -72,6 +72,18 @@ class OpStudent(models.Model):
     assignment_count = fields.Integer(string='Assignment Count', compute='_compute_assignment_count')
     fee_due_count = fields.Integer(string='Fee Due Count', compute='_compute_fee_due_count')
     attendance_count = fields.Integer(string='Attendance Count', compute='_compute_attendance_count')
+    color = fields.Integer(string='Color', compute='_compute_color')
+
+    def _compute_color(self):
+        for student in self:
+            if student.status == 'active':
+                student.color = 2  # Green
+            elif student.status == 'on_leave':
+                student.color = 5  # Yellow
+            elif student.status == 'graduated':
+                student.color = 7  # Red
+            else:
+                student.color = 0  # Default
 
     def _compute_session_count(self):
         for student in self:

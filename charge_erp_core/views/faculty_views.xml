@@ -91,6 +91,8 @@
                     <field name="name"/>
                     <field name="department_id"/>
                     <field name="program_id"/>
+                    <field name="email"/>
+                    <field name="phone"/>
                     <field name="image_128"/>
                     <templates>
                         <t t-name="card">
@@ -101,7 +103,9 @@
                                 <div class="oe_kanban_details">
                                     <strong><field name="name"/></strong>
                                     <ul>
-                                        <li><field name="program_id"/></li>
+                                        <li>Program: <field name="program_id"/></li>
+                                        <li>Email: <field name="email"/></li>
+                                        <li>Phone: <field name="phone"/></li>
                                     </ul>
                                 </div>
                             </div>
@@ -111,11 +115,27 @@
             </field>
         </record>
 
+        <!-- Search View for Faculty -->
+        <record id="view_op_faculty_search" model="ir.ui.view">
+            <field name="name">op.faculty.search</field>
+            <field name="model">op.faculty</field>
+            <field name="arch" type="xml">
+                <search string="Search Faculty">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Department" name="group_by_department" context="{'group_by':'department_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
         <!-- Action for Faculty -->
         <record id="action_op_faculty" model="ir.actions.act_window">
             <field name="name">Faculties</field>
             <field name="res_model">op.faculty</field>
             <field name="view_mode">kanban,list,form</field>
+            <field name="search_view_id" ref="view_op_faculty_search"/>
         </record>
 
 
