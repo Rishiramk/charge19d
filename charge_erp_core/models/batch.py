@@ -2,7 +2,6 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.models import Constraint
 
 class OpBatch(models.Model):
     _name = "op.batch"
@@ -17,13 +16,8 @@ class OpBatch(models.Model):
     student_ids = fields.One2many('op.student', 'batch_id', string='Students')
     active = fields.Boolean(default=True)
 
-    _constraints = [
-        Constraint(
-            name="unique_batch_code",
-            type="unique",
-            fields=["code"],
-            message=_("Code should be unique per batch!"),
-        )
+    _sql_constraints = [
+        ('unique_batch_code', 'unique(code)', 'Code should be unique per batch!')
     ]
 
     @api.constrains('start_date', 'end_date')

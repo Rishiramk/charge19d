@@ -12,6 +12,7 @@ class OpFaculty(models.Model):
     )
     image_128 = fields.Image(related='partner_id.image_128', readonly=True)
 
+    # Personal Information
     birth_date = fields.Date('Birth Date', required=True)
     blood_group = fields.Selection([
         ('A+', 'A+ve'), ('B+', 'B+ve'), ('O+', 'O+ve'), ('AB+', 'AB+ve'),
@@ -20,6 +21,19 @@ class OpFaculty(models.Model):
     gender = fields.Selection([
         ('male', 'Male'), ('female', 'Female')
     ], 'Gender', required=True)
+
+    # Contact Information
+    phone = fields.Char(related='partner_id.phone', readonly=False)
+    mobile = fields.Char(related='partner_id.mobile', readonly=False)
+    email = fields.Char(related='partner_id.email', readonly=False)
+    street = fields.Char(related='partner_id.street', readonly=False)
+    street2 = fields.Char(related='partner_id.street2', readonly=False)
+    city = fields.Char(related='partner_id.city', readonly=False)
+    state_id = fields.Many2one('res.country.state', related='partner_id.state_id', readonly=False)
+    zip = fields.Char(related='partner_id.zip', readonly=False)
+    country_id = fields.Many2one('res.country', related='partner_id.country_id', readonly=False)
+
+    # Academic Information
     department_id = fields.Many2one('op.department', string='Department')
     program_id = fields.Many2one('op.program', string='Program')
     subject_ids = fields.Many2many('op.subject', string='Subjects')
