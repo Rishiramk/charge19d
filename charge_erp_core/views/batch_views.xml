@@ -29,6 +29,7 @@
                                 <field name="name"/>
                                 <field name="code"/>
                                 <field name="course_id"/>
+                                <field name="coordinator_id"/>
                             </group>
                             <group>
                                 <field name="start_date"/>
