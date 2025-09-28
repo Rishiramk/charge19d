@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Enrollments for Computer Science Students -->
+        <record id="demo_enroll_john_cs101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_john_doe"/>
+            <field name="course_id" ref="demo_course_cs_intro"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+        <record id="demo_enroll_jane_cs101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_jane_smith"/>
+            <field name="course_id" ref="demo_course_cs_intro"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+        <record id="demo_enroll_peter_cs101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_peter_jones"/>
+            <field name="course_id" ref="demo_course_cs_intro"/>
+            <field name="academic_year_id" ref="demo_academic_year_2023"/>
+        </record>
+        <record id="demo_enroll_chris_cs101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_chris_lee"/>
+            <field name="course_id" ref="demo_course_cs_intro"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+        <record id="demo_enroll_patricia_cs101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_patricia_harris"/>
+            <field name="course_id" ref="demo_course_cs_intro"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+        <record id="demo_enroll_mark_cs101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_mark_walker"/>
+            <field name="course_id" ref="demo_course_cs_intro"/>
+            <field name="academic_year_id" ref="demo_academic_year_2023"/>
+        </record>
+
+
+        <!-- Enrollments for Data Science Students -->
+        <record id="demo_enroll_emily_ds501" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_emily_white"/>
+            <field name="course_id" ref="demo_course_cs_advanced"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+        <record id="demo_enroll_michael_ds501" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_michael_green"/>
+            <field name="course_id" ref="demo_course_cs_advanced"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+
+        <!-- Enrollments for History Students -->
+        <record id="demo_enroll_sarah_hist101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_sarah_brown"/>
+            <field name="course_id" ref="demo_course_hist_survey"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+        <record id="demo_enroll_david_hist101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_david_wilson"/>
+            <field name="course_id" ref="demo_course_hist_survey"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+        <record id="demo_enroll_robert_hist101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_robert_clark"/>
+            <field name="course_id" ref="demo_course_hist_survey"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+
+        <!-- Enrollments for Physics Students -->
+        <record id="demo_enroll_lisa_phy101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_lisa_taylor"/>
+            <field name="course_id" ref="demo_course_sci_foundation"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+        <record id="demo_enroll_james_phy101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_james_anderson"/>
+            <field name="course_id" ref="demo_course_sci_foundation"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+        <record id="demo_enroll_olivia_phy101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_olivia_thomas"/>
+            <field name="course_id" ref="demo_course_sci_foundation"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+        <record id="demo_enroll_linda_phy101" model="op.course.enrollment">
+            <field name="student_id" ref="demo_student_linda_lewis"/>
+            <field name="course_id" ref="demo_course_sci_foundation"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+        </record>
+
+    </data>
+</odoo>

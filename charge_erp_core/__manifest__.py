@@ -29,6 +29,17 @@
         'views/student_user_action.xml',
         'views/menu_views.xml',
     ],
+    'demo': [
+        'demo/department_demo.xml',
+        'demo/program_demo.xml',
+        'demo/academic_year_demo.xml',
+        'demo/subject_demo.xml',
+        'demo/course_demo.xml',
+        'demo/faculty_demo.xml',
+        'demo/batch_demo.xml',
+        'demo/student_demo.xml',
+        'demo/course_enrollment_demo.xml',
+    ],
     'installable': True,
     'application': True,
 }

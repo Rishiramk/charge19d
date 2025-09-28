@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Batch Records -->
+        <record id="demo_batch_cs_2024" model="op.batch">
+            <field name="name">CS Regular Batch 2024</field>
+            <field name="code">CS-REG-24</field>
+            <field name="start_date">2024-09-01</field>
+            <field name="end_date">2025-05-31</field>
+            <field name="program_id" ref="demo_program_bsc_cs"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+            <field name="course_id" ref="demo_course_cs_intro"/>
+            <field name="coordinator_id" ref="demo_faculty_alan_turing"/>
+        </record>
+
+        <record id="demo_batch_cs_2023" model="op.batch">
+            <field name="name">CS Regular Batch 2023</field>
+            <field name="code">CS-REG-23</field>
+            <field name="start_date">2023-09-01</field>
+            <field name="end_date">2024-05-31</field>
+            <field name="program_id" ref="demo_program_bsc_cs"/>
+            <field name="academic_year_id" ref="demo_academic_year_2023"/>
+            <field name="course_id" ref="demo_course_cs_intro"/>
+            <field name="coordinator_id" ref="demo_faculty_alan_turing"/>
+        </record>
+
+        <record id="demo_batch_ds_2024" model="op.batch">
+            <field name="name">DS Regular Batch 2024</field>
+            <field name="code">DS-REG-24</field>
+            <field name="start_date">2024-09-01</field>
+            <field name="end_date">2025-05-31</field>
+            <field name="program_id" ref="demo_program_msc_ds"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+            <field name="course_id" ref="demo_course_cs_advanced"/>
+            <field name="coordinator_id" ref="demo_faculty_ada_lovelace"/>
+        </record>
+
+        <record id="demo_batch_hist_2024" model="op.batch">
+            <field name="name">History Regular 2024</field>
+            <field name="code">HIST-REG-24</field>
+            <field name="start_date">2024-09-01</field>
+            <field name="end_date">2025-05-31</field>
+            <field name="program_id" ref="demo_program_ba_hist"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+            <field name="course_id" ref="demo_course_hist_survey"/>
+            <field name="coordinator_id" ref="demo_faculty_herodotus"/>
+        </record>
+
+        <record id="demo_batch_phy_2024" model="op.batch">
+            <field name="name">Physics Section A 2024</field>
+            <field name="code">PHY-A-24</field>
+            <field name="start_date">2024-09-01</field>
+            <field name="end_date">2025-05-31</field>
+            <field name="program_id" ref="demo_program_bsc_phy"/>
+            <field name="academic_year_id" ref="demo_academic_year_2024"/>
+            <field name="course_id" ref="demo_course_sci_foundation"/>
+            <field name="coordinator_id" ref="demo_faculty_marie_curie"/>
+        </record>
+    </data>
+</odoo>

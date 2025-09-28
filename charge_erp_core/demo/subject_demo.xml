@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Computer Science Subjects -->
+        <record id="demo_subject_cs101" model="op.subject">
+            <field name="name">Introduction to Programming</field>
+            <field name="code">CS101</field>
+            <field name="type">both</field>
+            <field name="department_id" ref="demo_department_cs"/>
+        </record>
+        <record id="demo_subject_cs201" model="op.subject">
+            <field name="name">Data Structures and Algorithms</field>
+            <field name="code">CS201</field>
+            <field name="type">both</field>
+            <field name="department_id" ref="demo_department_cs"/>
+        </record>
+        <record id="demo_subject_ds501" model="op.subject">
+            <field name="name">Machine Learning</field>
+            <field name="code">DS501</field>
+            <field name="type">theory</field>
+            <field name="department_id" ref="demo_department_cs"/>
+        </record>
+
+        <!-- Humanities Subjects -->
+        <record id="demo_subject_hist101" model="op.subject">
+            <field name="name">World History: Ancient Civilizations</field>
+            <field name="code">HIST101</field>
+            <field name="type">theory</field>
+            <field name="department_id" ref="demo_department_humanities"/>
+        </record>
+        <record id="demo_subject_hist202" model="op.subject">
+            <field name="name">Modern European History</field>
+            <field name="code">HIST202</field>
+            <field name="type">theory</field>
+            <field name="department_id" ref="demo_department_humanities"/>
+        </record>
+
+        <!-- Science Subjects -->
+        <record id="demo_subject_phy101" model="op.subject">
+            <field name="name">Classical Mechanics</field>
+            <field name="code">PHY101</field>
+            <field name="type">both</field>
+            <field name="department_id" ref="demo_department_science"/>
+        </record>
+        <record id="demo_subject_chem101" model="op.subject">
+            <field name="name">General Chemistry I</field>
+            <field name="code">CHEM101</field>
+            <field name="type">both</field>
+            <field name="department_id" ref="demo_department_science"/>
+        </record>
+
+    </data>
+</odoo>

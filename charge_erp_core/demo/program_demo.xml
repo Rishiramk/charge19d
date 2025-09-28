@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Program Level Records -->
+        <record id="demo_program_level_ug" model="op.program.level">
+            <field name="name">Undergraduate</field>
+            <field name="code">UG</field>
+        </record>
+
+        <record id="demo_program_level_pg" model="op.program.level">
+            <field name="name">Postgraduate</field>
+            <field name="code">PG</field>
+        </record>
+
+        <!-- Program Records -->
+        <record id="demo_program_bsc_cs" model="op.program">
+            <field name="name">B.Sc. Computer Science</field>
+            <field name="code">BSC-CS</field>
+            <field name="department_id" ref="demo_department_cs"/>
+            <field name="program_level_id" ref="demo_program_level_ug"/>
+        </record>
+
+        <record id="demo_program_msc_ds" model="op.program">
+            <field name="name">M.Sc. Data Science</field>
+            <field name="code">MSC-DS</field>
+            <field name="department_id" ref="demo_department_cs"/>
+            <field name="program_level_id" ref="demo_program_level_pg"/>
+        </record>
+
+        <record id="demo_program_ba_hist" model="op.program">
+            <field name="name">B.A. History</field>
+            <field name="code">BA-HIST</field>
+            <field name="department_id" ref="demo_department_humanities"/>
+            <field name="program_level_id" ref="demo_program_level_ug"/>
+        </record>
+
+        <record id="demo_program_bsc_phy" model="op.program">
+            <field name="name">B.Sc. Physics</field>
+            <field name="code">BSC-PHY</field>
+            <field name="department_id" ref="demo_department_science"/>
+            <field name="program_level_id" ref="demo_program_level_ug"/>
+        </record>
+
+        <record id="demo_program_bsc_chem" model="op.program">
+            <field name="name">B.Sc. Chemistry</field>
+            <field name="code">BSC-CHEM</field>
+            <field name="department_id" ref="demo_department_science"/>
+            <field name="program_level_id" ref="demo_program_level_ug"/>
+        </record>
+
+    </data>
+</odoo>

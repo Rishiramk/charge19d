@@ -43,7 +43,7 @@ The core data model was strengthened by establishing critical bi-directional rel
     -   **Enhancement:** Batches are now linked to both a Program and an Academic Year via `Many2one` fields, creating a clear academic hierarchy.
     -   **UI Impact:** The new relationship fields were added to the Batch form, and smart buttons were added to the Program and Academic Year forms for easy navigation.
 
-### 2. Course Enrollment Refactoring
+### 3. Course Enrollment Refactoring
 
 To improve clarity and align with Odoo best practices, the student enrollment system was refactored:
 
@@ -51,7 +51,7 @@ To improve clarity and align with Odoo best practices, the student enrollment sy
 -   **Field Rename:** The corresponding `One2many` fields on the student and course models were renamed to the more intuitive `enrollment_ids`.
 -   **System-Wide Update:** All references to the old model and fields were updated across the entire module, including in security rules, model definitions, and view files.
 
-### 3. UI/UX Improvements
+### 4. UI/UX Improvements
 
 The user interface was significantly upgraded to be more powerful and user-friendly:
 
@@ -69,6 +69,13 @@ The user interface was significantly upgraded to be more powerful and user-frien
 -   **Enrollment Menu Item:**
     -   **Enhancement:** Added a dedicated "Enrollments" menu item under "Academics > Course Management" to provide direct access to the `op.course.enrollment` model.
     -   **Implementation:** This involved creating new list and form views, a window action, and updating the manifest file to make the model accessible from the UI.
+
+### 5. Comprehensive Demo Data
+
+To facilitate testing, demonstrations, and future development (like the dashboard), a comprehensive set of demo data has been added. This includes records for all major models, creating a realistic and interconnected academic environment.
+
+-   **Data Includes:** Departments, Programs, Academic Years, Subjects, Courses, Faculty, Batches, Students, and Course Enrollments.
+-   **Implementation:** The data is loaded via standard Odoo XML files located in the `charge_erp_core/demo/` directory.
 
 ---
 

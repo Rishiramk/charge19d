@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Department Records -->
+        <record id="demo_department_cs" model="op.department">
+            <field name="name">Department of Computer Science</field>
+            <field name="code">CS</field>
+        </record>
+
+        <record id="demo_department_humanities" model="op.department">
+            <field name="name">Department of Humanities</field>
+            <field name="code">HUM</field>
+        </record>
+
+        <record id="demo_department_science" model="op.department">
+            <field name="name">Department of Science</field>
+            <field name="code">SCI</field>
+        </record>
+
+    </data>
+</odoo>
