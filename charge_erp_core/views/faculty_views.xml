@@ -23,12 +23,30 @@
                 <form string="Faculty">
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button name="%(charge_erp_core.session_list_action)d"
-                                type="action"
-                                class="oe_stat_button"
-                                icon="fa-calendar"
-                                context="{'search_default_faculty_ids': id}">
+                            <button name="action_view_courses" type="object" class="oe_stat_button" icon="fa-graduation-cap">
+                                <field name="course_count" widget="statinfo" string="Courses"/>
+                            </button>
+                            <button name="action_view_subjects" type="object" class="oe_stat_button" icon="fa-book">
+                                <field name="subject_count" widget="statinfo" string="Subjects"/>
+                            </button>
+                            <button name="action_view_sessions" type="object" class="oe_stat_button" icon="fa-calendar">
                                 <field name="session_count" widget="statinfo" string="Sessions"/>
+                            </button>
+                            <button name="action_view_assignments" type="object" class="oe_stat_button" icon="fa-pencil-square-o"
+                                attrs="{'invisible': [('has_assignment_module', '=', False)]}">
+                                <field name="assignment_count" widget="statinfo" string="Assignments"/>
+                            </button>
+                            <button name="action_view_timetable" type="object" class="oe_stat_button" icon="fa-table"
+                                attrs="{'invisible': [('has_timetable_module', '=', False)]}">
+                                <field name="timetable_count" widget="statinfo" string="Time Table"/>
+                            </button>
+                            <button name="action_view_health" type="object" class="oe_stat_button" icon="fa-heartbeat"
+                                attrs="{'invisible': [('has_health_module', '=', False)]}">
+                                <field name="health_count" widget="statinfo" string="Health"/>
+                            </button>
+                            <button name="action_view_media" type="object" class="oe_stat_button" icon="fa-file-image-o"
+                                attrs="{'invisible': [('has_media_module', '=', False)]}">
+                                <field name="media_count" widget="statinfo" string="Media"/>
                             </button>
                         </div>
                         <field name="image_1920" widget="image" class="oe_avatar"/>
@@ -86,6 +104,9 @@
                                 <group string="Qualifications &amp; Specialization">
                                     <field name="qualifications"/>
                                     <field name="specialization"/>
+                                </group>
+                                <group string="Assigned Courses">
+                                    <field name="course_ids" widget="many2many_tags"/>
                                 </group>
                             </page>
                         </notebook>
