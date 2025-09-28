@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo import fields, models
 
 class OpAcademicYear(models.Model):
     _name = 'op.academic.year'
@@ -22,12 +21,6 @@ class OpAcademicYear(models.Model):
     batch_ids = fields.One2many('op.batch', 'academic_year_id', string='Batches')
     batch_count = fields.Integer(string='Batch Count', compute='_compute_batch_count')
     active = fields.Boolean(default=True)
-
-    @api.constrains('name')
-    def _check_unique_name(self):
-        for academic_year in self:
-            if self.search_count([('name', '=', academic_year.name), ('id', '!=', academic_year.id)]):
-                raise ValidationError(_('The Academic Year Name must be unique.'))
 
     def _compute_batch_count(self):
         for academic_year in self:

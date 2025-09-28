@@ -28,12 +28,6 @@ class OpCourse(models.Model):
         for course in self:
             course.session_count = len(course.session_ids)
 
-    @api.constrains('code')
-    def _check_unique_code(self):
-        for course in self:
-            if self.search_count([('code', '=', course.code), ('id', '!=', course.id)]):
-                raise ValidationError(_('The Course Code must be unique.'))
-
     @api.constrains('parent_id')
     def _check_category_recursion(self):
         if not self._check_recursion():

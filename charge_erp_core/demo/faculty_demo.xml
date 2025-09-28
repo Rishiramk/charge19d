@@ -6,6 +6,7 @@
         <record id="demo_faculty_alan_turing" model="op.faculty">
             <field name="first_name">Alan</field>
             <field name="last_name">Turing</field>
+            <field name="name">Alan Turing</field>
             <field name="gender">male</field>
             <field name="department_id" ref="demo_department_cs"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_cs101'), ref('demo_subject_cs201')])]"/>
@@ -14,6 +15,7 @@
         <record id="demo_faculty_ada_lovelace" model="op.faculty">
             <field name="first_name">Ada</field>
             <field name="last_name">Lovelace</field>
+            <field name="name">Ada Lovelace</field>
             <field name="gender">female</field>
             <field name="department_id" ref="demo_department_cs"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_ds501')])]"/>
@@ -22,6 +24,7 @@
         <record id="demo_faculty_herodotus" model="op.faculty">
             <field name="first_name">Herodotus</field>
             <field name="last_name">Halicarnassus</field>
+            <field name="name">Herodotus Halicarnassus</field>
             <field name="gender">male</field>
             <field name="department_id" ref="demo_department_humanities"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_hist101'), ref('demo_subject_hist202')])]"/>
@@ -30,6 +33,7 @@
         <record id="demo_faculty_marie_curie" model="op.faculty">
             <field name="first_name">Marie</field>
             <field name="last_name">Curie</field>
+            <field name="name">Marie Curie</field>
             <field name="gender">female</field>
             <field name="department_id" ref="demo_department_science"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_phy101')])]"/>
@@ -38,6 +42,7 @@
         <record id="demo_faculty_rosalind_franklin" model="op.faculty">
             <field name="first_name">Rosalind</field>
             <field name="last_name">Franklin</field>
+            <field name="name">Rosalind Franklin</field>
             <field name="gender">female</field>
             <field name="department_id" ref="demo_department_science"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_chem101')])]"/>

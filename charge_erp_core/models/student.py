@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError, ValidationError
+from odoo import models, fields
+from odoo.exceptions import UserError
 
 class OpStudent(models.Model):
     _name = 'op.student'
@@ -73,18 +73,6 @@ class OpStudent(models.Model):
     fee_due_count = fields.Integer(string='Fee Due Count', compute='_compute_fee_due_count')
     attendance_count = fields.Integer(string='Attendance Count', compute='_compute_attendance_count')
     color = fields.Integer(string='Color', compute='_compute_color')
-
-    @api.constrains('roll_number', 'registration_number')
-    def _check_unique_student_identifiers(self):
-        for student in self:
-            if student.roll_number:
-                domain = [('roll_number', '=', student.roll_number), ('id', '!=', student.id)]
-                if self.search_count(domain):
-                    raise ValidationError(_('The Roll Number must be unique.'))
-            if student.registration_number:
-                domain = [('registration_number', '=', student.registration_number), ('id', '!=', student.id)]
-                if self.search_count(domain):
-                    raise ValidationError(_('The Registration Number must be unique.'))
 
     def _compute_color(self):
         for student in self:

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo import models, fields
 
 class OpSubject(models.Model):
     _name = "op.subject"
@@ -23,8 +22,6 @@ class OpSubject(models.Model):
         'op.faculty', 'op_faculty_subject_rel',
         'subject_id', 'faculty_id', string='Faculties')
 
-    @api.constrains('code')
-    def _check_unique_code(self):
-        for subject in self:
-            if self.search_count([('code', '=', subject.code), ('id', '!=', subject.id)]):
-                raise ValidationError(_('The Subject Code must be unique.'))
+    _sql_constraints = [
+        ('unique_subject_code', 'unique(code)', 'Code should be unique per subject!')
+    ]

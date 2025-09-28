@@ -12,18 +12,7 @@ All changes were implemented, reviewed, and tested to ensure stability and corre
 
 The following major features and enhancements were implemented:
 
-### 1. Refactored Data Integrity for Consistency
-
-To improve data quality and long-term maintainability, all uniqueness validations were refactored to use a consistent, reliable pattern. All models now use Python-level constraints (`@api.constrains`) instead of database-level SQL constraints. This ensures predictable behavior across the entire module, especially for models with complex inheritance.
-
-The following fields are now guaranteed to be unique:
--   **Student:** `roll_number` and `registration_number`.
--   **Course & Subject:** `code`.
--   **Department, Program & Academic Year:** `name`.
--   **Program:** `code`.
--   **Batch:** `code`, and the combination of `name` and `program_id`.
-
-### 2. Data Model & Relationship Enhancements
+### 1. Data Model & Relationship Enhancements
 
 The core data model was strengthened by establishing critical bi-directional relationships between the main academic models. This creates a more logical and interconnected system, paving the way for future features.
 
@@ -43,7 +32,7 @@ The core data model was strengthened by establishing critical bi-directional rel
     -   **Enhancement:** Batches are now linked to both a Program and an Academic Year via `Many2one` fields, creating a clear academic hierarchy.
     -   **UI Impact:** The new relationship fields were added to the Batch form, and smart buttons were added to the Program and Academic Year forms for easy navigation.
 
-### 3. Course Enrollment Refactoring
+### 2. Course Enrollment Refactoring
 
 To improve clarity and align with Odoo best practices, the student enrollment system was refactored:
 
@@ -51,7 +40,7 @@ To improve clarity and align with Odoo best practices, the student enrollment sy
 -   **Field Rename:** The corresponding `One2many` fields on the student and course models were renamed to the more intuitive `enrollment_ids`.
 -   **System-Wide Update:** All references to the old model and fields were updated across the entire module, including in security rules, model definitions, and view files.
 
-### 4. UI/UX Improvements
+### 3. UI/UX Improvements
 
 The user interface was significantly upgraded to be more powerful and user-friendly:
 
@@ -70,7 +59,7 @@ The user interface was significantly upgraded to be more powerful and user-frien
     -   **Enhancement:** Added a dedicated "Enrollments" menu item under "Academics > Course Management" to provide direct access to the `op.course.enrollment` model.
     -   **Implementation:** This involved creating new list and form views, a window action, and updating the manifest file to make the model accessible from the UI.
 
-### 5. Comprehensive Demo Data
+### 4. Comprehensive Demo Data
 
 To facilitate testing, demonstrations, and future development (like the dashboard), a comprehensive set of demo data has been added. This includes records for all major models, creating a realistic and interconnected academic environment.
 
@@ -103,3 +92,8 @@ During development, two key issues were identified and resolved.
 
 -   **Issue:** The demo data failed to install due to a `ValueError`. The `program_demo.xml` file incorrectly attempted to assign a value to a `code` field in the `op.program.level` model, which does not exist.
 -   **Fix:** The invalid `<field name="code">...</field>` lines were removed from the `op.program.level` records in the `program_demo.xml` file, resolving the installation error.
+
+### Bug 5: Missing Required Name Field for Partners
+
+-   **Issue:** After fixing the previous bug, the demo data installation failed again with a `psycopg2.errors.CheckViolation` on the `res_partner` table. This was because the `op.student` and `op.faculty` demo records, which inherit from `res.partner`, were missing the required `name` field.
+-   **Fix:** The `name` field was explicitly added to all `op.student` and `op.faculty` records in their respective demo XML files, satisfying the database constraint.

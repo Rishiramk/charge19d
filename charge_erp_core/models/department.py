@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo import api, fields, models
 
 class OpDepartment(models.Model):
     _name = "op.department"
@@ -22,12 +21,6 @@ class OpDepartment(models.Model):
     student_count = fields.Integer(string='Student Count', compute='_compute_student_count')
     subject_count = fields.Integer(string='Subject Count', compute='_compute_subject_count')
     batch_count = fields.Integer(string='Batch Count', compute='_compute_batch_count')
-
-    @api.constrains('name')
-    def _check_unique_name(self):
-        for department in self:
-            if self.search_count([('name', '=', department.name), ('id', '!=', department.id)]):
-                raise ValidationError(_('The Department Name must be unique.'))
 
     def _compute_course_count(self):
         for department in self:

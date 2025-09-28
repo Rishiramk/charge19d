@@ -6,6 +6,7 @@
         <record id="demo_student_john_doe" model="op.student">
             <field name="first_name">John</field>
             <field name="last_name">Doe</field>
+            <field name="name">John Doe</field>
             <field name="gender">male</field>
             <field name="email">john.doe@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2024"/>
@@ -15,6 +16,7 @@
         <record id="demo_student_jane_smith" model="op.student">
             <field name="first_name">Jane</field>
             <field name="last_name">Smith</field>
+            <field name="name">Jane Smith</field>
             <field name="gender">female</field>
             <field name="email">jane.smith@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2024"/>
@@ -24,6 +26,7 @@
         <record id="demo_student_peter_jones" model="op.student">
             <field name="first_name">Peter</field>
             <field name="last_name">Jones</field>
+            <field name="name">Peter Jones</field>
             <field name="gender">male</field>
             <field name="email">peter.jones@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2023"/>
@@ -35,6 +38,7 @@
         <record id="demo_student_emily_white" model="op.student">
             <field name="first_name">Emily</field>
             <field name="last_name">White</field>
+            <field name="name">Emily White</field>
             <field name="gender">female</field>
             <field name="email">emily.white@example.com</field>
             <field name="batch_id" ref="demo_batch_ds_2024"/>
@@ -44,6 +48,7 @@
         <record id="demo_student_michael_green" model="op.student">
             <field name="first_name">Michael</field>
             <field name="last_name">Green</field>
+            <field name="name">Michael Green</field>
             <field name="gender">male</field>
             <field name="email">michael.green@example.com</field>
             <field name="batch_id" ref="demo_batch_ds_2024"/>
@@ -55,6 +60,7 @@
         <record id="demo_student_sarah_brown" model="op.student">
             <field name="first_name">Sarah</field>
             <field name="last_name">Brown</field>
+            <field name="name">Sarah Brown</field>
             <field name="gender">female</field>
             <field name="email">sarah.brown@example.com</field>
             <field name="batch_id" ref="demo_batch_hist_2024"/>
@@ -64,6 +70,7 @@
         <record id="demo_student_david_wilson" model="op.student">
             <field name="first_name">David</field>
             <field name="last_name">Wilson</field>
+            <field name="name">David Wilson</field>
             <field name="gender">male</field>
             <field name="email">david.wilson@example.com</field>
             <field name="batch_id" ref="demo_batch_hist_2024"/>
@@ -75,6 +82,7 @@
         <record id="demo_student_lisa_taylor" model="op.student">
             <field name="first_name">Lisa</field>
             <field name="last_name">Taylor</field>
+            <field name="name">Lisa Taylor</field>
             <field name="gender">female</field>
             <field name="email">lisa.taylor@example.com</field>
             <field name="batch_id" ref="demo_batch_phy_2024"/>
@@ -84,6 +92,7 @@
         <record id="demo_student_james_anderson" model="op.student">
             <field name="first_name">James</field>
             <field name="last_name">Anderson</field>
+            <field name="name">James Anderson</field>
             <field name="gender">male</field>
             <field name="email">james.anderson@example.com</field>
             <field name="batch_id" ref="demo_batch_phy_2024"/>
@@ -93,6 +102,7 @@
         <record id="demo_student_olivia_thomas" model="op.student">
             <field name="first_name">Olivia</field>
             <field name="last_name">Thomas</field>
+            <field name="name">Olivia Thomas</field>
             <field name="gender">female</field>
             <field name="email">olivia.thomas@example.com</field>
             <field name="batch_id" ref="demo_batch_phy_2024"/>
@@ -104,6 +114,7 @@
         <record id="demo_student_chris_lee" model="op.student">
             <field name="first_name">Chris</field>
             <field name="last_name">Lee</field>
+            <field name="name">Chris Lee</field>
             <field name="gender">male</field>
             <field name="email">chris.lee@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2024"/>
@@ -113,6 +124,7 @@
         <record id="demo_student_patricia_harris" model="op.student">
             <field name="first_name">Patricia</field>
             <field name="last_name">Harris</field>
+            <field name="name">Patricia Harris</field>
             <field name="gender">female</field>
             <field name="email">patricia.harris@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2024"/>
@@ -122,6 +134,7 @@
         <record id="demo_student_robert_clark" model="op.student">
             <field name="first_name">Robert</field>
             <field name="last_name">Clark</field>
+            <field name="name">Robert Clark</field>
             <field name="gender">male</field>
             <field name="email">robert.clark@example.com</field>
             <field name="batch_id" ref="demo_batch_hist_2024"/>
@@ -131,6 +144,7 @@
         <record id="demo_student_linda_lewis" model="op.student">
             <field name="first_name">Linda</field>
             <field name="last_name">Lewis</field>
+            <field name="name">Linda Lewis</field>
             <field name="gender">female</field>
             <field name="email">linda.lewis@example.com</field>
             <field name="batch_id" ref="demo_batch_phy_2024"/>
@@ -140,6 +154,7 @@
         <record id="demo_student_mark_walker" model="op.student">
             <field name="first_name">Mark</field>
             <field name="last_name">Walker</field>
+            <field name="name">Mark Walker</field>
             <field name="gender">male</field>
             <field name="email">mark.walker@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2023"/>
