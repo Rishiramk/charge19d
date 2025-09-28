@@ -39,8 +39,8 @@ class OpStudent(models.Model):
 
     # Contact Information
     address_type = fields.Selection(related='partner_id.type', string="Address Type", readonly=False)
-    phone = fields.Char(string='Phone')
-    mobile = fields.Char(string='Mobile')
+    phone = fields.Char(related='partner_id.phone', readonly=False)
+    mobile = fields.Char(related='partner_id.mobile', readonly=False)
     email = fields.Char(related='partner_id.email', readonly=False)
     street = fields.Char(related='partner_id.street', readonly=False)
     street2 = fields.Char(related='partner_id.street2', readonly=False)
@@ -53,12 +53,9 @@ class OpStudent(models.Model):
     parent_ids = fields.Many2many(
         'res.partner', 'op_student_parent_rel', 'student_id', 'parent_id', string='Parents')
 
-    # Academic Information
+    # Other Information
     roll_number = fields.Char(string='Roll Number')
     registration_number = fields.Char(string='Registration Number')
-    previous_education = fields.Text(string='Previous Education')
-
-    # Other Information
     library_card = fields.Char(string='Library Card')
     badge_id = fields.Char(string='Badge ID')
     pin = fields.Char(string='PIN', help="PIN for Kiosk Mode")
@@ -67,8 +64,8 @@ class OpStudent(models.Model):
     batch_id = fields.Many2one('op.batch', string='Batch')
     program_id = fields.Many2one('op.program', string='Program')
     miscellaneous = fields.Text(string='Miscellaneous')
-    subject_enrollment_ids = fields.One2many(
-        'op.student.subject.enrollment', 'student_id', string='Subject Enrollments')
+    course_detail_ids = fields.One2many(
+        'op.student.course', 'student_id', string='Course Details')
     session_ids = fields.Many2many(
         'op.session', 'op_session_student_rel', 'student_id', 'session_id', string="Sessions")
     session_count = fields.Integer(string='Session Count', compute='_compute_session_count')

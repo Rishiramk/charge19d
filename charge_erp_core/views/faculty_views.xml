@@ -23,13 +23,11 @@
                 <form string="Faculty">
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button name="action_view_courses" type="object" class="oe_stat_button" icon="fa-graduation-cap">
-                                <field name="course_count" widget="statinfo" string="Courses"/>
-                            </button>
-                            <button name="action_view_subjects" type="object" class="oe_stat_button" icon="fa-book">
-                                <field name="subject_count" widget="statinfo" string="Subjects"/>
-                            </button>
-                            <button name="action_view_sessions" type="object" class="oe_stat_button" icon="fa-calendar">
+                            <button name="%(charge_erp_core.session_list_action)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-calendar"
+                                context="{'search_default_faculty_ids': id}">
                                 <field name="session_count" widget="statinfo" string="Sessions"/>
                             </button>
                         </div>
@@ -45,51 +43,36 @@
                         <notebook>
                             <page string="Personal Information">
                                 <group>
-                                    <group string="Personal Details">
+                                    <group>
                                         <field name="gender"/>
                                         <field name="birth_date"/>
+                                    </group>
+                                    <group>
                                         <field name="blood_group"/>
-                                        <field name="nationality"/>
-                                        <field name="lang"/>
-                                        <field name="visa_info"/>
                                     </group>
-                                    <group string="Contact &amp; Administrative">
-                                        <field name="phone"/>
-                                        <field name="mobile"/>
-                                        <field name="email"/>
-                                        <field name="emergency_contact_id"/>
-                                        <field name="company_id" invisible="1"/>
-                                        <field name="department_id"/>
-                                        <field name="allowed_department_ids" widget="many2many_tags"/>
-                                    </group>
-                                </group>
-                                <group string="Address">
-                                    <field name="address_type"/>
-                                    <label for="street" string="Address"/>
-                                    <div class="o_address_format">
-                                        <field name="street" placeholder="Street..." class="o_address_street"/>
-                                        <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                                        <field name="city" placeholder="City" class="o_address_city"/>
-                                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
-                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                                        <field name="country_id" placeholder="Country" options='{"no_open": True, "no_create": True}'/>
-                                    </div>
                                 </group>
                             </page>
-                            <page string="Academic Profile">
+                            <page string="Contact Information">
                                 <group>
-                                    <group>
-                                        <field name="program_id"/>
-                                        <field name="subject_ids" widget="many2many_tags"/>
-                                        <field name="office_location"/>
-                                    </group>
+                                    <field name="phone"/>
+                                    <field name="mobile"/>
+                                    <field name="email"/>
                                 </group>
-                                <group string="Qualifications &amp; Specialization">
-                                    <field name="qualifications"/>
-                                    <field name="specialization"/>
-                                </group>
-                                <group string="Assigned Courses">
-                                    <field name="course_ids" widget="many2many_tags"/>
+                                <label for="street"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..."/>
+                                    <field name="street2" placeholder="Street 2..."/>
+                                    <field name="city" placeholder="City"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                    <field name="zip" placeholder="ZIP"/>
+                                    <field name="country_id" placeholder="Country" options='{"no_open": True, "no_create": True}'/>
+                                </div>
+                            </page>
+                            <page string="Academic Information">
+                                <group>
+                                    <field name="department_id"/>
+                                    <field name="program_id"/>
+                                    <field name="subject_ids" widget="many2many_tags"/>
                                 </group>
                             </page>
                         </notebook>

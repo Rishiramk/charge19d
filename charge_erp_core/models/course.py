@@ -14,16 +14,12 @@ class OpCourse(models.Model):
         [('normal', 'Normal'), ('GPA', 'GPA'),
          ('CWA', 'CWA'), ('CCE', 'CCE')],
         'Evaluation Type', default="normal", required=True)
-    credits = fields.Float(string='Credits')
-    course_type = fields.Selection(
-        [('core', 'Core'), ('elective', 'Elective'), ('lab', 'Lab')],
-        string='Course Type', default='core')
-    syllabus = fields.Html(string='Syllabus')
     active = fields.Boolean(default=True)
     session_ids = fields.One2many(
         'op.session', 'course_id', string="Sessions")
-    curriculum_line_ids = fields.One2many(
-        'op.course.curriculum.line', 'course_id', string='Curriculum Lines')
+    student_course_ids = fields.One2many(
+        'op.student.course', 'course_id',
+        string='Student Courses')
     session_count = fields.Integer(
         string='Session Count', compute='_compute_session_count')
 

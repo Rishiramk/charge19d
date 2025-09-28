@@ -120,16 +120,12 @@
                                         <field name="program_id"/>
                                     </group>
                                 </group>
-                                <group string="Academic History">
-                                    <field name="previous_education"/>
-                                </group>
-                                <separator string="Subject Enrollments"/>
-                                <field name="subject_enrollment_ids">
-                                    <tree editable="bottom">
-                                        <field name="subject_id"/>
-                                        <field name="academic_term_id"/>
+                                <field name="course_detail_ids">
+                                    <list editable="bottom">
+                                        <field name="course_id"/>
+                                        <field name="academic_year_id"/>
                                         <field name="status"/>
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
 
