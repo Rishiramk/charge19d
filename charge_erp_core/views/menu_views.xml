@@ -4,67 +4,92 @@
         <!-- Root Menu -->
         <menuitem id="menu_op_school_root" name="SIS" sequence="10"/>
 
-        <!-- People Menu -->
-        <menuitem id="menu_op_people_root" name="People"
+        <!-- Student Menu (New Top-Level) -->
+        <menuitem id="menu_op_student_root" name="Student"
                   parent="menu_op_school_root"
-                  sequence="10"/>
+                  sequence="20"/>
         <menuitem id="menu_op_student" name="Students"
-                  parent="menu_op_people_root"
+                  parent="menu_op_student_root"
                   action="action_op_student"
                   sequence="10"/>
+
+        <!-- Faculty Menu (New Top-Level) -->
+        <menuitem id="menu_op_faculty_root" name="Faculty"
+                  parent="menu_op_school_root"
+                  sequence="30"/>
         <menuitem id="menu_op_faculty" name="Faculties"
-                  parent="menu_op_people_root"
+                  parent="menu_op_faculty_root"
                   action="action_op_faculty"
-                  sequence="20"/>
+                  sequence="10"/>
 
         <!-- Academics Menu -->
         <menuitem id="menu_op_academics_root" name="Academics"
                   parent="menu_op_school_root"
-                  sequence="20"/>
-        <menuitem id="session_menu" name="Sessions"
-                  parent="menu_op_academics_root"
-                  action="session_list_action"
-                  sequence="10"/>
-        <menuitem id="menu_op_course" name="Courses"
-                  parent="menu_op_academics_root"
-                  action="action_op_course"
-                  sequence="20"/>
-        <menuitem id="menu_op_batch" name="Batches"
-                  parent="menu_op_academics_root"
-                  action="action_op_batch"
-                  sequence="30"/>
-        <menuitem id="menu_op_subject" name="Subjects"
-                  parent="menu_op_academics_root"
-                  action="action_op_subject"
                   sequence="40"/>
 
-        <!-- Academics > Configuration Menu -->
-        <menuitem id="menu_op_academics_config_root" name="Configuration"
+        <!-- Academics > Academic Configuration -->
+        <menuitem id="menu_op_academic_config" name="Academic Configuration"
                   parent="menu_op_academics_root"
-                  sequence="100"/>
+                  sequence="10"/>
         <menuitem id="menu_op_academic_year" name="Academic Years"
-                  parent="menu_op_academics_config_root"
+                  parent="menu_op_academic_config"
                   action="action_op_academic_year"
                   sequence="10"/>
         <menuitem id="menu_op_academic_term" name="Academic Terms"
-                  parent="menu_op_academics_config_root"
+                  parent="menu_op_academic_config"
                   action="action_op_academic_term"
                   sequence="20"/>
-        <menuitem id="menu_op_program" name="Programs"
-                  parent="menu_op_academics_config_root"
-                  action="action_op_program"
-                  sequence="30"/>
-        <menuitem id="menu_op_program_level" name="Program Levels"
-                  parent="menu_op_academics_config_root"
-                  action="action_op_program_level"
-                  sequence="40"/>
+
+        <!-- Academics > Course Management -->
+        <menuitem id="menu_op_course_management" name="Course Management"
+                  parent="menu_op_academics_root"
+                  sequence="20"/>
         <menuitem id="menu_op_department" name="Departments"
-                  parent="menu_op_academics_config_root"
+                  parent="menu_op_course_management"
                   action="action_op_department"
+                  sequence="10"/>
+        <menuitem id="menu_op_course" name="Courses"
+                  parent="menu_op_course_management"
+                  action="action_op_course"
+                  sequence="20"/>
+        <menuitem id="menu_op_batch" name="Batches"
+                  parent="menu_op_course_management"
+                  action="action_op_batch"
+                  sequence="30"/>
+        <menuitem id="session_menu" name="Sessions"
+                  parent="menu_op_course_management"
+                  action="session_list_action"
+                  sequence="40"/>
+
+        <!-- Academics > Subject Management -->
+        <menuitem id="menu_op_subject_management" name="Subject Management"
+                  parent="menu_op_academics_root"
+                  sequence="30"/>
+        <menuitem id="menu_op_subject" name="Subjects"
+                  parent="menu_op_subject_management"
+                  action="action_op_subject"
+                  sequence="10"/>
+
+        <!-- Academics > Program Management -->
+        <menuitem id="menu_op_program_management" name="Program Management"
+                  parent="menu_op_academics_root"
+                  sequence="40"/>
+        <menuitem id="menu_op_program" name="Programs"
+                  parent="menu_op_program_management"
+                  action="action_op_program"
+                  sequence="10"/>
+        <menuitem id="menu_op_program_level" name="Program Levels"
+                  parent="menu_op_program_management"
+                  action="action_op_program_level"
+                  sequence="20"/>
+
+        <!-- Academics > General Management -->
+        <menuitem id="menu_op_general_management" name="General Management"
+                  parent="menu_op_academics_root"
                   sequence="50"/>
         <menuitem id="menu_op_category" name="Student Categories"
-                  parent="menu_op_academics_config_root"
+                  parent="menu_op_general_management"
                   action="action_op_category"
-                  sequence="60"/>
+                  sequence="10"/>
     </data>
 </odoo>
