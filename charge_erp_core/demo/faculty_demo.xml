@@ -27,7 +27,7 @@
             <field name="first_name">Herodotus</field>
             <field name="last_name">Halicarnassus</field>
             <field name="name">Herodotus Halicarnassus</field>
-            <field name="birth_date">484-01-01</field>
+            <field name="birth_date">0484-01-01</field>
             <field name="gender">male</field>
             <field name="department_id" ref="demo_department_humanities"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_hist101'), ref('demo_subject_hist202')])]"/>
