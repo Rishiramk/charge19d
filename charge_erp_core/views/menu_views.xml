@@ -60,6 +60,10 @@
                   parent="menu_op_course_management"
                   action="session_list_action"
                   sequence="40"/>
+        <menuitem id="menu_op_course_enrollment" name="Enrollments"
+                  parent="menu_op_course_management"
+                  action="action_op_course_enrollment"
+                  sequence="50"/>
 
         <!-- Academics > Subject Management -->
         <menuitem id="menu_op_subject_management" name="Subject Management"

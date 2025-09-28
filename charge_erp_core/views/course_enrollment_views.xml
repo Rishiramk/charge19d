@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- List View for Course Enrollment -->
+        <record id="view_op_course_enrollment_list" model="ir.ui.view">
+            <field name="name">op.course.enrollment.list</field>
+            <field name="model">op.course.enrollment</field>
+            <field name="arch" type="xml">
+                <list string="Enrollments">
+                    <field name="student_id"/>
+                    <field name="course_id"/>
+                    <field name="academic_year_id"/>
+                    <field name="status"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View for Course Enrollment -->
+        <record id="view_op_course_enrollment_form" model="ir.ui.view">
+            <field name="name">op.course.enrollment.form</field>
+            <field name="model">op.course.enrollment</field>
+            <field name="arch" type="xml">
+                <form string="Enrollment">
+                    <sheet>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="course_id"/>
+                            <field name="academic_year_id"/>
+                            <field name="status"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Course Enrollment -->
+        <record id="action_op_course_enrollment" model="ir.actions.act_window">
+            <field name="name">Enrollments</field>
+            <field name="res_model">op.course.enrollment</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+    </data>
+</odoo>
