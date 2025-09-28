@@ -43,41 +43,47 @@
                         <notebook>
                             <page string="Personal Information">
                                 <group>
-                                    <group>
+                                    <group string="Personal Details">
                                         <field name="gender"/>
                                         <field name="birth_date"/>
-                                    </group>
-                                    <group>
                                         <field name="blood_group"/>
+                                        <field name="nationality"/>
+                                        <field name="lang"/>
+                                        <field name="visa_info"/>
+                                    </group>
+                                    <group string="Contact &amp; Administrative">
+                                        <field name="phone"/>
+                                        <field name="mobile"/>
+                                        <field name="email"/>
+                                        <field name="emergency_contact_id"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="employee_id"/>
+                                        <field name="department_id"/>
+                                        <field name="allowed_department_ids" widget="many2many_tags"/>
                                     </group>
                                 </group>
-                            </page>
-                            <page string="Contact Information">
-                                <group>
-                                    <field name="phone"/>
-                                    <field name="mobile"/>
-                                    <field name="email"/>
+                                <group string="Address">
+                                    <field name="address_type"/>
+                                    <label for="street" string="Address"/>
+                                    <div class="o_address_format">
+                                        <field name="street" placeholder="Street..." class="o_address_street"/>
+                                        <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                        <field name="city" placeholder="City" class="o_address_city"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                        <field name="country_id" placeholder="Country" options='{"no_open": True, "no_create": True}'/>
+                                    </div>
                                 </group>
-                                <label for="street"/>
-                                <div class="o_address_format">
-                                    <field name="street" placeholder="Street..."/>
-                                    <field name="street2" placeholder="Street 2..."/>
-                                    <field name="city" placeholder="City"/>
-                                    <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
-                                    <field name="zip" placeholder="ZIP"/>
-                                    <field name="country_id" placeholder="Country" options='{"no_open": True, "no_create": True}'/>
-                                </div>
                             </page>
-                            <page string="Academic and System Information">
+                            <page string="Academic Profile">
                                 <group>
-                                    <field name="department_id"/>
-                                    <field name="allowed_department_ids" widget="many2many_tags"/>
-                                    <field name="program_id"/>
-                                    <field name="subject_ids" widget="many2many_tags"/>
-                                    <field name="office_location"/>
-                                    <field name="employee_id"/>
+                                    <group>
+                                        <field name="program_id"/>
+                                        <field name="subject_ids" widget="many2many_tags"/>
+                                        <field name="office_location"/>
+                                    </group>
                                 </group>
-                                <group string="Qualifications and Specialization">
+                                <group string="Qualifications &amp; Specialization">
                                     <field name="qualifications"/>
                                     <field name="specialization"/>
                                 </group>

@@ -21,8 +21,12 @@ class OpFaculty(models.Model):
     gender = fields.Selection([
         ('male', 'Male'), ('female', 'Female')
     ], 'Gender', required=True)
+    nationality = fields.Many2one('res.country', string='Nationality')
+    lang = fields.Selection(related='partner_id.lang', readonly=False)
+    visa_info = fields.Char(string='Visa Info')
 
     # Contact Information
+    address_type = fields.Selection(related='partner_id.type', string="Address Type", readonly=False)
     phone = fields.Char(related='partner_id.phone_sanitized', readonly=False)
     mobile = fields.Char(related='partner_id.phone', readonly=False)
     email = fields.Char(related='partner_id.email', readonly=False)
@@ -32,6 +36,8 @@ class OpFaculty(models.Model):
     state_id = fields.Many2one('res.country.state', related='partner_id.state_id', readonly=False)
     zip = fields.Char(related='partner_id.zip', readonly=False)
     country_id = fields.Many2one('res.country', related='partner_id.country_id', readonly=False)
+    emergency_contact_id = fields.Many2one(
+        'res.partner', string='Emergency Contact', ondelete='set null')
 
     # Academic and System Information
     department_id = fields.Many2one('op.department', string='Main Department')
