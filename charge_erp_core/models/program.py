@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields
+from odoo.models import Constraint
 
 class OpProgram(models.Model):
     _name = "op.program"
@@ -15,6 +16,6 @@ class OpProgram(models.Model):
     program_level_id = fields.Many2one(
         'op.program.level', 'Program Level', required=True)
 
-    _sql_constraints = [
-        ('unique_program_code', 'unique(code)', 'Code should be unique per program!')
+    _constraints = [
+        Constraint('unique_program_code', 'unique(code)', 'Code should be unique per program!')
     ]

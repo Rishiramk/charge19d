@@ -22,17 +22,6 @@ class OpFaculty(models.Model):
         ('male', 'Male'), ('female', 'Female')
     ], 'Gender', required=True)
 
-    # Contact Information
-    phone = fields.Char(related='partner_id.phone', readonly=False)
-    mobile = fields.Char(related='partner_id.mobile', readonly=False)
-    email = fields.Char(related='partner_id.email', readonly=False)
-    street = fields.Char(related='partner_id.street', readonly=False)
-    street2 = fields.Char(related='partner_id.street2', readonly=False)
-    city = fields.Char(related='partner_id.city', readonly=False)
-    state_id = fields.Many2one('res.country.state', related='partner_id.state_id', readonly=False)
-    zip = fields.Char(related='partner_id.zip', readonly=False)
-    country_id = fields.Many2one('res.country', related='partner_id.country_id', readonly=False)
-
     # Academic Information
     department_id = fields.Many2one('op.department', string='Department')
     program_id = fields.Many2one('op.program', string='Program')
