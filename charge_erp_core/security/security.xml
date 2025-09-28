@@ -39,8 +39,7 @@
         </record>
 
         <!-- Faculty Rules (Restrictive) -->
-        <!-- Note: The student rule is omitted for now to prevent installation errors.
-             It should be added in a subsequent update after the schema is stable. -->
+        <!-- Note: The student security rule is deferred to a subsequent update to prevent installation errors. -->
         <record id="op_faculty_faculty_rule" model="ir.rule">
             <field name="name">Faculty: Can only see faculty in their departments</field>
             <field name="model_id" ref="model_op_faculty"/>
