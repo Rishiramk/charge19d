@@ -39,7 +39,6 @@ class OpStudent(models.Model):
 
     # Contact Information
     address_type = fields.Selection(related='partner_id.type', string="Address Type", readonly=False)
-    mobile = fields.Char("Mobile")
     emergency_contact_id = fields.Many2one(
         'res.partner', string='Emergency Contact', ondelete='set null')
     parent_ids = fields.Many2many(
