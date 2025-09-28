@@ -7,6 +7,7 @@
             <field name="first_name">Alan</field>
             <field name="last_name">Turing</field>
             <field name="name">Alan Turing</field>
+            <field name="birth_date">1912-06-23</field>
             <field name="gender">male</field>
             <field name="department_id" ref="demo_department_cs"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_cs101'), ref('demo_subject_cs201')])]"/>
@@ -16,6 +17,7 @@
             <field name="first_name">Ada</field>
             <field name="last_name">Lovelace</field>
             <field name="name">Ada Lovelace</field>
+            <field name="birth_date">1815-12-10</field>
             <field name="gender">female</field>
             <field name="department_id" ref="demo_department_cs"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_ds501')])]"/>
@@ -25,6 +27,7 @@
             <field name="first_name">Herodotus</field>
             <field name="last_name">Halicarnassus</field>
             <field name="name">Herodotus Halicarnassus</field>
+            <field name="birth_date">484-01-01</field>
             <field name="gender">male</field>
             <field name="department_id" ref="demo_department_humanities"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_hist101'), ref('demo_subject_hist202')])]"/>
@@ -34,6 +37,7 @@
             <field name="first_name">Marie</field>
             <field name="last_name">Curie</field>
             <field name="name">Marie Curie</field>
+            <field name="birth_date">1867-11-07</field>
             <field name="gender">female</field>
             <field name="department_id" ref="demo_department_science"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_phy101')])]"/>
@@ -43,6 +47,7 @@
             <field name="first_name">Rosalind</field>
             <field name="last_name">Franklin</field>
             <field name="name">Rosalind Franklin</field>
+            <field name="birth_date">1920-07-25</field>
             <field name="gender">female</field>
             <field name="department_id" ref="demo_department_science"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_chem101')])]"/>
