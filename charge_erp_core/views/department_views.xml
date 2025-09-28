@@ -2,6 +2,52 @@
 <odoo>
     <data>
 
+        <!-- Actions for Department Smart Buttons -->
+        <record id="action_op_course_department" model="ir.actions.act_window">
+            <field name="name">Courses</field>
+            <field name="res_model">op.course</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('department_id', '=', active_id)]</field>
+            <field name="context">{'default_department_id': active_id}</field>
+        </record>
+
+        <record id="action_op_faculty_department" model="ir.actions.act_window">
+            <field name="name">Faculties</field>
+            <field name="res_model">op.faculty</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="domain">[('department_id', '=', active_id)]</field>
+            <field name="context">{'default_department_id': active_id}</field>
+        </record>
+
+        <record id="action_op_student_department" model="ir.actions.act_window">
+            <field name="name">Students</field>
+            <field name="res_model">op.student</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="domain">[('program_id.department_id', '=', active_id)]</field>
+        </record>
+
+        <record id="action_op_subject_department" model="ir.actions.act_window">
+            <field name="name">Subjects</field>
+            <field name="res_model">op.subject</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('department_id', '=', active_id)]</field>
+            <field name="context">{'default_department_id': active_id}</field>
+        </record>
+
+        <record id="action_op_batch_department" model="ir.actions.act_window">
+            <field name="name">Batches</field>
+            <field name="res_model">op.batch</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('program_id.department_id', '=', active_id)]</field>
+        </record>
+
+        <!-- Main Action for Department -->
+        <record id="action_op_department" model="ir.actions.act_window">
+            <field name="name">Departments</field>
+            <field name="res_model">op.department</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
         <!-- List View for Department -->
         <record id="view_op_department_list" model="ir.ui.view">
             <field name="name">op.department.list</field>
@@ -63,53 +109,6 @@
                 </form>
             </field>
         </record>
-
-        <!-- Actions for Department Smart Buttons -->
-        <record id="action_op_course_department" model="ir.actions.act_window">
-            <field name="name">Courses</field>
-            <field name="res_model">op.course</field>
-            <field name="view_mode">list,form</field>
-            <field name="domain">[('department_id', '=', active_id)]</field>
-            <field name="context">{'default_department_id': active_id}</field>
-        </record>
-
-        <record id="action_op_faculty_department" model="ir.actions.act_window">
-            <field name="name">Faculties</field>
-            <field name="res_model">op.faculty</field>
-            <field name="view_mode">kanban,list,form</field>
-            <field name="domain">[('department_id', '=', active_id)]</field>
-            <field name="context">{'default_department_id': active_id}</field>
-        </record>
-
-        <record id="action_op_student_department" model="ir.actions.act_window">
-            <field name="name">Students</field>
-            <field name="res_model">op.student</field>
-            <field name="view_mode">kanban,list,form</field>
-            <field name="domain">[('program_id.department_id', '=', active_id)]</field>
-        </record>
-
-        <record id="action_op_subject_department" model="ir.actions.act_window">
-            <field name="name">Subjects</field>
-            <field name="res_model">op.subject</field>
-            <field name="view_mode">list,form</field>
-            <field name="domain">[('department_id', '=', active_id)]</field>
-            <field name="context">{'default_department_id': active_id}</field>
-        </record>
-
-        <record id="action_op_batch_department" model="ir.actions.act_window">
-            <field name="name">Batches</field>
-            <field name="res_model">op.batch</field>
-            <field name="view_mode">list,form</field>
-            <field name="domain">[('program_id.department_id', '=', active_id)]</field>
-        </record>
-
-        <!-- Action for Department -->
-        <record id="action_op_department" model="ir.actions.act_window">
-            <field name="name">Departments</field>
-            <field name="res_model">op.department</field>
-            <field name="view_mode">list,form</field>
-        </record>
-
 
     </data>
 </odoo>
