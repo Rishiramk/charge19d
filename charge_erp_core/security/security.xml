@@ -23,5 +23,34 @@
             <field name="implied_ids" eval="[(4, ref('charge_erp_core.group_op_faculty'))]"/>
         </record>
 
+        <!-- Department-based Security Rules -->
+        <!-- Manager Rules (Permissive) -->
+        <record id="op_student_manager_rule" model="ir.rule">
+            <field name="name">Student: Manager can see all</field>
+            <field name="model_id" ref="model_op_student"/>
+            <field name="groups" eval="[(4, ref('group_op_manager'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+        <record id="op_faculty_manager_rule" model="ir.rule">
+            <field name="name">Faculty: Manager can see all</field>
+            <field name="model_id" ref="model_op_faculty"/>
+            <field name="groups" eval="[(4, ref('group_op_manager'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <!-- Faculty Rules (Restrictive) -->
+        <record id="op_student_faculty_rule" model="ir.rule">
+            <field name="name">Student: Faculty can only see students in their departments</field>
+            <field name="model_id" ref="model_op_student"/>
+            <field name="groups" eval="[(4, ref('group_op_faculty'))]"/>
+            <field name="domain_force">[('program_id.department_id', 'in', [user.faculty_id.department_id.id] + user.faculty_id.allowed_department_ids.ids)]</field>
+        </record>
+        <record id="op_faculty_faculty_rule" model="ir.rule">
+            <field name="name">Faculty: Faculty can only see faculty in their departments</field>
+            <field name="model_id" ref="model_op_faculty"/>
+            <field name="groups" eval="[(4, ref('group_op_faculty'))]"/>
+            <field name="domain_force">['|', ('id', '=', user.faculty_id.id), '|', ('department_id', 'in', [user.faculty_id.department_id.id] + user.faculty_id.allowed_department_ids.ids), ('allowed_department_ids', 'in', [user.faculty_id.department_id.id] + user.faculty_id.allowed_department_ids.ids)]</field>
+        </record>
+
     </data>
 </odoo>

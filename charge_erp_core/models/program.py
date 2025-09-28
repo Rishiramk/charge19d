@@ -14,6 +14,7 @@ class OpProgram(models.Model):
     image_1920 = fields.Image('Image', attachment=True)
     program_level_id = fields.Many2one(
         'op.program.level', 'Program Level', required=True)
+    department_id = fields.Many2one('op.department', string='Department')
 
     _sql_constraints = [
         ('unique_program_code', 'unique(code)', 'Code should be unique per program!')

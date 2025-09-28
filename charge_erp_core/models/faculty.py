@@ -33,13 +33,18 @@ class OpFaculty(models.Model):
     zip = fields.Char(related='partner_id.zip', readonly=False)
     country_id = fields.Many2one('res.country', related='partner_id.country_id', readonly=False)
 
-    # Academic Information
-    department_id = fields.Many2one('op.department', string='Department')
+    # Academic and System Information
+    department_id = fields.Many2one('op.department', string='Main Department')
+    allowed_department_ids = fields.Many2many(
+        'op.department', 'faculty_department_rel',
+        'faculty_id', 'department_id', string='Allowed Departments')
     program_id = fields.Many2one('op.program', string='Program')
     subject_ids = fields.Many2many('op.subject', string='Subjects')
     qualifications = fields.Text(string='Qualifications')
     specialization = fields.Text(string='Specialization')
     office_location = fields.Char(string='Office Location')
+    employee_id = fields.Many2one('hr.employee', string='Related Employee')
+    user_id = fields.Many2one('res.users', string='Related User', related='partner_id.user_ids.user_id', view_load=True)
 
     session_ids = fields.Many2many(
         'op.session', 'op_session_faculty_rel', 'faculty_id', 'session_id', string="Sessions")

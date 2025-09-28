@@ -68,12 +68,14 @@
                                     <field name="country_id" placeholder="Country" options='{"no_open": True, "no_create": True}'/>
                                 </div>
                             </page>
-                            <page string="Academic Information">
+                            <page string="Academic and System Information">
                                 <group>
                                     <field name="department_id"/>
+                                    <field name="allowed_department_ids" widget="many2many_tags"/>
                                     <field name="program_id"/>
                                     <field name="subject_ids" widget="many2many_tags"/>
                                     <field name="office_location"/>
+                                    <field name="employee_id"/>
                                 </group>
                                 <group string="Qualifications and Specialization">
                                     <field name="qualifications"/>

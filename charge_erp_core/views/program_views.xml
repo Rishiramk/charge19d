@@ -26,6 +26,7 @@
                             <group>
                                 <field name="name"/>
                                 <field name="code"/>
+                                <field name="department_id"/>
                                 <field name="program_level_id"/>
                             </group>
                             <group>

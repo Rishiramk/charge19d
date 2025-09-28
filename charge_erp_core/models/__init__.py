@@ -15,3 +15,4 @@ from . import session
 from . import category
 from . import res_partner
 from . import student_course
+from . import res_users

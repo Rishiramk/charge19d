@@ -8,7 +8,7 @@
     'author': 'Charge',
     'website': 'https://www.charge-erp.com',
     'category': 'Education',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'hr'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
