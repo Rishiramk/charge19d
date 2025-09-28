@@ -36,7 +36,9 @@ class OpFaculty(models.Model):
     # Academic Information
     department_id = fields.Many2one('op.department', string='Department')
     program_id = fields.Many2one('op.program', string='Program')
-    subject_ids = fields.Many2many('op.subject', string='Subjects')
+    subject_ids = fields.Many2many(
+        'op.subject', 'op_faculty_subject_rel',
+        'faculty_id', 'subject_id', string='Subjects')
 
     session_ids = fields.One2many(
         'op.session', 'faculty_id', string="Sessions")

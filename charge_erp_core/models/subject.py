@@ -17,6 +17,9 @@ class OpSubject(models.Model):
         [('compulsory', 'Compulsory'), ('elective', 'Elective')],
         'Subject Type', default="compulsory", required=True)
     active = fields.Boolean(default=True)
+    faculty_ids = fields.Many2many(
+        'op.faculty', 'op_faculty_subject_rel',
+        'subject_id', 'faculty_id', string='Faculties')
 
     _sql_constraints = [
         ('unique_subject_code', 'unique(code)', 'Code should be unique per subject!')

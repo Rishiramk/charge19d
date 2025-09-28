@@ -35,6 +35,11 @@
                                 <field name="active"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page string="Faculties">
+                                <field name="faculty_ids"/>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
