@@ -66,9 +66,8 @@
                 <search string="Search Course">
                     <field name="name"/>
                     <field name="code"/>
-                    <group expand="0" string="Group By">
-                        <filter string="Department" name="group_by_department" context="{'group_by':'department_id'}"/>
-                    </group>
+                    <separator/>
+                    <filter string="Department" name="group_by_department" context="{'group_by':'department_id'}"/>
                 </search>
             </field>
         </record>
