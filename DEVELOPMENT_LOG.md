@@ -98,3 +98,8 @@ During development, two key issues were identified and resolved.
 
 -   **Issue:** When creating a new course enrollment record (e.g., from the Student form), the UI would display a generic system ID like "op.course.enrollment,NewId_..." instead of a human-readable name.
 -   **Fix:** A computed `name` field was added to the `op.course.enrollment` model. This field generates a user-friendly name by combining the student's name and the course name (e.g., "John Doe - Introduction to Python"), resolving the display issue.
+
+### Bug 4: Invalid Field in Demo Data
+
+-   **Issue:** The demo data failed to install due to a `ValueError`. The `program_demo.xml` file incorrectly attempted to assign a value to a `code` field in the `op.program.level` model, which does not exist.
+-   **Fix:** The invalid `<field name="code">...</field>` lines were removed from the `op.program.level` records in the `program_demo.xml` file, resolving the installation error.

@@ -5,12 +5,10 @@
         <!-- Program Level Records -->
         <record id="demo_program_level_ug" model="op.program.level">
             <field name="name">Undergraduate</field>
-            <field name="code">UG</field>
         </record>
 
         <record id="demo_program_level_pg" model="op.program.level">
             <field name="name">Postgraduate</field>
-            <field name="code">PG</field>
         </record>
 
         <!-- Program Records -->
