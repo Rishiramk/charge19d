@@ -12,6 +12,7 @@ class OpProgram(models.Model):
     min_unit_load = fields.Float("Minimum Unit Load")
     active = fields.Boolean(default=True)
     image_1920 = fields.Image('Image', attachment=True)
+    department_id = fields.Many2one('op.department', string='Department')
     program_level_id = fields.Many2one(
         'op.program.level', 'Program Level', required=True)
     batch_ids = fields.One2many('op.batch', 'program_id', string='Batches')

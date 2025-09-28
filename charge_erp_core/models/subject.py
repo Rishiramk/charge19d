@@ -16,6 +16,7 @@ class OpSubject(models.Model):
     subject_type = fields.Selection(
         [('compulsory', 'Compulsory'), ('elective', 'Elective')],
         'Subject Type', default="compulsory", required=True)
+    department_id = fields.Many2one('op.department', string='Department')
     active = fields.Boolean(default=True)
     faculty_ids = fields.Many2many(
         'op.faculty', 'op_faculty_subject_rel',
