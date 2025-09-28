@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="charge_erp_core.dashboard">
+        <div class="o_hr_dashboard">
+            <div class="container-fluid o_hr_dashboard_container">
+                <!-- KPI Row -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Total Students</h5>
+                                <h1 class="total_students">...</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Total Faculty</h5>
+                                <h1 class="total_faculty">...</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Active Courses</h5>
+                                <h1 class="total_courses">...</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Students by Department</h5>
+                                <canvas id="studentsByDepartmentChart" style="height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Faculty by Department</h5>
+                                <canvas id="facultyByDepartmentChart" style="height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

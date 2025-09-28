@@ -39,7 +39,12 @@
         </record>
 
         <!-- Faculty Rules (Restrictive) -->
-        <!-- Note: The student security rule is deferred to a subsequent update to prevent installation errors. -->
+        <record id="op_student_faculty_rule" model="ir.rule">
+            <field name="name">Student: Faculty can only see students in their departments</field>
+            <field name="model_id" ref="model_op_student"/>
+            <field name="groups" eval="[(4, ref('group_op_faculty'))]"/>
+            <field name="domain_force">[('program_id.department_id', 'in', [user.faculty_id.department_id.id] + user.faculty_id.allowed_department_ids.ids)]</field>
+        </record>
         <record id="op_faculty_faculty_rule" model="ir.rule">
             <field name="name">Faculty: Can only see faculty in their departments</field>
             <field name="model_id" ref="model_op_faculty"/>
