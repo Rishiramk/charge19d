@@ -12,7 +12,18 @@ All changes were implemented, reviewed, and tested to ensure stability and corre
 
 The following major features and enhancements were implemented:
 
-### 1. Data Model & Relationship Enhancements
+### 1. Refactored Data Integrity for Consistency
+
+To improve data quality and long-term maintainability, all uniqueness validations were refactored to use a consistent, reliable pattern. All models now use Python-level constraints (`@api.constrains`) instead of database-level SQL constraints. This ensures predictable behavior across the entire module, especially for models with complex inheritance.
+
+The following fields are now guaranteed to be unique:
+-   **Student:** `roll_number` and `registration_number`.
+-   **Course & Subject:** `code`.
+-   **Department, Program & Academic Year:** `name`.
+-   **Program:** `code`.
+-   **Batch:** `code`, and the combination of `name` and `program_id`.
+
+### 2. Data Model & Relationship Enhancements
 
 The core data model was strengthened by establishing critical bi-directional relationships between the main academic models. This creates a more logical and interconnected system, paving the way for future features.
 
@@ -58,17 +69,6 @@ The user interface was significantly upgraded to be more powerful and user-frien
 -   **Enrollment Menu Item:**
     -   **Enhancement:** Added a dedicated "Enrollments" menu item under "Academics > Course Management" to provide direct access to the `op.course.enrollment` model.
     -   **Implementation:** This involved creating new list and form views, a window action, and updating the manifest file to make the model accessible from the UI.
-
-### 4. Refactored Data Integrity for Consistency
-
-To improve data quality and long-term maintainability, all uniqueness validations were refactored to use a consistent, reliable pattern. All models now use Python-level constraints (`@api.constrains`) instead of database-level SQL constraints. This ensures predictable behavior across the entire module, especially for models with complex inheritance.
-
-The following fields are now guaranteed to be unique:
--   **Student:** `roll_number` and `registration_number`.
--   **Course & Subject:** `code`.
--   **Department, Program & Academic Year:** `name`.
--   **Program:** `code`.
--   **Batch:** `code`, and the combination of `name` and `program_id`.
 
 ---
 
