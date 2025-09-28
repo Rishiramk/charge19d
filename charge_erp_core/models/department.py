@@ -6,6 +6,10 @@ class OpDepartment(models.Model):
     _name = "op.department"
     _description = "Department"
 
+    _sql_constraints = [
+        ('name_unique', 'unique(name)', 'Department Name must be unique!'),
+    ]
+
     name = fields.Char('Name', required=True)
     code = fields.Char('Code', required=True)
     parent_id = fields.Many2one('op.department', 'Parent Department')

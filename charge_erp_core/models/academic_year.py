@@ -6,6 +6,10 @@ class OpAcademicYear(models.Model):
     _name = 'op.academic.year'
     _description = "Academic Year"
 
+    _sql_constraints = [
+        ('name_unique', 'unique(name)', 'Academic Year Name must be unique!'),
+    ]
+
     name = fields.Char('Name', required=True)
     start_date = fields.Date('Start Date', required=True)
     end_date = fields.Date('End Date', required=True)

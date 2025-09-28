@@ -7,6 +7,13 @@ class OpStudent(models.Model):
     _description = 'Student'
     _inherits = {'res.partner': 'partner_id'}
 
+    _sql_constraints = [
+        ('roll_number_unique', 'unique(roll_number)',
+         'Roll Number must be unique!'),
+        ('registration_number_unique', 'unique(registration_number)',
+         'Registration Number must be unique!'),
+    ]
+
     # Link to res.partner
     partner_id = fields.Many2one(
         'res.partner', string='Partner', required=True, ondelete='cascade'

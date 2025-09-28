@@ -23,5 +23,6 @@ class OpProgram(models.Model):
             program.batch_count = len(program.batch_ids)
 
     _sql_constraints = [
-        ('unique_program_code', 'unique(code)', 'Code should be unique per program!')
+        ('unique_program_code', 'unique(code)', 'Code should be unique per program!'),
+        ('name_unique', 'unique(name)', 'Program Name must be unique!'),
     ]

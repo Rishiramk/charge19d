@@ -7,6 +7,10 @@ class OpCourse(models.Model):
     _name = "op.course"
     _description = "Course"
 
+    _sql_constraints = [
+        ('code_unique', 'unique(code)', 'Course Code must be unique!'),
+    ]
+
     name = fields.Char('Name', required=True, translate=True)
     code = fields.Char('Code', size=16, required=True)
     parent_id = fields.Many2one('op.course', 'Parent Course', index=True, ondelete='cascade')

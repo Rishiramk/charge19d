@@ -59,6 +59,15 @@ The user interface was significantly upgraded to be more powerful and user-frien
     -   **Enhancement:** Added a dedicated "Enrollments" menu item under "Academics > Course Management" to provide direct access to the `op.course.enrollment` model.
     -   **Implementation:** This involved creating new list and form views, a window action, and updating the manifest file to make the model accessible from the UI.
 
+### 4. Enhanced Data Integrity with SQL Constraints
+
+To improve data quality and prevent duplicate records, database-level uniqueness constraints (`_sql_constraints`) were added to several key models. This is a lightweight but powerful enhancement that strengthens the reliability of the core data.
+
+-   **Student:** Enforced uniqueness on `roll_number` and `registration_number`.
+-   **Course & Subject:** Enforced uniqueness on the `code` field.
+-   **Department, Program & Academic Year:** Enforced uniqueness on the `name` field.
+-   **Batch:** Enforced uniqueness on the combination of `name` and `program_id` to allow same-named batches across different programs.
+
 ---
 
 ## II. Issues Encountered & Bug Fixes
