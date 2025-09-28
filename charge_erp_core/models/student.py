@@ -53,9 +53,12 @@ class OpStudent(models.Model):
     parent_ids = fields.Many2many(
         'res.partner', 'op_student_parent_rel', 'student_id', 'parent_id', string='Parents')
 
-    # Other Information
+    # Academic Information
     roll_number = fields.Char(string='Roll Number')
     registration_number = fields.Char(string='Registration Number')
+    previous_education = fields.Text(string='Previous Education')
+
+    # Other Information
     library_card = fields.Char(string='Library Card')
     badge_id = fields.Char(string='Badge ID')
     pin = fields.Char(string='PIN', help="PIN for Kiosk Mode")

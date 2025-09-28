@@ -14,6 +14,11 @@ class OpCourse(models.Model):
         [('normal', 'Normal'), ('GPA', 'GPA'),
          ('CWA', 'CWA'), ('CCE', 'CCE')],
         'Evaluation Type', default="normal", required=True)
+    credits = fields.Float(string='Credits')
+    course_type = fields.Selection(
+        [('core', 'Core'), ('elective', 'Elective'), ('lab', 'Lab')],
+        string='Course Type', default='core')
+    syllabus = fields.Html(string='Syllabus')
     active = fields.Boolean(default=True)
     session_ids = fields.One2many(
         'op.session', 'course_id', string="Sessions")

@@ -120,6 +120,9 @@
                                         <field name="program_id"/>
                                     </group>
                                 </group>
+                                <group string="Academic History">
+                                    <field name="previous_education"/>
+                                </group>
                                 <field name="course_detail_ids">
                                     <list editable="bottom">
                                         <field name="course_id"/>

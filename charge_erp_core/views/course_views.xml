@@ -38,6 +38,8 @@
                             <group>
                                 <field name="parent_id"/>
                                 <field name="evaluation_type"/>
+                                <field name="credits"/>
+                                <field name="course_type"/>
                                 <field name="active"/>
                             </group>
                         </group>
@@ -50,6 +52,9 @@
                                         <field name="status"/>
                                     </list>
                                 </field>
+                            </page>
+                            <page string="Syllabus">
+                                <field name="syllabus"/>
                             </page>
                         </notebook>
                     </sheet>
