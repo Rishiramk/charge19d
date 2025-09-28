@@ -43,8 +43,8 @@
                             </group>
                         </group>
                         <notebook>
-                            <page string="Students">
-                                <field name="student_course_ids">
+                            <page string="Enrollments">
+                                <field name="enrollment_ids">
                                     <list>
                                         <field name="student_id"/>
                                         <field name="academic_year_id"/>

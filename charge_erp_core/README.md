@@ -1,84 +1,58 @@
 # Charge ERP Core Module
 
-This module contains the core models and functionality for the Charge ERP system.
+Welcome to the Charge ERP Core module. This module provides the foundational features for a comprehensive School Information System (SIS) built on Odoo 19. It includes the core data models, security structure, and user interface for managing students, faculty, courses, and other academic entities.
 
-## Features
+This module has recently undergone a major "Phase 1" refactoring to establish a robust and secure foundation for future development.
 
-As of the current version, this module includes the following features:
-- A `School` menu in the Odoo interface.
-- Basic models for managing:
-    - Students (`op.student`)
-    - Courses (`op.course`)
-    - Faculties (`op.faculty`)
-    - Subjects (`op.subject`)
-    - Batches (`op.batch`)
-    - Program Levels (`op.program.level`)
-    - Programs (`op.program`)
-    - Departments (`op.department`)
-    - Academic Terms (`op.academic.term`)
-    - Academic Years (`op.academic.year`)
-- Basic views (list and form) and menu items for each of the above models.
-- Basic access rights for all new models.
+## Key Features & Recent Improvements
 
-## Detailed Development Log
+- **Modular Architecture**: Designed to be lean and stable, serving as the core for future extension modules (e.g., Fees, Assignments, Attendance).
+- **Normalized Data Models**:
+    - **Student Name**: The `res.partner` model has been extended to include granular `first_name`, `middle_name`, and `last_name` fields, ensuring data consistency. The full name is constructed automatically.
+    - **Student Category**: The student category is a relational `Many2one` field, allowing for better management and filtering.
+- **Restructured UI**: The user interface has been reorganized for clarity, with menus grouped into logical sections:
+    - **People**: For managing Students and Faculty.
+    - **Academics**: For managing Sessions, Courses, Batches, and Subjects.
+    - **Academics > Configuration**: For less-frequently accessed settings like Academic Years, Programs, and Departments.
+- **Enhanced Relationships**:
+    - **Faculty & Sessions**: A bi-directional `One2many` relationship now links faculty to their assigned sessions, with a smart button on the faculty form for easy navigation.
+    - **Faculty & Subjects**: A bi-directional `ManyToManyField` links faculty and subjects, allowing for better academic planning.
+    - **Courses & Departments**: A bi-directional relationship now links courses to their respective academic departments, with a smart button on the department form.
+- **Course Enrollment (`op.course.enrollment`)**: The previous `op.student.course` model has been refactored into `op.course.enrollment` for greater clarity. This model robustly tracks student enrollments in courses for specific academic years.
+- **Role-Based Access Control**: A granular security system has been implemented to control user permissions.
+- **Extensibility**: The student form now includes placeholder "smart buttons" for future modules like Assignments, Fees, and Attendance, ensuring a seamless upgrade path.
 
-### Student Management Enhancements
+## Access Control and Security Setup
 
-The student management system has been significantly enhanced to provide a more robust and user-friendly experience.
+The security of the Charge ERP Core module is built around a role-based access control system. We have defined three primary roles with specific permissions, in addition to the standard Odoo Administrator.
 
-#### 1. Category Management (`op.category`)
+### Roles and Permissions
 
-- **New Model**: A new model, `op.category`, has been created to allow for the centralized management of student categories.
-- **Refactored Field**: The `category` field on the `op.student` model has been changed from a simple text field to a `Many2one` relationship with the new `op.category` model. This ensures data consistency and allows for easier filtering and reporting.
+1.  **Student (`charge_erp_core.group_op_student`)**
+    - **Permissions**: Read-only access.
+    - **Description**: This is the most restrictive role, intended for students. Users in this group can view their own information, as well as general academic information like courses and subjects, but cannot create or modify any records.
 
-#### 2. Course Enrollment (`op.student.course`)
+2.  **Faculty (`charge_erp_core.group_op_faculty`)**
+    - **Permissions**: Read access to most academic data, with limited write/create access.
+    - **Description**: This role is for teachers and other faculty members. They can view student profiles and academic structures. Crucially, they have permission to **create and manage Sessions** and **manage student course enrollments**, but they cannot create new students or courses.
 
-- **New Model**: A new model, `op.student.course`, has been introduced to track student enrollments in different courses across academic years.
-- **"Courses" Tab**: A "Courses" tab has been added to the student form view. This tab contains an editable list view that displays all the courses a student is enrolled in, along with the academic year and the status of the enrollment (e.g., "enrolled," "dropped," "completed").
+3.  **Manager (`charge_erp_core.group_op_manager`)**
+    - **Permissions**: Full Create, Read, Update, Delete (CRUD) access to all models within this module.
+    - **Description**: This is the highest-level role within the Charge ERP module. Users in this group, such as administrative staff, have full control over all academic and user data. They can create new students, faculty, courses, and configure all academic settings.
 
-#### 3. UI/UX Improvements
+4.  **System Administrator (`base.group_system`)**
+    - **Permissions**: Full CRUD access to all models.
+    - **Description**: The standard Odoo Administrator group has been granted full permissions for all models in this module. Any user in this group (like the `devops` user) will have complete access, including the ability to see all "New" buttons.
 
-- **Status Bar**: The status bar on the student form now includes the `on_leave` state, providing a complete visual representation of all possible student statuses.
-- **Portal Access Tab**: The `user_id` field has been moved to a new "Portal Access" tab for better organization and clarity.
-- **Kanban View**: A new Kanban view has been implemented for students, providing a more visual and at-a-glance overview. Each Kanban card displays the student's photo, name, batch, and status.
+### How to Assign Roles to Users
 
-### Faculty Management Enhancements
+To grant users the appropriate permissions, you must assign them to one of the groups listed above. This is done by a System Administrator.
 
-The faculty management system has been refactored to align with Odoo best practices and provide more detailed academic information.
+1.  Navigate to **Settings > Users & Companies > Users**.
+2.  Select the user you wish to modify.
+3.  Click **Edit**.
+4.  In the **Access Rights** tab, under the "Charge ERP" section, you will see the available roles (Student, Faculty, Manager).
+5.  Check the box next to the desired role for the user. A user can have multiple roles, and they will inherit the highest level of permission granted by their roles.
+6.  Click **Save**.
 
-#### 1. Inheritance from `res.partner`
-
-- **Refactored Model**: The `op.faculty` model now inherits from `res.partner` using the `_inherits` mechanism. This simplifies the model by leveraging the built-in fields of `res.partner` (e.g., address, contact information) and ensures consistency with other models in the system.
-- **Granular Name Fields**: The `first_name`, `middle_name`, and `last_name` fields have been preserved on the faculty model to allow for detailed name management. A computed `name` field automatically concatenates these fields into the main `name` field inherited from `res.partner`.
-
-#### 2. Academic Information
-
-- **New Fields**: The `op.faculty` model now includes the following fields to store more detailed academic information:
-    - `department_id` (Many2one to `op.department`)
-    - `program_id` (Many2one to `op.program`)
-    - `subject_ids` (Many2many to `op.subject`)
-- **Updated Views**: The faculty form and list views have been updated to include these new fields, providing a more comprehensive overview of each faculty member.
-
-#### 3. Link to Sessions
-
-- **Refactored Relationship**: The `op.session` model has been updated to use a `faculty_id` `Many2one` field instead of a `Many2many` field. This establishes a clear, one-to-one link between a session and its assigned faculty member.
-
-### Bug Fixes
-
-- **Odoo 19 View Compatibility**: This development cycle included fixes for several view rendering errors specific to Odoo 19. This involved:
-    - Replacing a deprecated `<tree>` tag with `<list>` for an inline list view definition.
-    - Correcting the Kanban view image rendering by using the `kanban_image` widget instead of a raw `<img>` tag.
-    - Resolving a "Missing 'card' template" error by renaming the Kanban QWeb template to `card`.
-
-## How to Deploy
-
-To deploy this module, please follow these steps:
-
-1.  **Ensure you have a running Odoo 19 instance.**
-2.  **Add this module to your addons path.** Place the `charge_erp_core` directory into the `addons` directory of your Odoo installation.
-3.  **Restart your Odoo server.** This is necessary for Odoo to recognize the new module.
-4.  **Activate Developer Mode.** In your Odoo instance, go to `Settings` -> `General Settings` and click on `Activate the developer mode`.
-5.  **Update the Apps List.** Go to `Apps` in the main menu and click on `Update Apps List` in the secondary menu. You will be prompted to confirm the update.
-6.  **Install or Upgrade the Module.** Search for `Charge ERP Core` in the Apps list (you may need to remove the default "Apps" filter to see it). Click the "Install" or "Upgrade" button on the module.
-
-Once the installation is complete, you will see a new "School" menu in your Odoo instance where you can manage the new models.
+The user's permissions will be updated immediately. For example, to give a user the ability to create new students, you would add them to the **Manager** group.

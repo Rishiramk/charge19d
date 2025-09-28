@@ -120,7 +120,7 @@
                                         <field name="program_id"/>
                                     </group>
                                 </group>
-                                <field name="course_detail_ids">
+                                <field name="enrollment_ids">
                                     <list editable="bottom">
                                         <field name="course_id"/>
                                         <field name="academic_year_id"/>
