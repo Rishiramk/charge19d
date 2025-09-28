@@ -14,7 +14,6 @@ class OpStudent(models.Model):
     image_128 = fields.Image(related='partner_id.image_128', readonly=True)
 
     # Personal Information
-    lang = fields.Selection(related='partner_id.lang', readonly=False)
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
@@ -38,18 +37,16 @@ class OpStudent(models.Model):
     id_number = fields.Char(string='ID Card Number')
 
     # Contact Information
-    address_type = fields.Selection(related='partner_id.type', string="Address Type", readonly=False)
+    mobile = fields.Char("Mobile")
     emergency_contact_id = fields.Many2one(
-        'res.partner', string='Emergency Contact', ondelete='set null')
+        'res.partner', string='Emergency Contact Partner', ondelete='set null')
     parent_ids = fields.Many2many(
         'res.partner', 'op_student_parent_rel', 'student_id', 'parent_id', string='Parents')
 
     # Other Information
-    roll_number = fields.Char(string='Roll Number')
     registration_number = fields.Char(string='Registration Number')
     library_card = fields.Char(string='Library Card')
     badge_id = fields.Char(string='Badge ID')
-    pin = fields.Char(string='PIN', help="PIN for Kiosk Mode")
     category_id = fields.Many2one('op.category', string='Category')
     user_id = fields.Many2one('res.users', string='User')
     batch_id = fields.Many2one('op.batch', string='Batch')

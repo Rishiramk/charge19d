@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, _
 from odoo.models import Constraint
 
 class OpSubject(models.Model):
@@ -20,5 +20,10 @@ class OpSubject(models.Model):
     active = fields.Boolean(default=True)
 
     _constraints = [
-        Constraint('unique_subject_code', 'unique(code)', 'Code should be unique per subject!')
+        Constraint(
+            name="unique_subject_code",
+            type="unique",
+            fields=["code"],
+            message=_("Code should be unique per subject!"),
+        )
     ]

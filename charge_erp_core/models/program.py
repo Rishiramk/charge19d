@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, _
 from odoo.models import Constraint
 
 class OpProgram(models.Model):
@@ -17,5 +17,10 @@ class OpProgram(models.Model):
         'op.program.level', 'Program Level', required=True)
 
     _constraints = [
-        Constraint('unique_program_code', 'unique(code)', 'Code should be unique per program!')
+        Constraint(
+            name="unique_program_code",
+            type="unique",
+            fields=["code"],
+            message=_("Code should be unique per program!"),
+        )
     ]

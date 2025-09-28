@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, _
 from odoo.models import Constraint
 
 class OpProgramLevel(models.Model):
@@ -10,5 +10,10 @@ class OpProgramLevel(models.Model):
     name = fields.Char('Name', required=True, translate=True)
 
     _constraints = [
-        Constraint('unique_level_name', 'unique(name)', 'Name should be unique per Program level!')
+        Constraint(
+            name="unique_level_name",
+            type="unique",
+            fields=["name"],
+            message=_("Name should be unique per Program level!"),
+        )
     ]

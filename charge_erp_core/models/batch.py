@@ -18,7 +18,12 @@ class OpBatch(models.Model):
     active = fields.Boolean(default=True)
 
     _constraints = [
-        Constraint('unique_batch_code', 'unique(code)', 'Code should be unique per batch!')
+        Constraint(
+            name="unique_batch_code",
+            type="unique",
+            fields=["code"],
+            message=_("Code should be unique per batch!"),
+        )
     ]
 
     @api.constrains('start_date', 'end_date')
