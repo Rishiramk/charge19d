@@ -64,7 +64,7 @@
                         <div class="oe_title">
                             <label for="name" string="Name"/>
                             <h1>
-                                <field name="title" placeholder="Title" options='{"no_open": True}'/>
+                                <field name="partner_title" placeholder="Title" options='{"no_open": True}'/>
                                 <field name="first_name" placeholder="First Name" style="width: 30%"/>
                                 <field name="middle_name" placeholder="Middle Name" style="width: 30%"/>
                                 <field name="last_name" placeholder="Last Name" style="width: 30%" required="1"/>

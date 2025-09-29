@@ -4,7 +4,7 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    title = fields.Selection([
+    partner_title = fields.Selection([
         ('mr', 'Mr.'),
         ('ms', 'Ms.'),
         ('mrs', 'Mrs.'),

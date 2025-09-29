@@ -11,7 +11,7 @@ class OpFaculty(models.Model):
     partner_id = fields.Many2one(
         'res.partner', string='Partner', required=True, ondelete='cascade')
     image_128 = fields.Image(related='partner_id.image_128', readonly=True)
-    title = fields.Selection(related='partner_id.title', readonly=False)
+    partner_title = fields.Selection(related='partner_id.partner_title', readonly=False)
 
     # Personal Information
     gender = fields.Selection([
