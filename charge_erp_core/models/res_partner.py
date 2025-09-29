@@ -4,13 +4,6 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    partner_title = fields.Selection([
-        ('mr', 'Mr.'),
-        ('ms', 'Ms.'),
-        ('mrs', 'Mrs.'),
-        ('dr', 'Dr.'),
-        ('prof', 'Prof.')
-    ], string='Title')
     first_name = fields.Char("First Name")
     last_name = fields.Char("Last Name")
     middle_name = fields.Char("Middle Name")
