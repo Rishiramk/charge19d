@@ -54,7 +54,7 @@
                                 type="action"
                                 class="oe_stat_button"
                                 icon="fa-users"
-                                attrs="{'invisible': [('employee_id', '=', False)]}"
+                                invisible="not employee_id"
                                 context="{'search_default_id': employee_id}">
                                 <field name="employee_id" readonly="1" widget="statinfo" string="Employee"/>
                             </button>
@@ -146,10 +146,10 @@
                                             string="Create Employee"
                                             type="object"
                                             class="btn-primary"
-                                            attrs="{'invisible': [('employee_id', '!=', False)]}"/>
+                                            invisible="employee_id"/>
                                         <field name="employee_id"
                                             readonly="1"
-                                            attrs="{'invisible': [('employee_id', '=', False)]}"/>
+                                            invisible="not employee_id"/>
                                     </group>
                                 </group>
                             </page>
