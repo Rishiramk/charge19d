@@ -4,6 +4,7 @@ from odoo import models, fields, api
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    title = fields.Many2one('res.partner.title', string='Title')
     first_name = fields.Char("First Name")
     last_name = fields.Char("Last Name")
     middle_name = fields.Char("Middle Name")
