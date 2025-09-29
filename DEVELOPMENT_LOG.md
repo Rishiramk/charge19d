@@ -98,3 +98,8 @@ During development, two key issues were identified and resolved.
 
 -   **Issue:** After fixing the previous bug, the demo data installation failed again with a `psycopg2.errors.CheckViolation` on the `res_partner` table. This was because the `op.student` and `op.faculty` demo records, which inherit from `res.partner`, were missing the required `name` field.
 -   **Fix:** The `name` field was explicitly added to all `op.student` and `op.faculty` records in their respective demo XML files, satisfying the database constraint.
+
+### Bug 6: Missing Required Birth Date for Faculty
+
+-   **Issue:** The demo data installation continued to fail with a `psycopg2.errors.NotNullViolation` on the `op_faculty` table. This was because the `birth_date` field, a required field on the model, was missing from the demo records.
+-   **Fix:** A plausible `birth_date` was added to all `op.faculty` records in the `faculty_demo.xml` file, resolving the final installation error.

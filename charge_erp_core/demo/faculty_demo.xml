@@ -8,6 +8,7 @@
             <field name="last_name">Turing</field>
             <field name="name">Alan Turing</field>
             <field name="gender">male</field>
+            <field name="birth_date">1912-06-23</field>
             <field name="image_1920" type="base64" file="charge_erp_core/static/img/faculty_alan_turing.png"/>
             <field name="department_id" ref="demo_department_cs"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_cs101'), ref('demo_subject_cs201')])]"/>
@@ -18,6 +19,7 @@
             <field name="last_name">Lovelace</field>
             <field name="name">Ada Lovelace</field>
             <field name="gender">female</field>
+            <field name="birth_date">1975-12-10</field>
             <field name="image_1920" type="base64" file="charge_erp_core/static/img/faculty_ada_lovelace.png"/>
             <field name="department_id" ref="demo_department_cs"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_ds501')])]"/>
@@ -28,6 +30,7 @@
             <field name="last_name">Halicarnassus</field>
             <field name="name">Herodotus Halicarnassus</field>
             <field name="gender">male</field>
+            <field name="birth_date">1968-01-15</field>
             <field name="image_1920" type="base64" file="charge_erp_core/static/img/faculty_herodotus.png"/>
             <field name="department_id" ref="demo_department_humanities"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_hist101'), ref('demo_subject_hist202')])]"/>
@@ -38,6 +41,7 @@
             <field name="last_name">Curie</field>
             <field name="name">Marie Curie</field>
             <field name="gender">female</field>
+            <field name="birth_date">1967-11-07</field>
             <field name="image_1920" type="base64" file="charge_erp_core/static/img/faculty_marie_curie.png"/>
             <field name="department_id" ref="demo_department_science"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_phy101')])]"/>
@@ -48,6 +52,7 @@
             <field name="last_name">Franklin</field>
             <field name="name">Rosalind Franklin</field>
             <field name="gender">female</field>
+            <field name="birth_date">1970-07-25</field>
             <field name="image_1920" type="base64" file="charge_erp_core/static/img/faculty_rosalind_franklin.png"/>
             <field name="department_id" ref="demo_department_science"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_chem101')])]"/>
