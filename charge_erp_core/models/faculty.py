@@ -12,7 +12,7 @@ class OpFaculty(models.Model):
         'res.partner', string='Partner', required=True, ondelete='cascade')
     image_128 = fields.Image(related='partner_id.image_128', readonly=True)
     title = fields.Many2one(
-        related='partner_id.title',
+        related='partner_id.title_id',
         string='Title',
         readonly=False)
 
