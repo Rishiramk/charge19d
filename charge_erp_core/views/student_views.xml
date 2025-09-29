@@ -69,56 +69,55 @@
                             <!-- Personal Information -->
                             <page string="Personal Information">
                                 <group>
-                                    <group>
+                                    <group string="Basic Information">
                                         <field name="gender"/>
                                         <field name="birth_date"/>
                                         <field name="blood_group"/>
-                                    </group>
-                                    <group>
-                                        <field name="lang"/>
                                         <field name="nationality"/>
+                                        <field name="lang"/>
                                         <field name="visa_info"/>
-                                        <field name="is_an_alumni"/>
+                                    </group>
+                                    <group string="Contact Details">
+                                        <field name="phone"/>
+                                        <field name="mobile"/>
+                                        <field name="email"/>
+                                        <field name="emergency_contact_id"/>
                                     </group>
                                 </group>
-                            </page>
-
-                            <!-- Contact Information -->
-                            <page string="Contact Information">
-                                <group>
-                                    <field name="phone"/>
-                                    <field name="mobile"/>
-                                    <field name="email"/>
-                                    <field name="emergency_contact_id"/>
+                                <group string="Address">
+                                    <field name="address_type"/>
+                                    <label for="street"/>
+                                    <div class="o_address_format">
+                                        <field name="street"/>
+                                        <field name="street2"/>
+                                        <field name="city"/>
+                                        <field name="state_id"/>
+                                        <field name="zip"/>
+                                        <field name="country_id"/>
+                                    </div>
                                 </group>
-                                <field name="address_type"/>
-                                <label for="street"/>
-                                <div class="o_address_format">
-                                    <field name="street"/>
-                                    <field name="street2"/>
-                                    <field name="city"/>
-                                    <field name="state_id"/>
-                                    <field name="zip"/>
-                                    <field name="country_id"/>
-                                </div>
+                                <group string="Family Information">
+                                    <field name="parent_ids" widget="many2many_tags"/>
+                                </group>
                             </page>
 
-                            <!-- Family Information -->
-                            <page string="Family Information">
-                                <field name="parent_ids" widget="many2many_tags"/>
-                            </page>
-
-                            <!-- Educational -->
-                            <page string="Educational">
+                            <!-- Academic Information -->
+                            <page string="Academic Information">
                                 <group>
-                                    <group>
+                                    <group string="Academic Details">
                                         <field name="roll_number"/>
                                         <field name="registration_number"/>
                                         <field name="batch_id"/>
-                                    </group>
-                                    <group>
                                         <field name="program_id"/>
                                         <field name="category_id"/>
+                                        <field name="is_an_alumni"/>
+                                    </group>
+                                    <group string="Other Details">
+                                        <field name="id_number"/>
+                                        <field name="library_card"/>
+                                        <field name="badge_id"/>
+                                        <field name="pin"/>
+                                        <field name="miscellaneous"/>
                                     </group>
                                 </group>
                                 <separator string="Course Enrollments"/>
@@ -129,17 +128,6 @@
                                         <field name="status"/>
                                     </list>
                                 </field>
-                            </page>
-
-                            <!-- Other Information -->
-                            <page string="Other Information">
-                                <group>
-                                    <field name="id_number"/>
-                                    <field name="library_card"/>
-                                    <field name="badge_id"/>
-                                    <field name="pin"/>
-                                    <field name="miscellaneous"/>
-                                </group>
                             </page>
 
                             <!-- Portal Access -->
