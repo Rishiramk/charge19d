@@ -64,6 +64,7 @@ The user interface was significantly upgraded to be more powerful and user-frien
 To facilitate testing, demonstrations, and future development (like the dashboard), a comprehensive set of demo data has been added. This includes records for all major models, creating a realistic and interconnected academic environment.
 
 -   **Data Includes:** Departments, Programs, Academic Years, Subjects, Courses, Faculty, Batches, Students, and Course Enrollments.
+-   **Image Placeholders:** The demo files for Students, Faculty, and Programs have been updated to include placeholder image references. This prepares the system to display images once they are added to the `static/img` directory.
 -   **Implementation:** The data is loaded via standard Odoo XML files located in the `charge_erp_core/demo/` directory.
 
 ---

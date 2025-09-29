@@ -8,6 +8,7 @@
             <field name="last_name">Doe</field>
             <field name="name">John Doe</field>
             <field name="gender">male</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_john_doe.png"/>
             <field name="email">john.doe@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2024"/>
             <field name="roll_number">CS24001</field>
@@ -18,6 +19,7 @@
             <field name="last_name">Smith</field>
             <field name="name">Jane Smith</field>
             <field name="gender">female</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_jane_smith.png"/>
             <field name="email">jane.smith@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2024"/>
             <field name="roll_number">CS24002</field>
@@ -28,6 +30,7 @@
             <field name="last_name">Jones</field>
             <field name="name">Peter Jones</field>
             <field name="gender">male</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_peter_jones.png"/>
             <field name="email">peter.jones@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2023"/>
             <field name="roll_number">CS23001</field>
@@ -40,6 +43,7 @@
             <field name="last_name">White</field>
             <field name="name">Emily White</field>
             <field name="gender">female</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_emily_white.png"/>
             <field name="email">emily.white@example.com</field>
             <field name="batch_id" ref="demo_batch_ds_2024"/>
             <field name="roll_number">DS24001</field>
@@ -50,6 +54,7 @@
             <field name="last_name">Green</field>
             <field name="name">Michael Green</field>
             <field name="gender">male</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_michael_green.png"/>
             <field name="email">michael.green@example.com</field>
             <field name="batch_id" ref="demo_batch_ds_2024"/>
             <field name="roll_number">DS24002</field>
@@ -62,6 +67,7 @@
             <field name="last_name">Brown</field>
             <field name="name">Sarah Brown</field>
             <field name="gender">female</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_sarah_brown.png"/>
             <field name="email">sarah.brown@example.com</field>
             <field name="batch_id" ref="demo_batch_hist_2024"/>
             <field name="roll_number">HIST24001</field>
@@ -72,6 +78,7 @@
             <field name="last_name">Wilson</field>
             <field name="name">David Wilson</field>
             <field name="gender">male</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_david_wilson.png"/>
             <field name="email">david.wilson@example.com</field>
             <field name="batch_id" ref="demo_batch_hist_2024"/>
             <field name="roll_number">HIST24002</field>
@@ -84,6 +91,7 @@
             <field name="last_name">Taylor</field>
             <field name="name">Lisa Taylor</field>
             <field name="gender">female</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_lisa_taylor.png"/>
             <field name="email">lisa.taylor@example.com</field>
             <field name="batch_id" ref="demo_batch_phy_2024"/>
             <field name="roll_number">PHY24001</field>
@@ -94,6 +102,7 @@
             <field name="last_name">Anderson</field>
             <field name="name">James Anderson</field>
             <field name="gender">male</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_james_anderson.png"/>
             <field name="email">james.anderson@example.com</field>
             <field name="batch_id" ref="demo_batch_phy_2024"/>
             <field name="roll_number">PHY24002</field>
@@ -104,6 +113,7 @@
             <field name="last_name">Thomas</field>
             <field name="name">Olivia Thomas</field>
             <field name="gender">female</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_olivia_thomas.png"/>
             <field name="email">olivia.thomas@example.com</field>
             <field name="batch_id" ref="demo_batch_phy_2024"/>
             <field name="roll_number">PHY24003</field>
@@ -116,6 +126,7 @@
             <field name="last_name">Lee</field>
             <field name="name">Chris Lee</field>
             <field name="gender">male</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_chris_lee.png"/>
             <field name="email">chris.lee@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2024"/>
             <field name="roll_number">CS24003</field>
@@ -126,6 +137,7 @@
             <field name="last_name">Harris</field>
             <field name="name">Patricia Harris</field>
             <field name="gender">female</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_patricia_harris.png"/>
             <field name="email">patricia.harris@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2024"/>
             <field name="roll_number">CS24004</field>
@@ -136,6 +148,7 @@
             <field name="last_name">Clark</field>
             <field name="name">Robert Clark</field>
             <field name="gender">male</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_robert_clark.png"/>
             <field name="email">robert.clark@example.com</field>
             <field name="batch_id" ref="demo_batch_hist_2024"/>
             <field name="roll_number">HIST24003</field>
@@ -146,6 +159,7 @@
             <field name="last_name">Lewis</field>
             <field name="name">Linda Lewis</field>
             <field name="gender">female</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_linda_lewis.png"/>
             <field name="email">linda.lewis@example.com</field>
             <field name="batch_id" ref="demo_batch_phy_2024"/>
             <field name="roll_number">PHY24004</field>
@@ -156,6 +170,7 @@
             <field name="last_name">Walker</field>
             <field name="name">Mark Walker</field>
             <field name="gender">male</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_mark_walker.png"/>
             <field name="email">mark.walker@example.com</field>
             <field name="batch_id" ref="demo_batch_cs_2023"/>
             <field name="roll_number">CS23002</field>

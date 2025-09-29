@@ -15,6 +15,7 @@
         <record id="demo_program_bsc_cs" model="op.program">
             <field name="name">B.Sc. Computer Science</field>
             <field name="code">BSC-CS</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/program_bsc_cs.png"/>
             <field name="department_id" ref="demo_department_cs"/>
             <field name="program_level_id" ref="demo_program_level_ug"/>
         </record>
@@ -22,6 +23,7 @@
         <record id="demo_program_msc_ds" model="op.program">
             <field name="name">M.Sc. Data Science</field>
             <field name="code">MSC-DS</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/program_msc_ds.png"/>
             <field name="department_id" ref="demo_department_cs"/>
             <field name="program_level_id" ref="demo_program_level_pg"/>
         </record>
@@ -29,6 +31,7 @@
         <record id="demo_program_ba_hist" model="op.program">
             <field name="name">B.A. History</field>
             <field name="code">BA-HIST</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/program_ba_hist.png"/>
             <field name="department_id" ref="demo_department_humanities"/>
             <field name="program_level_id" ref="demo_program_level_ug"/>
         </record>
@@ -36,6 +39,7 @@
         <record id="demo_program_bsc_phy" model="op.program">
             <field name="name">B.Sc. Physics</field>
             <field name="code">BSC-PHY</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/program_bsc_phy.png"/>
             <field name="department_id" ref="demo_department_science"/>
             <field name="program_level_id" ref="demo_program_level_ug"/>
         </record>
@@ -43,6 +47,7 @@
         <record id="demo_program_bsc_chem" model="op.program">
             <field name="name">B.Sc. Chemistry</field>
             <field name="code">BSC-CHEM</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/program_bsc_chem.png"/>
             <field name="department_id" ref="demo_department_science"/>
             <field name="program_level_id" ref="demo_program_level_ug"/>
         </record>
