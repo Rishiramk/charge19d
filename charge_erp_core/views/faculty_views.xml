@@ -128,8 +128,8 @@
                                     <tree editable="bottom">
                                         <field name="name"/>
                                         <field name="course_id"/>
-                                        <field name="start_datetime"/>
-                                        <field name="end_datetime"/>
+                                        <field name="start_date"/>
+                                        <field name="duration"/>
                                         <field name="state"/>
                                     </tree>
                                 </field>
