@@ -11,10 +11,13 @@ class OpFaculty(models.Model):
     partner_id = fields.Many2one(
         'res.partner', string='Partner', required=True, ondelete='cascade')
     image_128 = fields.Image(related='partner_id.image_128', readonly=True)
-    title = fields.Many2one(
-        related='partner_id.title_id',
-        string='Title',
-        readonly=False)
+    title = fields.Selection([
+        ('mr', 'Mr.'),
+        ('ms', 'Ms.'),
+        ('mrs', 'Mrs.'),
+        ('dr', 'Dr.'),
+        ('prof', 'Prof.')
+    ], string='Title')
 
     # Personal Information
     gender = fields.Selection([
