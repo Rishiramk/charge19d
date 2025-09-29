@@ -2,18 +2,18 @@
 <odoo>
     <data>
 
-        <!-- List/Tree View for Faculty -->
+        <!-- List View for Faculty -->
         <record id="view_op_faculty_list" model="ir.ui.view">
             <field name="name">op.faculty.list</field>
             <field name="model">op.faculty</field>
             <field name="arch" type="xml">
-                <tree string="Faculties">
+                <list string="Faculties">
                     <field name="name"/>
                     <field name="gender"/>
                     <field name="nationality"/>
                     <field name="department_id"/>
                     <field name="employee_id"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -225,7 +225,7 @@
         <record id="action_op_faculty" model="ir.actions.act_window">
             <field name="name">Faculties</field>
             <field name="res_model">op.faculty</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,list,form</field>
             <field name="search_view_id" ref="view_op_faculty_search"/>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -238,7 +238,7 @@
         <record id="action_op_book_issue" model="ir.actions.act_window">
             <field name="name">Issued Books</field>
             <field name="res_model">op.book.issue</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
     </data>
