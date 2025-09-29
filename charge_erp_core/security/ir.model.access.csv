@@ -72,3 +72,9 @@ access_op_category_admin,access.op.category.admin,model_op_category,base.group_s
 access_op_course_enrollment_admin,access.op.course.enrollment.admin,model_op_course_enrollment,base.group_system,1,1,1,1
 access_op_tags_manager,access.op.tags.manager,model_op_tags,charge_erp_core.group_op_manager,1,1,1,1
 access_op_tags_admin,access.op.tags.admin,model_op_tags,base.group_system,1,1,1,1
+access_op_library_card_manager,access.op.library.card.manager,model_op_library_card,charge_erp_core.group_op_manager,1,1,1,1
+access_op_library_card_admin,access.op.library.card.admin,model_op_library_card,base.group_system,1,1,1,1
+access_op_book_issue_manager,access.op.book.issue.manager,model_op_book_issue,charge_erp_core.group_op_manager,1,1,1,1
+access_op_book_issue_admin,access.op.book.issue.admin,model_op_book_issue,base.group_system,1,1,1,1
+access_op_health_details_manager,access.op.health.details.manager,model_op_health_details,charge_erp_core.group_op_manager,1,1,1,1
+access_op_health_details_admin,access.op.health.details.admin,model_op_health_details,base.group_system,1,1,1,1

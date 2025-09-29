@@ -2,25 +2,34 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
+
 class OpFaculty(models.Model):
     _name = "op.faculty"
     _description = "Faculty"
     _inherits = {'res.partner': 'partner_id'}
 
     partner_id = fields.Many2one(
-        'res.partner', string='Partner', required=True, ondelete='cascade'
-    )
+        'res.partner', string='Partner', required=True, ondelete='cascade')
     image_128 = fields.Image(related='partner_id.image_128', readonly=True)
+    title = fields.Many2one(
+        'res.partner.title', related='partner_id.title', readonly=False)
 
     # Personal Information
-    birth_date = fields.Date('Birth Date', required=True)
-    blood_group = fields.Selection([
-        ('A+', 'A+ve'), ('B+', 'B+ve'), ('O+', 'O+ve'), ('AB+', 'AB+ve'),
-        ('A-', 'A-ve'), ('B-', 'B-ve'), ('O-', 'O-ve'), ('AB-', 'AB-ve')
-    ], string='Blood Group')
     gender = fields.Selection([
-        ('male', 'Male'), ('female', 'Female')
+        ('male', 'Male'), ('female', 'Female'), ('other', 'Other')
     ], 'Gender', required=True)
+    birth_date = fields.Date('Date of Birth', required=True)
+    blood_group = fields.Selection([
+        ('A+', 'A+'), ('B+', 'B+'), ('O+', 'O+'), ('AB+', 'AB+'),
+        ('A-', 'A-'), ('B-', 'B-'), ('O-', 'O-'), ('AB-', 'AB-')
+    ], string='Blood Group')
+    nationality = fields.Many2one('res.country', string='Nationality')
+    visa_info = fields.Char('Visa Information')
+    lang_ids = fields.Many2many(
+        'res.lang', 'op_faculty_lang_rel', 'faculty_id', 'lang_id',
+        string='Languages')
+    emergency_contact_id = fields.Many2one(
+        'res.partner', string='Emergency Contact', ondelete='set null')
 
     # Contact Information
     phone = fields.Char(string='Phone')
@@ -29,28 +38,92 @@ class OpFaculty(models.Model):
     street = fields.Char(related='partner_id.street', readonly=False)
     street2 = fields.Char(related='partner_id.street2', readonly=False)
     city = fields.Char(related='partner_id.city', readonly=False)
-    state_id = fields.Many2one('res.country.state', related='partner_id.state_id', readonly=False)
+    state_id = fields.Many2one(
+        'res.country.state', related='partner_id.state_id', readonly=False)
     zip = fields.Char(related='partner_id.zip', readonly=False)
-    country_id = fields.Many2one('res.country', related='partner_id.country_id', readonly=False)
+    country_id = fields.Many2one(
+        'res.country', related='partner_id.country_id', readonly=False)
 
-    # Academic Information
+    # Academics
+    highest_qualification = fields.Char('Highest Qualification')
+    specialization = fields.Char('Specialization / Expertise Area')
+    previous_experience = fields.Text('Previous Experience')
+    certifications = fields.Text('Certifications / Achievements')
+
+    # Subjects & Courses
     department_id = fields.Many2one('op.department', string='Department')
-    program_id = fields.Many2one('op.program', string='Program')
     subject_ids = fields.Many2many(
         'op.subject', 'op_faculty_subject_rel',
         'faculty_id', 'subject_id', string='Subjects')
-    tag_ids = fields.Many2many('op.tags', string='Tags')
+    course_ids = fields.Many2many(
+        'op.course', 'op_faculty_course_rel',
+        'faculty_id', 'course_id', string='Courses')
 
+    # Sessions
     session_ids = fields.One2many(
         'op.session', 'faculty_id', string="Sessions")
-    session_count = fields.Integer(string='Session Count', compute='_compute_session_count')
 
-    def _compute_session_count(self):
-        for faculty in self:
-            faculty.session_count = len(faculty.session_ids)
+    # Library (Placeholder)
+    library_card_id = fields.Many2one(
+        'op.library.card', 'Library Card ID', ondelete='restrict')
+    issued_book_ids = fields.One2many(
+        'op.book.issue', 'faculty_id', 'Issued Books')
+
+    # Health (Placeholder)
+    medical_conditions = fields.Text('Medical Conditions')
+    allergies = fields.Text('Allergies')
+    emergency_instructions = fields.Text('Emergency Instructions')
+
+    # HR Link
+    employee_id = fields.Many2one(
+        'hr.employee', string='Linked Employee',
+        ondelete='restrict', copy=False)
+
+    # Smart Button Counts
+    session_count = fields.Integer(
+        string='Session Count', compute='_compute_session_count')
+    subject_count = fields.Integer(
+        string='Subject Count', compute='_compute_subject_count')
+    library_count = fields.Integer(
+        string='Library Items', compute='_compute_library_count')
 
     @api.constrains('birth_date')
     def _check_birthdate(self):
         for record in self:
             if record.birth_date and record.birth_date > fields.Date.today():
-                raise ValidationError(_("Birth Date can't be greater than current date!"))
+                raise ValidationError(
+                    _("Birth Date can't be greater than current date!"))
+
+    def _compute_session_count(self):
+        for faculty in self:
+            faculty.session_count = len(faculty.session_ids)
+
+    def _compute_subject_count(self):
+        for faculty in self:
+            faculty.subject_count = len(faculty.subject_ids)
+
+    def _compute_library_count(self):
+        for faculty in self:
+            faculty.library_count = len(faculty.issued_book_ids)
+
+    def action_create_employee(self):
+        for faculty in self:
+            if not faculty.employee_id:
+                hr_department = self.env['hr.department'].search(
+                    [('name', '=', faculty.department_id.name)], limit=1)
+                employee_vals = {
+                    'name': faculty.name,
+                    'work_email': faculty.email,
+                    'work_phone': faculty.mobile or faculty.phone,
+                    'work_contact_id': faculty.partner_id.id,
+                    'department_id': hr_department.id if hr_department else False,
+                }
+                employee = self.env['hr.employee'].create(employee_vals)
+                faculty.employee_id = employee.id
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'hr.employee',
+            'res_id': self.employee_id.id,
+            'view_mode': 'form',
+            'target': 'current',
+        }

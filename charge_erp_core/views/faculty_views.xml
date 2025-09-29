@@ -2,16 +2,18 @@
 <odoo>
     <data>
 
-        <!-- List View for Faculty -->
+        <!-- List/Tree View for Faculty -->
         <record id="view_op_faculty_list" model="ir.ui.view">
             <field name="name">op.faculty.list</field>
             <field name="model">op.faculty</field>
             <field name="arch" type="xml">
-                <list string="Faculties">
+                <tree string="Faculties">
                     <field name="name"/>
+                    <field name="gender"/>
+                    <field name="nationality"/>
                     <field name="department_id"/>
-                    <field name="program_id"/>
-                </list>
+                    <field name="employee_id"/>
+                </tree>
             </field>
         </record>
 
@@ -23,6 +25,7 @@
                 <form string="Faculty">
                     <sheet>
                         <div class="oe_button_box" name="button_box">
+                            <!-- Sessions Smart Button -->
                             <button name="%(charge_erp_core.session_list_action)d"
                                 type="action"
                                 class="oe_stat_button"
@@ -30,50 +33,138 @@
                                 context="{'search_default_faculty_id': id}">
                                 <field name="session_count" widget="statinfo" string="Sessions"/>
                             </button>
+                            <!-- Subjects Smart Button -->
+                            <button name="%(charge_erp_core.action_op_subject)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-book"
+                                context="{'search_default_faculty_ids': id}">
+                                <field name="subject_count" widget="statinfo" string="Subjects"/>
+                            </button>
+                            <!-- Library Smart Button -->
+                            <button type="action"
+                                class="oe_stat_button"
+                                icon="fa-folder"
+                                context="{'search_default_faculty_id': id}"
+                                name="%(charge_erp_core.action_op_book_issue)d">
+                                <field name="library_count" widget="statinfo" string="Library"/>
+                            </button>
+                            <!-- Employee Smart Button -->
+                            <button name="%(hr.open_view_employee_list)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-users"
+                                attrs="{'invisible': [('employee_id', '=', False)]}"
+                                context="{'search_default_id': employee_id}">
+                                <field name="employee_id" readonly="1" widget="statinfo" string="Employee"/>
+                            </button>
                         </div>
+
                         <field name="image_1920" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
-                            <field name="name" invisible="1" force_save="1"/>
+                            <label for="name" string="Name"/>
                             <h1>
-                                <field name="first_name" placeholder="First Name" style="width: 33%"/>
-                                <field name="middle_name" placeholder="Middle Name" style="width: 33%"/>
-                                <field name="last_name" placeholder="Last Name" style="width: 34%" required="1"/>
+                                <field name="title" placeholder="Title" options='{"no_open": True}'/>
+                                <field name="first_name" placeholder="First Name" style="width: 30%"/>
+                                <field name="middle_name" placeholder="Middle Name" style="width: 30%"/>
+                                <field name="last_name" placeholder="Last Name" style="width: 30%" required="1"/>
                             </h1>
+                            <h2><field name="name" readonly="1"/></h2>
                         </div>
+
                         <notebook>
                             <page string="Personal Information">
                                 <group>
-                                    <group>
+                                    <group string="Basic Info">
                                         <field name="gender"/>
                                         <field name="birth_date"/>
-                                    </group>
-                                    <group>
                                         <field name="blood_group"/>
+                                        <field name="nationality" options='{"no_open": True}'/>
+                                    </group>
+                                    <group string="Contact">
+                                        <field name="phone"/>
+                                        <field name="mobile"/>
+                                        <field name="email"/>
+                                    </group>
+                                    <group string="Address" name="address">
+                                        <label for="street" string="Address"/>
+                                        <div class="o_address_format">
+                                            <field name="street" placeholder="Street..."/>
+                                            <field name="street2" placeholder="Street 2..."/>
+                                            <field name="city" placeholder="City"/>
+                                            <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                            <field name="zip" placeholder="ZIP"/>
+                                            <field name="country_id" placeholder="Country" options='{"no_open": True, "no_create": True}'/>
+                                        </div>
+                                    </group>
+                                    <group string="Additional Info">
+                                        <field name="visa_info"/>
+                                        <field name="lang_ids" widget="many2many_tags" options='{"no_create": True}'/>
+                                        <field name="emergency_contact_id" context="{'show_address': 1}" options='{"no_open": True}'/>
                                     </group>
                                 </group>
                             </page>
-                            <page string="Contact Information">
+                            <page string="Academics">
                                 <group>
-                                    <field name="phone"/>
-                                    <field name="mobile"/>
-                                    <field name="email"/>
+                                    <group string="Qualifications">
+                                        <field name="highest_qualification"/>
+                                        <field name="specialization"/>
+                                    </group>
+                                    <group string="Experience &amp; Certifications">
+                                        <field name="previous_experience"/>
+                                        <field name="certifications" nolabel="1" placeholder="Certifications / Achievements..."/>
+                                    </group>
                                 </group>
-                                <label for="street"/>
-                                <div class="o_address_format">
-                                    <field name="street" placeholder="Street..."/>
-                                    <field name="street2" placeholder="Street 2..."/>
-                                    <field name="city" placeholder="City"/>
-                                    <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
-                                    <field name="zip" placeholder="ZIP"/>
-                                    <field name="country_id" placeholder="Country" options='{"no_open": True, "no_create": True}'/>
-                                </div>
                             </page>
-                            <page string="Academic Information">
+                            <page string="Subjects Detail">
                                 <group>
                                     <field name="department_id"/>
-                                    <field name="program_id"/>
-                                    <field name="subject_ids" widget="many2many_tags"/>
-                                    <field name="tag_ids" widget="many2many_tags"/>
+                                    <field name="subject_ids" widget="many2many_tags" placeholder="Select Subjects"/>
+                                    <field name="course_ids" widget="many2many_tags" placeholder="Select Courses"/>
+                                </group>
+                            </page>
+                            <page string="Sessions">
+                                <field name="session_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="course_id"/>
+                                        <field name="start_datetime"/>
+                                        <field name="end_datetime"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Library Detail">
+                                <group>
+                                    <field name="library_card_id"/>
+                                </group>
+                                <field name="issued_book_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="issue_date"/>
+                                        <field name="due_date"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Health Details">
+                                <group>
+                                    <field name="medical_conditions"/>
+                                    <field name="allergies"/>
+                                    <field name="emergency_instructions"/>
+                                </group>
+                            </page>
+                            <page string="Employee / HR Link" groups="hr.group_hr_manager">
+                                <group>
+                                    <group>
+                                        <button name="action_create_employee"
+                                            string="Create Employee"
+                                            type="object"
+                                            class="btn-primary"
+                                            attrs="{'invisible': [('employee_id', '!=', False)]}"/>
+                                        <field name="employee_id"
+                                            readonly="1"
+                                            attrs="{'invisible': [('employee_id', '=', False)]}"/>
+                                    </group>
                                 </group>
                             </page>
                         </notebook>
@@ -91,12 +182,11 @@
                     <field name="id"/>
                     <field name="name"/>
                     <field name="department_id"/>
-                    <field name="program_id"/>
                     <field name="email"/>
                     <field name="phone"/>
                     <field name="image_128"/>
                     <templates>
-                        <t t-name="card">
+                        <t t-name="kanban-box">
                             <div class="oe_kanban_global_click">
                                 <div class="o_kanban_image">
                                     <field name="image_128" widget="image" class="o_kanban_image"/>
@@ -104,7 +194,7 @@
                                 <div class="oe_kanban_details">
                                     <strong><field name="name"/></strong>
                                     <ul>
-                                        <li>Program: <field name="program_id"/></li>
+                                        <li><field name="department_id"/></li>
                                         <li>Email: <field name="email"/></li>
                                         <li>Phone: <field name="phone"/></li>
                                     </ul>
@@ -126,6 +216,7 @@
                     <field name="email"/>
                     <separator/>
                     <filter string="Department" name="group_by_department" context="{'group_by':'department_id'}"/>
+                    <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                 </search>
             </field>
         </record>
@@ -134,10 +225,21 @@
         <record id="action_op_faculty" model="ir.actions.act_window">
             <field name="name">Faculties</field>
             <field name="res_model">op.faculty</field>
-            <field name="view_mode">kanban,list,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="search_view_id" ref="view_op_faculty_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new faculty member.
+                </p>
+            </field>
         </record>
 
+        <!-- Action for Book Issue (for smart button) -->
+        <record id="action_op_book_issue" model="ir.actions.act_window">
+            <field name="name">Issued Books</field>
+            <field name="res_model">op.book.issue</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
     </data>
 </odoo>

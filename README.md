@@ -14,8 +14,16 @@ This module has recently undergone a major "Phase 1" refactoring to establish a 
     - **People**: For managing Students and Faculty.
     - **Academics**: For managing Sessions, Courses, Batches, and Subjects.
     - **Academics > Configuration**: For less-frequently accessed settings like Academic Years, Programs, and Departments.
+
+- **Comprehensive Faculty Management**: The faculty form has been completely redesigned with a tabbed interface to provide a 360-degree view. Key enhancements include:
+    - **Detailed Tabs**: Information is now organized into logical tabs: Personal Information, Academics, Subjects Detail, Sessions, Library Detail, Health Details, and an HR Link for managers.
+    - **Rich Data Fields**: Added extensive fields for personal details (visa info, languages), academic history (qualifications, experience), and health information.
+    - **HR Integration**: A new tab allows managers to link a faculty record to an `hr.employee` record and create one directly from the form.
+    - **Smart Buttons**: Quick access to related records like Sessions, Subjects, Library items, and the linked Employee profile.
+
 - **Role-Based Access Control**: A granular security system has been implemented to control user permissions.
-- **Extensibility**: The student form now includes placeholder "smart buttons" for future modules like Assignments, Fees, and Attendance, ensuring a seamless upgrade path.
+
+- **Extensibility**: Both the student and faculty forms now include placeholder "smart buttons" and tabs for future modules (e.g., Assignments, Fees, Attendance, Library, Health), ensuring a seamless upgrade path.
 
 ## Access Control and Security Setup
 

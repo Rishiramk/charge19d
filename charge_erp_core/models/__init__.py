@@ -16,3 +16,6 @@ from . import tags
 from . import category
 from . import res_partner
 from . import course_enrollment
+from . import library_card
+from . import book_issue
+from . import health_details
