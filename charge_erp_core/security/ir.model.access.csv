@@ -13,6 +13,7 @@ access_op_session_user,access.op.session.user,model_op_session,base.group_user,1
 access_op_attendee_wizard_user,access.op.attendee.wizard.user,model_op_attendee_wizard,base.group_user,1,0,0,0
 access_op_category_user,access.op.category.user,model_op_category,base.group_user,1,0,0,0
 access_op_course_enrollment_user,access.op.course.enrollment.user,model_op_course_enrollment,base.group_user,1,0,0,0
+access_op_tags_user,access.op.tags.user,model_op_tags,base.group_user,1,0,0,0
 access_op_student_student,access.op.student.student,model_op_student,charge_erp_core.group_op_student,1,0,0,0
 access_op_course_student,access.op.course.student,model_op_course,charge_erp_core.group_op_student,1,0,0,0
 access_op_faculty_student,access.op.faculty.student,model_op_faculty,charge_erp_core.group_op_student,1,0,0,0
@@ -69,3 +70,5 @@ access_op_session_admin,access.op.session.admin,model_op_session,base.group_syst
 access_op_attendee_wizard_admin,access.op.attendee.wizard.admin,model_op_attendee_wizard,base.group_system,1,1,1,1
 access_op_category_admin,access.op.category.admin,model_op_category,base.group_system,1,1,1,1
 access_op_course_enrollment_admin,access.op.course.enrollment.admin,model_op_course_enrollment,base.group_system,1,1,1,1
+access_op_tags_manager,access.op.tags.manager,model_op_tags,charge_erp_core.group_op_manager,1,1,1,1
+access_op_tags_admin,access.op.tags.admin,model_op_tags,base.group_system,1,1,1,1

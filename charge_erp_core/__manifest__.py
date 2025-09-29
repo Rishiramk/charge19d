@@ -26,6 +26,7 @@
         'views/category_views.xml',
         'views/academic_term_views.xml',
         'views/academic_year_views.xml',
+        'views/tags_views.xml',
         'views/student_user_action.xml',
         'views/menu_views.xml',
     ],

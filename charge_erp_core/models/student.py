@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields
-from odoo.exceptions import UserError
+from odoo import models, fields, api
+from odoo.exceptions import UserError, ValidationError
+
 
 class OpStudent(models.Model):
     _name = 'op.student'
@@ -33,9 +34,15 @@ class OpStudent(models.Model):
         ('AB+', 'AB+'), ('AB-', 'AB-')
     ], string='Blood Group')
     nationality = fields.Many2one('res.country', string='Nationality')
-    visa_info = fields.Char(string='Visa Info')
     is_an_alumni = fields.Boolean(string='Is an Alumni?')
     id_number = fields.Char(string='ID Card Number')
+
+    # Aadhar Information
+    aadhar_number = fields.Char(
+        string='Aadhar Number', size=12,
+        help='Enter 12-digit Aadhar number')
+    aadhar_verified = fields.Boolean(string='Aadhar Verified')
+    aadhar_document = fields.Binary(string='Aadhar Document')
 
     # Contact Information
     address_type = fields.Selection(related='partner_id.type', string="Address Type", readonly=False)
@@ -58,7 +65,6 @@ class OpStudent(models.Model):
     registration_number = fields.Char(string='Registration Number')
     library_card = fields.Char(string='Library Card')
     badge_id = fields.Char(string='Badge ID')
-    pin = fields.Char(string='PIN', help="PIN for Kiosk Mode")
     category_id = fields.Many2one('op.category', string='Category')
     user_id = fields.Many2one('res.users', string='User')
     batch_id = fields.Many2one('op.batch', string='Batch')
@@ -68,11 +74,18 @@ class OpStudent(models.Model):
         'op.course.enrollment', 'student_id', string='Enrollments')
     session_ids = fields.Many2many(
         'op.session', 'op_session_student_rel', 'student_id', 'session_id', string="Sessions")
+    tag_ids = fields.Many2many('op.tags', string='Tags')
     session_count = fields.Integer(string='Session Count', compute='_compute_session_count')
     assignment_count = fields.Integer(string='Assignment Count', compute='_compute_assignment_count')
     fee_due_count = fields.Integer(string='Fee Due Count', compute='_compute_fee_due_count')
     attendance_count = fields.Integer(string='Attendance Count', compute='_compute_attendance_count')
     color = fields.Integer(string='Color', compute='_compute_color')
+
+    @api.constrains('aadhar_number')
+    def _check_aadhar_number(self):
+        for record in self:
+            if record.aadhar_number and (not record.aadhar_number.isdigit() or len(record.aadhar_number) != 12):
+                raise ValidationError("Aadhar number must be a 12-digit numeric value.")
 
     def _compute_color(self):
         for student in self:

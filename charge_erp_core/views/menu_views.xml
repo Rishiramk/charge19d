@@ -39,6 +39,10 @@
                   parent="menu_op_academic_config"
                   action="action_op_academic_term"
                   sequence="20"/>
+        <menuitem id="menu_op_tags" name="Tags"
+                  parent="menu_op_academic_config"
+                  action="action_op_tags"
+                  sequence="30"/>
 
         <!-- Academics > Course Management -->
         <menuitem id="menu_op_course_management" name="Course Management"

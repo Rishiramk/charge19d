@@ -39,6 +39,7 @@ class OpFaculty(models.Model):
     subject_ids = fields.Many2many(
         'op.subject', 'op_faculty_subject_rel',
         'faculty_id', 'subject_id', string='Subjects')
+    tag_ids = fields.Many2many('op.tags', string='Tags')
 
     session_ids = fields.One2many(
         'op.session', 'faculty_id', string="Sessions")

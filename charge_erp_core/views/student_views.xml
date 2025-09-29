@@ -65,43 +65,43 @@
                             </h1>
                         </div>
                         <notebook>
-
-                            <!-- Personal Information -->
                             <page string="Personal Information">
                                 <group>
-                                    <group string="Basic Information">
+                                    <group string="Personal Details">
                                         <field name="gender"/>
                                         <field name="birth_date"/>
                                         <field name="blood_group"/>
                                         <field name="nationality"/>
                                         <field name="lang"/>
-                                        <field name="visa_info"/>
                                     </group>
-                                    <group string="Contact Details">
+                                    <group string="Aadhar Information">
+                                        <field name="aadhar_number"/>
+                                        <field name="aadhar_verified"/>
+                                        <field name="aadhar_document" widget="binary" filename="'aadhar_document.pdf'"/>
+                                    </group>
+                                    <group string="Contact Information">
                                         <field name="phone"/>
                                         <field name="mobile"/>
                                         <field name="email"/>
                                         <field name="emergency_contact_id"/>
                                     </group>
+                                    <group string="Family Information">
+                                        <field name="parent_ids" widget="many2many_tags"/>
+                                    </group>
                                 </group>
-                                <group string="Address">
-                                    <field name="address_type"/>
-                                    <label for="street"/>
-                                    <div class="o_address_format">
-                                        <field name="street"/>
-                                        <field name="street2"/>
-                                        <field name="city"/>
-                                        <field name="state_id"/>
-                                        <field name="zip"/>
-                                        <field name="country_id"/>
-                                    </div>
-                                </group>
-                                <group string="Family Information">
-                                    <field name="parent_ids" widget="many2many_tags"/>
+                                <group string="Mailing Address">
+                                     <field name="address_type"/>
+                                     <label for="street" string="Address"/>
+                                     <div class="o_address_format">
+                                         <field name="street" placeholder="Street..."/>
+                                         <field name="street2" placeholder="Street 2..."/>
+                                         <field name="city" placeholder="City"/>
+                                         <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True}"/>
+                                         <field name="zip" placeholder="ZIP"/>
+                                         <field name="country_id" placeholder="Country" options="{'no_open': True, 'no_create': True}"/>
+                                     </div>
                                 </group>
                             </page>
-
-                            <!-- Academic Information -->
                             <page string="Academic Information">
                                 <group>
                                     <group string="Academic Details">
@@ -116,7 +116,7 @@
                                         <field name="id_number"/>
                                         <field name="library_card"/>
                                         <field name="badge_id"/>
-                                        <field name="pin"/>
+                                        <field name="tag_ids" widget="many2many_tags"/>
                                         <field name="miscellaneous"/>
                                     </group>
                                 </group>
@@ -129,14 +129,11 @@
                                     </list>
                                 </field>
                             </page>
-
-                            <!-- Portal Access -->
                             <page string="Portal Access">
                                 <group>
                                     <field name="user_id"/>
                                 </group>
                             </page>
-
                         </notebook>
                     </sheet>
                 </form>
