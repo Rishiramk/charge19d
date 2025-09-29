@@ -130,13 +130,7 @@
                                 <group>
                                     <field name="library_card_id"/>
                                 </group>
-                                <field name="issued_book_ids">
-                                    <tree>
-                                        <field name="name"/>
-                                        <field name="issue_date"/>
-                                        <field name="due_date"/>
-                                    </tree>
-                                </field>
+                                <field name="issued_book_ids"/>
                             </page>
                             <page string="Health Details">
                                 <group>
