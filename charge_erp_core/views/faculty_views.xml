@@ -124,14 +124,7 @@
                                 </group>
                             </page>
                             <page string="Sessions">
-                                <field name="session_ids">
-                                    <tree editable="bottom">
-                                        <field name="name"/>
-                                        <field name="start_date"/>
-                                        <field name="duration"/>
-                                        <field name="state"/>
-                                    </tree>
-                                </field>
+                                <field name="session_ids"/>
                             </page>
                             <page string="Library Detail">
                                 <group>
