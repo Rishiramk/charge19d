@@ -65,7 +65,6 @@
             <field name="name">Carl Sagan</field>
             <field name="gender">male</field>
             <field name="birth_date">1934-11-09</field>
-            <field name="image_1920" type="base64" file="charge_erp_core/static/img/faculty_carl_sagan.png"/>
             <field name="department_id" ref="demo_department_science"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_phy101'), ref('demo_subject_astr101')])]"/>
         </record>
@@ -75,7 +74,6 @@
             <field name="name">Grace Hopper</field>
             <field name="gender">female</field>
             <field name="birth_date">1906-12-09</field>
-            <field name="image_1920" type="base64" file="charge_erp_core/static/img/faculty_grace_hopper.png"/>
             <field name="department_id" ref="demo_department_cs"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_cs101'), ref('demo_subject_cs201')])]"/>
         </record>
@@ -85,7 +83,6 @@
             <field name="name">Thucydides of Athens</field>
             <field name="gender">male</field>
             <field name="birth_date">1954-04-20</field>
-            <field name="image_1920" type="base64" file="charge_erp_core/static/img/faculty_thucydides.png"/>
             <field name="department_id" ref="demo_department_humanities"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_hist101')])]"/>
         </record>
