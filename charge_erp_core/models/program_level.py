@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import _, api, models, fields
+from odoo.exceptions import ValidationError
 
 class OpProgramLevel(models.Model):
     _name = "op.program.level"
@@ -8,6 +9,10 @@ class OpProgramLevel(models.Model):
 
     name = fields.Char('Name', required=True, translate=True)
 
-    _sql_constraints = [
-        ('unique_level_name', 'unique(name)', 'Name should be unique per Program level!')
-    ]
+    @api.constrains('name')
+    def _check_unique_name(self):
+        for level in self:
+            if level.name:
+                domain = [('name', '=', level.name), ('id', '!=', level.id)]
+                if self.search_count(domain):
+                    raise ValidationError(_('Program Level name must be unique!'))
