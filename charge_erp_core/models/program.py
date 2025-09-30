@@ -4,6 +4,11 @@ from odoo import _, api, models, fields
 from odoo.exceptions import ValidationError
 
 class OpProgram(models.Model):
+    """
+    Represents an academic program, such as a Bachelor of Science or Master
+    of Arts. It groups together related courses and batches under a single
+    academic track.
+    """
     _name = "op.program"
     _description = "Program"
 
@@ -25,6 +30,7 @@ class OpProgram(models.Model):
 
     @api.constrains('code')
     def _check_unique_code(self):
+        """Ensures that the program code is unique."""
         for program in self:
             if program.code:
                 domain = [('code', '=', program.code), ('id', '!=', program.id)]

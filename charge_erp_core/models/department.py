@@ -4,6 +4,10 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 class OpDepartment(models.Model):
+    """
+    Represents an academic department within the institution, which can be
+    linked to courses, faculties, and subjects.
+    """
     _name = "op.department"
     _description = "Department"
 
@@ -47,6 +51,7 @@ class OpDepartment(models.Model):
 
     @api.constrains('code')
     def _check_unique_code(self):
+        """Ensures that the department code is unique."""
         for department in self:
             if department.code:
                 domain = [('code', '=', department.code), ('id', '!=', department.id)]

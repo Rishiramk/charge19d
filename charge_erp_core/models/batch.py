@@ -4,6 +4,10 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 class OpBatch(models.Model):
+    """
+    Represents a batch, which is a specific group of students studying a
+    particular course during a given academic year.
+    """
     _name = "op.batch"
     _description = "Batch"
 
@@ -22,6 +26,7 @@ class OpBatch(models.Model):
 
     @api.constrains('code')
     def _check_unique_code(self):
+        """Ensures that the batch code is unique."""
         for batch in self:
             if batch.code:
                 domain = [('code', '=', batch.code), ('id', '!=', batch.id)]
@@ -30,6 +35,7 @@ class OpBatch(models.Model):
 
     @api.constrains('start_date', 'end_date')
     def _check_dates(self):
+        """Validates that the start date is not after the end date."""
         for record in self:
             if record.start_date and record.end_date and record.start_date > record.end_date:
                 raise ValidationError(

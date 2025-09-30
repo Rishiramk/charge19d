@@ -4,6 +4,11 @@ from odoo import _, models, fields, api
 from odoo.exceptions import ValidationError
 
 class OpSubject(models.Model):
+    """
+    Represents an academic subject that can be taught as part of a course.
+    Each subject has a unique code and can be classified by type (e.g., theory,
+    practical) and its role in the curriculum (e.g., compulsory, elective).
+    """
     _name = "op.subject"
     _description = "Subject"
 
@@ -25,6 +30,7 @@ class OpSubject(models.Model):
 
     @api.constrains('code')
     def _check_unique_code(self):
+        """Ensures that the subject code is unique across all subjects."""
         for subject in self:
             if subject.code:
                 domain = [('code', '=', subject.code), ('id', '!=', subject.id)]

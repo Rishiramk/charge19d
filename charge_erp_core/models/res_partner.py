@@ -31,6 +31,10 @@ class ResPartner(models.Model):
 
     @api.constrains('phone', 'mobile')
     def _check_phone_numbers(self):
+        """
+        Validates the format of phone and mobile numbers, allowing only digits,
+        spaces, and the characters '+' and '-'.
+        """
         for partner in self:
             if partner.phone and not re.match(r'^[0-9\s+-]*$', partner.phone):
                 raise ValidationError(

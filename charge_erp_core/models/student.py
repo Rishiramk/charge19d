@@ -4,6 +4,11 @@ from odoo.exceptions import UserError, ValidationError
 
 
 class OpStudent(models.Model):
+    """
+    Represents a student in the system. This model inherits from `res.partner`
+    to leverage its contact and address management features, while adding
+    student-specific academic and personal information.
+    """
     _name = 'op.student'
     _description = 'Student'
     _inherits = {'res.partner': 'partner_id'}
@@ -89,6 +94,10 @@ class OpStudent(models.Model):
 
     @api.constrains('roll_number', 'registration_number')
     def _check_unique_identifiers(self):
+        """
+        Validates that the roll number and registration number are unique across
+        all students in the system.
+        """
         for student in self:
             if student.roll_number:
                 domain = [('roll_number', '=', student.roll_number), ('id', '!=', student.id)]

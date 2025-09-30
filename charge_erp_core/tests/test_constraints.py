@@ -1,9 +1,19 @@
 # -*- coding: utf-8 -*-
+"""
+This module contains tests for the data integrity constraints implemented in the
+charge_erp_core module. It verifies that the uniqueness and logical validation
+rules for models like Student, Course, Batch, etc., are working correctly.
+"""
 
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import ValidationError
 
 class TestConstraints(TransactionCase):
+    """
+    Test case for the data integrity constraints of the charge_erp_core module.
+    This class sets up common records and includes test methods for each of
+    the custom constraints.
+    """
 
     def setUp(self):
         super(TestConstraints, self).setUp()

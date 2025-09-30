@@ -4,6 +4,11 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 class OpAcademicYear(models.Model):
+    """
+    Represents an academic year, defined by a name and a start and end date.
+    It serves as a container for academic terms, batches, and other
+    time-sensitive records.
+    """
     _name = 'op.academic.year'
     _description = "Academic Year"
 
@@ -29,6 +34,7 @@ class OpAcademicYear(models.Model):
 
     @api.constrains('start_date', 'end_date')
     def _check_dates(self):
+        """Validates that the start date is not after the end date."""
         for record in self:
             if record.start_date and record.end_date and record.start_date > record.end_date:
                 raise ValidationError(

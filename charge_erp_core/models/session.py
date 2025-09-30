@@ -2,6 +2,10 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 class Session(models.Model):
+    """
+    Represents a specific teaching session for a course, led by a faculty member.
+    It includes details about the schedule, duration, and attendees.
+    """
     _name = 'op.session'
     _description = 'Open Academy Sessions'
 
@@ -23,6 +27,10 @@ class Session(models.Model):
 
     @api.constrains('seats', 'attendee_ids')
     def _check_seats(self):
+        """
+        Validates that the number of seats is not negative and that the number
+        of attendees does not exceed the available seats.
+        """
         for r in self:
             if r.seats < 0:
                 raise ValidationError(_(
@@ -33,6 +41,7 @@ class Session(models.Model):
 
     @api.constrains('duration')
     def _check_duration(self):
+        """Ensures the session duration is not a negative value."""
         for r in self:
             if r.duration < 0:
                 raise ValidationError(_("The duration cannot be negative."))

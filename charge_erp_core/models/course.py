@@ -4,6 +4,11 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 class OpCourse(models.Model):
+    """
+    Represents an academic course offered by the institution. Each course has a
+    unique code and can be associated with a department and have a parent
+    course to create a hierarchy.
+    """
     _name = "op.course"
     _description = "Course"
 
@@ -35,6 +40,7 @@ class OpCourse(models.Model):
 
     @api.constrains('code')
     def _check_unique_code(self):
+        """Ensures that the course code is unique across all courses."""
         for course in self:
             if course.code:
                 domain = [('code', '=', course.code), ('id', '!=', course.id)]
