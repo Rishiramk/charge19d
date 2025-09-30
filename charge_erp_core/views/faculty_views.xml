@@ -62,14 +62,14 @@
 
                         <field name="image_1920" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
-                            <label for="name" string="Name"/>
                             <h1>
-                                <field name="title" placeholder="Title" options='{"no_open": True}'/>
-                                <field name="first_name" placeholder="First Name" style="width: 30%"/>
-                                <field name="middle_name" placeholder="Middle Name" style="width: 30%"/>
-                                <field name="last_name" placeholder="Last Name" style="width: 30%" required="1"/>
+                                <div class="d-flex align-items-center">
+                                    <field name="title" placeholder="Title" options='{"no_open": True}' class="me-1"/>
+                                    <field name="first_name" placeholder="First Name" class="me-1"/>
+                                    <field name="middle_name" placeholder="Middle Name" class="me-1"/>
+                                    <field name="last_name" placeholder="Last Name" required="1"/>
+                                </div>
                             </h1>
-                            <h2><field name="name" readonly="1"/></h2>
                         </div>
 
                         <notebook>
