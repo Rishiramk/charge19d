@@ -177,5 +177,62 @@
             <field name="registration_number">REG-CS23-002</field>
         </record>
 
+        <!-- Add 5 more students -->
+        <record id="demo_student_susan_young" model="op.student">
+            <field name="first_name">Susan</field>
+            <field name="last_name">Young</field>
+            <field name="name">Susan Young</field>
+            <field name="gender">female</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_susan_young.png"/>
+            <field name="email">susan.young@example.com</field>
+            <field name="batch_id" ref="demo_batch_ds_2024"/>
+            <field name="roll_number">DS24003</field>
+            <field name="registration_number">REG-DS24-003</field>
+        </record>
+        <record id="demo_student_jason_king" model="op.student">
+            <field name="first_name">Jason</field>
+            <field name="last_name">King</field>
+            <field name="name">Jason King</field>
+            <field name="gender">male</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_jason_king.png"/>
+            <field name="email">jason.king@example.com</field>
+            <field name="batch_id" ref="demo_batch_ds_2024"/>
+            <field name="roll_number">DS24004</field>
+            <field name="registration_number">REG-DS24-004</field>
+        </record>
+        <record id="demo_student_betty_wright" model="op.student">
+            <field name="first_name">Betty</field>
+            <field name="last_name">Wright</field>
+            <field name="name">Betty Wright</field>
+            <field name="gender">female</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_betty_wright.png"/>
+            <field name="email">betty.wright@example.com</field>
+            <field name="batch_id" ref="demo_batch_hist_2024"/>
+            <field name="roll_number">HIST24004</field>
+            <field name="registration_number">REG-HIST24-004</field>
+        </record>
+        <record id="demo_student_steven_scott" model="op.student">
+            <field name="first_name">Steven</field>
+            <field name="last_name">Scott</field>
+            <field name="name">Steven Scott</field>
+            <field name="gender">male</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_steven_scott.png"/>
+            <field name="email">steven.scott@example.com</field>
+            <field name="batch_id" ref="demo_batch_phy_2024"/>
+            <field name="roll_number">PHY24005</field>
+            <field name="registration_number">REG-PHY24-005</field>
+        </record>
+        <record id="demo_student_nancy_green" model="op.student">
+            <field name="first_name">Nancy</field>
+            <field name="last_name">Green</field>
+            <field name="name">Nancy Green</field>
+            <field name="gender">female</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_nancy_green.png"/>
+            <field name="email">nancy.green@example.com</field>
+            <field name="batch_id" ref="demo_batch_cs_2023"/>
+            <field name="roll_number">CS23003</field>
+            <field name="registration_number">REG-CS23-003</field>
+        </record>
+
     </data>
 </odoo>

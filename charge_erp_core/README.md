@@ -60,3 +60,20 @@ To deploy this module, please follow these steps:
 6.  **Install or Upgrade the Module.** Search for `Charge ERP Core` in the Apps list (you may need to remove the default "Apps" filter to see it). Click the "Install" or "Upgrade" button on the module.
 
 Once the installation is complete, you will see a new "School" menu in your Odoo instance where you can manage the new models.
+
+## Testing
+
+This module includes a test suite to verify its data integrity constraints and other core logic. To run the tests, you can use the following command from your Odoo installation's root directory.
+
+Make sure to replace `your_odoo_database` with the name of the database you want to test against.
+
+```bash
+./odoo-bin --test-enable --test-tags charge_erp_core -d your_odoo_database --stop-after-init
+```
+
+**Command Breakdown:**
+- `./odoo-bin`: The Odoo executable script. Your path may vary.
+- `--test-enable`: Enables the test mode.
+- `--test-tags charge_erp_core`: Specifies that only tests for the `charge_erp_core` module should be run.
+- `-d your_odoo_database`: The database to run the tests against.
+- `--stop-after-init`: Stops the server after the tests have completed.
