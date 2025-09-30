@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import _, models, fields, api
+from odoo.exceptions import ValidationError
 
 class OpSubject(models.Model):
     _name = "op.subject"
@@ -28,4 +29,4 @@ class OpSubject(models.Model):
             if subject.code:
                 domain = [('code', '=', subject.code), ('id', '!=', subject.id)]
                 if self.search_count(domain):
-                    raise ValidationError('Subject Code must be unique!')
+                    raise ValidationError(_('Subject Code must be unique!'))

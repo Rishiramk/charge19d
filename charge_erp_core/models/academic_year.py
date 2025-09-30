@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 class OpAcademicYear(models.Model):
     _name = 'op.academic.year'
@@ -25,3 +26,10 @@ class OpAcademicYear(models.Model):
     def _compute_batch_count(self):
         for academic_year in self:
             academic_year.batch_count = len(academic_year.batch_ids)
+
+    @api.constrains('start_date', 'end_date')
+    def _check_dates(self):
+        for record in self:
+            if record.start_date and record.end_date and record.start_date > record.end_date:
+                raise ValidationError(
+                    _("End Date cannot be set before Start Date."))

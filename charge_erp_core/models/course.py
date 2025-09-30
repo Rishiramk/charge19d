@@ -39,4 +39,4 @@ class OpCourse(models.Model):
             if course.code:
                 domain = [('code', '=', course.code), ('id', '!=', course.id)]
                 if self.search_count(domain):
-                    raise ValidationError('Course Code must be unique!')
+                    raise ValidationError(_('Course Code must be unique!'))

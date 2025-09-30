@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 class OpDepartment(models.Model):
     _name = "op.department"
@@ -50,7 +51,7 @@ class OpDepartment(models.Model):
             if department.code:
                 domain = [('code', '=', department.code), ('id', '!=', department.id)]
                 if self.search_count(domain):
-                    raise ValidationError('Department Code must be unique!')
+                    raise ValidationError(_('Department Code must be unique!'))
 
     @api.model
     def create(self, vals_list):

@@ -26,7 +26,7 @@ class OpBatch(models.Model):
             if batch.code:
                 domain = [('code', '=', batch.code), ('id', '!=', batch.id)]
                 if self.search_count(domain):
-                    raise ValidationError('Batch Code must be unique!')
+                    raise ValidationError(_('Batch Code must be unique!'))
 
     @api.constrains('start_date', 'end_date')
     def _check_dates(self):

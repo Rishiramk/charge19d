@@ -31,6 +31,12 @@ class Session(models.Model):
                 raise ValidationError(_(
                     "There are more attendees than available seats."))
 
+    @api.constrains('duration')
+    def _check_duration(self):
+        for r in self:
+            if r.duration < 0:
+                raise ValidationError(_("The duration cannot be negative."))
+
     def action_start_session(self):
         self.write({'state': 'in_progress'})
 

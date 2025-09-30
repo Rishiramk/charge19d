@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo import _, models, fields, api
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -85,7 +85,7 @@ class OpStudent(models.Model):
     def _check_aadhar_number(self):
         for record in self:
             if record.aadhar_number and (not record.aadhar_number.isdigit() or len(record.aadhar_number) != 12):
-                raise ValidationError("Aadhar number must be a 12-digit numeric value.")
+                raise ValidationError(_("Aadhar number must be a 12-digit numeric value."))
 
     @api.constrains('roll_number', 'registration_number')
     def _check_unique_identifiers(self):
@@ -93,11 +93,11 @@ class OpStudent(models.Model):
             if student.roll_number:
                 domain = [('roll_number', '=', student.roll_number), ('id', '!=', student.id)]
                 if self.search_count(domain):
-                    raise ValidationError('Roll Number must be unique!')
+                    raise ValidationError(_('Roll Number must be unique!'))
             if student.registration_number:
                 domain = [('registration_number', '=', student.registration_number), ('id', '!=', student.id)]
                 if self.search_count(domain):
-                    raise ValidationError('Registration Number must be unique!')
+                    raise ValidationError(_('Registration Number must be unique!'))
 
     def _compute_color(self):
         for student in self:
