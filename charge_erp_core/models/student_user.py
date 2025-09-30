@@ -25,4 +25,4 @@ class Student(models.Model):
 
                 # Step 2: Assign the student portal group
                 student_group = self.env.ref('charge_erp_core.group_op_student')
-                user.write({'groups_id': [(4, student_group.id)]})
+                student_group.users = [(4, user.id)]

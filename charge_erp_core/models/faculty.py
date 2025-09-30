@@ -153,4 +153,4 @@ class OpFaculty(models.Model):
 
                 # Step 2: Assign the 'Faculty' group
                 faculty_group = self.env.ref('charge_erp_core.group_op_faculty')
-                user.write({'groups_id': [(4, faculty_group.id)]})
+                faculty_group.users = [(4, user.id)]
