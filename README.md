@@ -47,15 +47,6 @@ The security of the Charge ERP Core module is built around a role-based access c
     - **Permissions**: Full CRUD access to all models.
     - **Description**: The standard Odoo Administrator group has been granted full permissions for all models in this module. Any user in this group (like the `devops` user) will have complete access, including the ability to see all "New" buttons.
 
-### Record-Level Security
-
-In addition to the role-based permissions, the module now includes **record rules** to enforce row-level security, ensuring users can only access the data relevant to them:
-
--   **For Students**: A student who logs into the system can only view their own student profile. They cannot see the records of other students.
--   **For Faculty**: A faculty member can only view and manage their own faculty profile and the sessions they are assigned to teach. They can also view the profiles of students who are enrolled in their sessions, but not other students.
-
-These rules provide a more secure environment and protect sensitive student and faculty data.
-
 ### How to Assign Roles to Users
 
 To grant users the appropriate permissions, you must assign them to one of the groups listed above. This is done by a System Administrator.

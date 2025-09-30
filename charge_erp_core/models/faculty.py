@@ -83,9 +83,6 @@ class OpFaculty(models.Model):
     employee_id = fields.Many2one(
         'hr.employee', string='Linked Employee',
         ondelete='restrict', copy=False)
-    user_id = fields.Many2one(
-        'res.users', string='System User',
-        help="The user account linked to this faculty member for system access.")
 
     # Smart Button Counts
     session_count = fields.Integer(
