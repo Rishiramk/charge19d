@@ -10,7 +10,7 @@ class Student(models.Model):
                 user_vals = {
                     'name': student.name,
                     'login': student.email or student.name.lower().replace(" ", "."),
-                    'groups_id': [(6, 0, [self.env.ref('openeducat_core.group_student').id])],
+                    'groups_id': [(6, 0, [self.env.ref('charge_erp_core.group_op_student').id])],
                 }
                 user = self.env['res.users'].create(user_vals)
                 student.user_id = user.id
