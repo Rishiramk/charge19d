@@ -49,6 +49,12 @@
             <field name="type">both</field>
             <field name="department_id" ref="demo_department_science"/>
         </record>
+        <record id="demo_subject_astr101" model="op.subject">
+            <field name="name">Introduction to Astronomy</field>
+            <field name="code">ASTR101</field>
+            <field name="type">theory</field>
+            <field name="department_id" ref="demo_department_science"/>
+        </record>
 
     </data>
 </odoo>
