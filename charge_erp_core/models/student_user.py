@@ -6,10 +6,6 @@ class Student(models.Model):
     def action_create_user(self):
         """
         Create a portal user linked to the Student record.
-
-        This method creates a `res.users` record configured for portal access
-        by linking it to the student's partner record and assigning the
-        correct portal group.
         """
         for student in self:
             if not student.user_id:
@@ -23,6 +19,6 @@ class Student(models.Model):
                 user = self.env['res.users'].create(user_vals)
                 student.user_id = user.id
 
-                # Step 2: Assign the student portal group
+                # Step 2: Assign the student to the portal/student group
                 student_group = self.env.ref('charge_erp_core.group_op_student')
-                student_group.users = [(4, user.id)]
+                student_group.write({'users': [(4, user.id)]})
