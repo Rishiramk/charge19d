@@ -22,7 +22,9 @@ This module has recently undergone a major "Phase 1" refactoring to establish a 
     - **Smart Buttons**: Quick access to related records like Sessions, Subjects, Library items, and the linked Employee profile.
 
 - **Role-Based Access Control**: A granular security system has been implemented to control user permissions.
-- **User Provisioning**: A 'Create User' button is now available on the faculty form for managers, simplifying the process of granting system access to faculty members.
+- **User Provisioning**:
+    - A 'Create User' button is available on the **student form** to create a portal user.
+    - A 'Create User' button is available on the **faculty form** for managers to grant internal system access.
 
 - **Extensibility**: Both the student and faculty forms now include placeholder "smart buttons" and tabs for future modules (e.g., Assignments, Fees, Attendance, Library, Health), ensuring a seamless upgrade path.
 
@@ -33,12 +35,12 @@ The security of the Charge ERP Core module is built around a role-based access c
 ### Roles and Permissions
 
 1.  **Student (`charge_erp_core.group_op_student`)**
-    - **Permissions**: Read-only access.
-    - **Description**: This is the most restrictive role, intended for students. Users in this group can view their own information, as well as general academic information like courses and subjects, but cannot create or modify any records.
+    - **Permissions**: Portal-only, read-only access.
+    - **Description**: This is the most restrictive role. Students are configured as **portal users**, meaning they do not have access to the internal system backend. They can log in to the portal to view their own information but cannot create or modify any records.
 
 2.  **Faculty (`charge_erp_core.group_op_faculty`)**
     - **Permissions**: Read access to most academic data, with limited write/create access.
-    - **Description**: This role is for teachers and other faculty members. They can view student profiles and academic structures. Crucially, they have permission to **create and manage Sessions** and **manage student course enrollments**, but they cannot create new students or courses.
+    - **Description**: This role is for teachers and other faculty members who are **internal users**. They can view relevant student profiles and academic structures. Crucially, they have permission to **create and manage Sessions** and **manage student course enrollments**, but they cannot create new students or courses.
 
 3.  **Manager (`charge_erp_core.group_op_manager`)**
     - **Permissions**: Full Create, Read, Update, Delete (CRUD) access to all models within this module.

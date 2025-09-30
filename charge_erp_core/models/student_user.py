@@ -5,12 +5,11 @@ class Student(models.Model):
 
     def action_create_user(self):
         """
-        Create Odoo User linked with Student.
+        Create a portal user linked to the Student record.
 
-        This method follows a two-step process to comply with Odoo's
-        security requirements for user creation:
-        1. Create the user with basic details.
-        2. Assign the appropriate security group in a separate write call.
+        This method creates a `res.users` record configured for portal access
+        by linking it to the student's partner record and assigning the
+        correct portal group.
         """
         for student in self:
             if not student.user_id:
@@ -18,11 +17,12 @@ class Student(models.Model):
                     'name': student.name,
                     'login': student.email or student.name.lower().replace(" ", "."),
                     'email': student.email,
+                    'partner_id': student.partner_id.id,
                 }
-                # Step 1: Create the user without groups_id
+                # Step 1: Create the user, linking them to the student's partner
                 user = self.env['res.users'].create(user_vals)
                 student.user_id = user.id
 
-                # Step 2: Assign the group after creation
+                # Step 2: Assign the student portal group
                 student_group = self.env.ref('charge_erp_core.group_op_student')
                 user.write({'groups_id': [(4, student_group.id)]})
