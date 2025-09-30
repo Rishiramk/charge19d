@@ -141,7 +141,7 @@
                             </page>
                             <page string="Employee / HR Link" groups="hr.group_hr_manager">
                                 <group>
-                                    <group>
+                                    <group string="HR Employee">
                                         <button name="action_create_employee"
                                             string="Create Employee"
                                             type="object"
@@ -150,6 +150,16 @@
                                         <field name="employee_id"
                                             readonly="1"
                                             invisible="not employee_id"/>
+                                    </group>
+                                    <group string="System Access">
+                                        <button name="action_create_user"
+                                            string="Create System User"
+                                            type="object"
+                                            class="btn-primary"
+                                            invisible="user_id"/>
+                                        <field name="user_id"
+                                            readonly="1"
+                                            invisible="not user_id"/>
                                     </group>
                                 </group>
                             </page>

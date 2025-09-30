@@ -83,6 +83,10 @@ class OpFaculty(models.Model):
     employee_id = fields.Many2one(
         'hr.employee', string='Linked Employee',
         ondelete='restrict', copy=False)
+    user_id = fields.Many2one(
+        'res.users', string='System User',
+        help="The user account linked to this faculty member for system access.",
+        copy=False)
 
     # Smart Button Counts
     session_count = fields.Integer(
@@ -132,3 +136,21 @@ class OpFaculty(models.Model):
             'view_mode': 'form',
             'target': 'current',
         }
+
+    def action_create_user(self):
+        """Create a new system user for the faculty member."""
+        for faculty in self:
+            if not faculty.user_id:
+                user_vals = {
+                    'name': faculty.name,
+                    'login': faculty.email or faculty.name.lower().replace(" ", "."),
+                    'email': faculty.email,
+                    'partner_id': faculty.partner_id.id,
+                }
+                # Step 1: Create the user
+                user = self.env['res.users'].create(user_vals)
+                faculty.user_id = user.id
+
+                # Step 2: Assign the 'Faculty' group
+                faculty_group = self.env.ref('charge_erp_core.group_op_faculty')
+                user.write({'groups_id': [(4, faculty_group.id)]})

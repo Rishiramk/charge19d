@@ -22,6 +22,7 @@ This module has recently undergone a major "Phase 1" refactoring to establish a 
     - **Smart Buttons**: Quick access to related records like Sessions, Subjects, Library items, and the linked Employee profile.
 
 - **Role-Based Access Control**: A granular security system has been implemented to control user permissions.
+- **User Provisioning**: A 'Create User' button is now available on the faculty form for managers, simplifying the process of granting system access to faculty members.
 
 - **Extensibility**: Both the student and faculty forms now include placeholder "smart buttons" and tabs for future modules (e.g., Assignments, Fees, Attendance, Library, Health), ensuring a seamless upgrade path.
 
@@ -46,6 +47,14 @@ The security of the Charge ERP Core module is built around a role-based access c
 4.  **System Administrator (`base.group_system`)**
     - **Permissions**: Full CRUD access to all models.
     - **Description**: The standard Odoo Administrator group has been granted full permissions for all models in this module. Any user in this group (like the `devops` user) will have complete access, including the ability to see all "New" buttons.
+
+### Record-Level Security
+
+In addition to role-based permissions, the module now includes **record rules** to enforce row-level security, ensuring users can only access data relevant to them:
+
+-   **For Faculty**: A faculty member can only view and manage their own faculty profile and the sessions they are assigned to teach. They can also view the profiles of students who are enrolled in their sessions, but not other students.
+
+These rules provide a more secure and private environment for all users.
 
 ### How to Assign Roles to Users
 
