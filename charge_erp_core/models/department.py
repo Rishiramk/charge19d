@@ -44,6 +44,14 @@ class OpDepartment(models.Model):
             programs = self.env['op.program'].search([('department_id', '=', department.id)])
             department.batch_count = self.env['op.batch'].search_count([('program_id', 'in', programs.ids)])
 
+    @api.constrains('code')
+    def _check_unique_code(self):
+        for department in self:
+            if department.code:
+                domain = [('code', '=', department.code), ('id', '!=', department.id)]
+                if self.search_count(domain):
+                    raise ValidationError('Department Code must be unique!')
+
     @api.model
     def create(self, vals_list):
         """

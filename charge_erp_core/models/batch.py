@@ -20,9 +20,13 @@ class OpBatch(models.Model):
     student_ids = fields.One2many('op.student', 'batch_id', string='Students')
     active = fields.Boolean(default=True)
 
-    _sql_constraints = [
-        ('unique_batch_code', 'unique(code)', 'Code should be unique per batch!')
-    ]
+    @api.constrains('code')
+    def _check_unique_code(self):
+        for batch in self:
+            if batch.code:
+                domain = [('code', '=', batch.code), ('id', '!=', batch.id)]
+                if self.search_count(domain):
+                    raise ValidationError('Batch Code must be unique!')
 
     @api.constrains('start_date', 'end_date')
     def _check_dates(self):

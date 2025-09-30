@@ -87,6 +87,18 @@ class OpStudent(models.Model):
             if record.aadhar_number and (not record.aadhar_number.isdigit() or len(record.aadhar_number) != 12):
                 raise ValidationError("Aadhar number must be a 12-digit numeric value.")
 
+    @api.constrains('roll_number', 'registration_number')
+    def _check_unique_identifiers(self):
+        for student in self:
+            if student.roll_number:
+                domain = [('roll_number', '=', student.roll_number), ('id', '!=', student.id)]
+                if self.search_count(domain):
+                    raise ValidationError('Roll Number must be unique!')
+            if student.registration_number:
+                domain = [('registration_number', '=', student.registration_number), ('id', '!=', student.id)]
+                if self.search_count(domain):
+                    raise ValidationError('Registration Number must be unique!')
+
     def _compute_color(self):
         for student in self:
             if student.status == 'active':

@@ -32,3 +32,11 @@ class OpCourse(models.Model):
     def _check_category_recursion(self):
         if not self._check_recursion():
             raise ValidationError(_('You cannot create recursive courses.'))
+
+    @api.constrains('code')
+    def _check_unique_code(self):
+        for course in self:
+            if course.code:
+                domain = [('code', '=', course.code), ('id', '!=', course.id)]
+                if self.search_count(domain):
+                    raise ValidationError('Course Code must be unique!')

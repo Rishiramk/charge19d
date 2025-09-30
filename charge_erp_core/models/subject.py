@@ -22,6 +22,10 @@ class OpSubject(models.Model):
         'op.faculty', 'op_faculty_subject_rel',
         'subject_id', 'faculty_id', string='Faculties')
 
-    _sql_constraints = [
-        ('unique_subject_code', 'unique(code)', 'Code should be unique per subject!')
-    ]
+    @api.constrains('code')
+    def _check_unique_code(self):
+        for subject in self:
+            if subject.code:
+                domain = [('code', '=', subject.code), ('id', '!=', subject.id)]
+                if self.search_count(domain):
+                    raise ValidationError('Subject Code must be unique!')
