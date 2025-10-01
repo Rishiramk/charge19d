@@ -43,10 +43,10 @@
         </record>
 
         <record id="op_student_rule_faculty" model="ir.rule">
-            <field name="name">Faculty can only see students in their sessions</field>
+            <field name="name">Faculty can only see students in their department</field>
             <field name="model_id" ref="model_op_student"/>
             <field name="groups" eval="[(4, ref('group_op_faculty'))]"/>
-            <field name="domain_force">[('session_ids.faculty_id.user_id', '=', user.id)]</field>
+            <field name="domain_force">[('program_id.department_id', 'in', user.env['op.faculty'].search([('user_id','=',user.id)]).mapped('department_id').ids)]</field>
             <field name="perm_read" eval="1"/>
             <field name="perm_write" eval="0"/>
             <field name="perm_create" eval="0"/>
