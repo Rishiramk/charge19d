@@ -143,3 +143,39 @@ To access the technical settings, you first need to activate developer mode:
     *   **Permissions:** The `Apply for Read`, `Apply for Write`, `Apply for Create`, and `Apply for Delete` checkboxes correspond to the `perm_read`, `perm_write`, `perm_create`, and `perm_unlink` flags in the XML file.
 
 **Important Note:** Changes made in the UI are not saved in your module's code. If you update the `charge_erp_core` module, any changes you made to the record rules or security groups via the UI will be reset to what is defined in the XML files. The UI is best used for inspection and temporary testing. For permanent changes, it's always best to update the XML files in your module.
+
+---
+
+## 5. Bulk Importing Faculty Users
+
+To import a large number of faculty members at once (e.g., 100 users), you can use Odoo's built-in import tool. This is a two-step process that involves creating the user accounts first, and then creating the detailed faculty profiles.
+
+Template files for this process are located in the `charge_erp_core/import_templates/` directory.
+
+### Step 1: Import the User Accounts
+
+1.  **Prepare your data:** Use the `faculty_users_template.csv` as a reference. Fill it with the data for all the users you want to create. The key columns are:
+    *   `Name`: The full name of the user.
+    *   `Login`: A unique login/username for the user.
+    *   `Email`: The user's email address.
+    *   `Access Rights/Groups`: To assign the user to the faculty group, use the value `Charge ERP / Faculty`.
+
+2.  **Import the file:**
+    *   In Odoo, navigate to **Settings > Users & Companies > Users**.
+    *   Click the "Favorites" icon (the star) and select **Import records**.
+    *   Upload your completed CSV file.
+    *   Click **Test** to ensure the data is valid, then click **Import**.
+
+### Step 2: Import the Faculty Profiles
+
+1.  **Prepare your data:** Use the `faculty_profiles_template.csv` as a reference. This file contains a comprehensive set of columns for the faculty profile.
+    *   **Crucial Link:** The **`User/ID`** column is the most important. You must use the **Login** value from the user file you imported in Step 1 to link the faculty profile to the correct user account.
+    *   Fill in the other details like `First Name`, `Last Name`, `Department/ID`, etc.
+
+2.  **Import the file:**
+    *   Navigate to the **Faculty** menu.
+    *   Click **Favorites > Import records**.
+    *   Upload your completed faculty profile CSV file.
+    *   Click **Test** to validate, and then **Import**.
+
+This two-step process ensures that both the user accounts and the detailed faculty profiles are created and correctly linked in the system.
