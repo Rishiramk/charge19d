@@ -242,5 +242,126 @@
             <field name="registration_number">REG-PHY24-003</field>
         </record>
 
+        <!-- Re-adding missing students -->
+        <!-- Student: Chris Lee -->
+        <record id="partner_student_chris_lee" model="res.partner">
+            <field name="name">Chris Lee</field>
+            <field name="first_name">Chris</field>
+            <field name="last_name">Lee</field>
+            <field name="email">chris.lee@example.com</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_chris_lee.png"/>
+        </record>
+        <record id="user_student_chris_lee" model="res.users">
+            <field name="name">Chris Lee</field>
+            <field name="partner_id" ref="partner_student_chris_lee"/>
+            <field name="login">chrislee</field>
+            <field name="password">demo</field>
+            <field name="share" eval="True"/>
+        </record>
+        <record id="demo_student_chris_lee" model="op.student">
+            <field name="partner_id" ref="partner_student_chris_lee"/>
+            <field name="user_id" ref="user_student_chris_lee"/>
+            <field name="gender">male</field>
+            <field name="batch_id" ref="demo_batch_cs_2024"/>
+            <field name="roll_number">CS24003</field>
+            <field name="registration_number">REG-CS24-003</field>
+        </record>
+
+        <!-- Student: Patricia Harris -->
+        <record id="partner_student_patricia_harris" model="res.partner">
+            <field name="name">Patricia Harris</field>
+            <field name="first_name">Patricia</field>
+            <field name="last_name">Harris</field>
+            <field name="email">patricia.harris@example.com</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_patricia_harris.png"/>
+        </record>
+        <record id="user_student_patricia_harris" model="res.users">
+            <field name="name">Patricia Harris</field>
+            <field name="partner_id" ref="partner_student_patricia_harris"/>
+            <field name="login">patriciaharris</field>
+            <field name="password">demo</field>
+            <field name="share" eval="True"/>
+        </record>
+        <record id="demo_student_patricia_harris" model="op.student">
+            <field name="partner_id" ref="partner_student_patricia_harris"/>
+            <field name="user_id" ref="user_student_patricia_harris"/>
+            <field name="gender">female</field>
+            <field name="batch_id" ref="demo_batch_cs_2024"/>
+            <field name="roll_number">CS24004</field>
+            <field name="registration_number">REG-CS24-004</field>
+        </record>
+
+        <!-- Student: Mark Walker -->
+        <record id="partner_student_mark_walker" model="res.partner">
+            <field name="name">Mark Walker</field>
+            <field name="first_name">Mark</field>
+            <field name="last_name">Walker</field>
+            <field name="email">mark.walker@example.com</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_mark_walker.png"/>
+        </record>
+        <record id="user_student_mark_walker" model="res.users">
+            <field name="name">Mark Walker</field>
+            <field name="partner_id" ref="partner_student_mark_walker"/>
+            <field name="login">markwalker</field>
+            <field name="password">demo</field>
+            <field name="share" eval="True"/>
+        </record>
+        <record id="demo_student_mark_walker" model="op.student">
+            <field name="partner_id" ref="partner_student_mark_walker"/>
+            <field name="user_id" ref="user_student_mark_walker"/>
+            <field name="gender">male</field>
+            <field name="batch_id" ref="demo_batch_cs_2023"/>
+            <field name="roll_number">CS23002</field>
+            <field name="registration_number">REG-CS23-002</field>
+        </record>
+
+        <!-- Student: Robert Clark -->
+        <record id="partner_student_robert_clark" model="res.partner">
+            <field name="name">Robert Clark</field>
+            <field name="first_name">Robert</field>
+            <field name="last_name">Clark</field>
+            <field name="email">robert.clark@example.com</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_robert_clark.png"/>
+        </record>
+        <record id="user_student_robert_clark" model="res.users">
+            <field name="name">Robert Clark</field>
+            <field name="partner_id" ref="partner_student_robert_clark"/>
+            <field name="login">robertclark</field>
+            <field name="password">demo</field>
+            <field name="share" eval="True"/>
+        </record>
+        <record id="demo_student_robert_clark" model="op.student">
+            <field name="partner_id" ref="partner_student_robert_clark"/>
+            <field name="user_id" ref="user_student_robert_clark"/>
+            <field name="gender">male</field>
+            <field name="batch_id" ref="demo_batch_hist_2024"/>
+            <field name="roll_number">HIST24003</field>
+            <field name="registration_number">REG-HIST24-003</field>
+        </record>
+
+        <!-- Student: Linda Lewis -->
+        <record id="partner_student_linda_lewis" model="res.partner">
+            <field name="name">Linda Lewis</field>
+            <field name="first_name">Linda</field>
+            <field name="last_name">Lewis</field>
+            <field name="email">linda.lewis@example.com</field>
+            <field name="image_1920" type="base64" file="charge_erp_core/static/img/student_linda_lewis.png"/>
+        </record>
+        <record id="user_student_linda_lewis" model="res.users">
+            <field name="name">Linda Lewis</field>
+            <field name="partner_id" ref="partner_student_linda_lewis"/>
+            <field name="login">lindalewis</field>
+            <field name="password">demo</field>
+            <field name="share" eval="True"/>
+        </record>
+        <record id="demo_student_linda_lewis" model="op.student">
+            <field name="partner_id" ref="partner_student_linda_lewis"/>
+            <field name="user_id" ref="user_student_linda_lewis"/>
+            <field name="gender">female</field>
+            <field name="batch_id" ref="demo_batch_phy_2024"/>
+            <field name="roll_number">PHY24004</field>
+            <field name="registration_number">REG-PHY24-004</field>
+        </record>
+
     </data>
 </odoo>
