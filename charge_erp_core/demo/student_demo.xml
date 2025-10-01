@@ -362,8 +362,8 @@
             <field name="registration_number">REG-PHY24-004</field>
         </record>
 
-        <!-- Add all demo students to the Portal group -->
-        <record id="base.group_portal" model="res.groups">
+        <!-- Add all demo students to the Student group -->
+        <record id="charge_erp_core.group_op_student" model="res.groups">
             <field name="user_ids" eval="[(6, 0, [
                 ref('user_student_john_doe'),
                 ref('user_student_jane_smith'),
