@@ -55,31 +55,53 @@ Next, create the user record and link it to the partner from Step 1. This is the
 
 #### Step 3: Add Users to Security Groups
 
-In Odoo 19, you **cannot** write directly to the `groups_id` field on a `res.users` record via XML. This will cause a `ValueError`.
+In Odoo 19, you **cannot** write directly to the `groups_id` field on a `res.users` record via XML. This will cause a `ValueError`. The correct method is to modify the `res.groups` record itself.
 
-The correct method is to modify the `res.groups` record itself and add the users to its `user_ids` field. This should be done in a single block after all users have been created.
+There are two primary methods for this, each with a specific use case.
 
-*   **Syntax:** Use `eval="[(4, ref('user_xml_id'))]"` to **append** a user to the group. The number `4` signifies the "link to" command.
+##### Best Practice for Demo Data: Replace the User List
+
+For demo data, it is crucial that the data is **idempotent**. This means that no matter how many times you install or update the module, the result is always the same clean, predictable set of demo users.
+
+To achieve this, use the `(6, 0, [IDs])` command. This command **replaces** the entire list of users in a group with the new list you provide.
+
+*   **Syntax:** `eval="[(6, 0, [ref('user_one'), ref('user_two')])]"`
 
 ```xml
-<!-- Example: Adding all demo faculty to the Faculty group -->
+<!--
+  BEST PRACTICE:
+  This replaces all users in the group with our demo users, ensuring a
+  clean state every time the module is loaded.
+-->
 <record id="charge_erp_core.group_op_faculty" model="res.groups">
-    <field name="user_ids" eval="[
-        (4, ref('user_faculty_alan_turing')),
-        (4, ref('user_faculty_ada_lovelace')),
-        (4, ref('user_faculty_herodotus'))
+    <field name="user_ids" eval="[(6, 0, [
+        ref('user_faculty_alan_turing'),
+        ref('user_faculty_ada_lovelace'),
+        ref('user_faculty_herodotus')
         <!-- ... more users ... -->
-    ]"/>
+    ])]"/>
 </record>
+```
 
-<!-- Example: Adding all demo students to the Student group -->
-<record id="charge_erp_core.group_op_student" model="res.groups">
+##### Alternative Method: Append Users to a Group
+
+In some cases, you may want to **add** users to a group without removing existing members. This is useful when you are adding users to a standard Odoo group (like `base.group_user`) that might already contain other important users.
+
+To do this, use the `(4, ID)` command for each user you want to add.
+
+*   **Syntax:** `eval="[(4, ref('user_one')), (4, ref('user_two'))]"`
+
+```xml
+<!--
+  This appends users to a group. Use this when you do not want to
+  remove existing members from the group.
+-->
+<record id="some_existing_group" model="res.groups">
     <field name="user_ids" eval="[
-        (4, ref('user_student_john_doe')),
-        (4, ref('user_student_jane_smith'))
-        <!-- ... more users ... -->
+        (4, ref('user_to_add_one')),
+        (4, ref('user_to_add_two'))
     ]"/>
 </record>
 ```
 
-By following this three-step process, you ensure that users are created correctly, assigned the right type (internal vs. portal), and added to their respective security groups without errors.
+By understanding and using the correct method for your specific needs, you ensure that users are managed cleanly, correctly, and without unintended side effects.

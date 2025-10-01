@@ -364,23 +364,23 @@
 
         <!-- Add all demo students to the Portal group -->
         <record id="base.group_portal" model="res.groups">
-            <field name="user_ids" eval="[
-                (4, ref('user_student_john_doe')),
-                (4, ref('user_student_jane_smith')),
-                (4, ref('user_student_peter_jones')),
-                (4, ref('user_student_emily_white')),
-                (4, ref('user_student_michael_green')),
-                (4, ref('user_student_sarah_brown')),
-                (4, ref('user_student_david_wilson')),
-                (4, ref('user_student_lisa_taylor')),
-                (4, ref('user_student_james_anderson')),
-                (4, ref('user_student_olivia_thomas')),
-                (4, ref('user_student_chris_lee')),
-                (4, ref('user_student_patricia_harris')),
-                (4, ref('user_student_mark_walker')),
-                (4, ref('user_student_robert_clark')),
-                (4, ref('user_student_linda_lewis'))
-            ]"/>
+            <field name="user_ids" eval="[(6, 0, [
+                ref('user_student_john_doe'),
+                ref('user_student_jane_smith'),
+                ref('user_student_peter_jones'),
+                ref('user_student_emily_white'),
+                ref('user_student_michael_green'),
+                ref('user_student_sarah_brown'),
+                ref('user_student_david_wilson'),
+                ref('user_student_lisa_taylor'),
+                ref('user_student_james_anderson'),
+                ref('user_student_olivia_thomas'),
+                ref('user_student_chris_lee'),
+                ref('user_student_patricia_harris'),
+                ref('user_student_mark_walker'),
+                ref('user_student_robert_clark'),
+                ref('user_student_linda_lewis')
+            ])]"/>
         </record>
 
     </data>
