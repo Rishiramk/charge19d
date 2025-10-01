@@ -185,16 +185,16 @@
 
         <!-- Add all demo faculty users to the Faculty group -->
         <record id="charge_erp_core.group_op_faculty" model="res.groups">
-            <field name="user_ids" eval="[
-                (4, ref('user_faculty_alan_turing')),
-                (4, ref('user_faculty_ada_lovelace')),
-                (4, ref('user_faculty_herodotus')),
-                (4, ref('user_faculty_marie_curie')),
-                (4, ref('user_faculty_rosalind_franklin')),
-                (4, ref('user_faculty_carl_sagan')),
-                (4, ref('user_faculty_grace_hopper')),
-                (4, ref('user_faculty_thucydides')),
-            ]"/>
+            <field name="user_ids" eval="[(6, 0, [
+                ref('user_faculty_alan_turing'),
+                ref('user_faculty_ada_lovelace'),
+                ref('user_faculty_herodotus'),
+                ref('user_faculty_marie_curie'),
+                ref('user_faculty_rosalind_franklin'),
+                ref('user_faculty_carl_sagan'),
+                ref('user_faculty_grace_hopper'),
+                ref('user_faculty_thucydides'),
+            ])]"/>
         </record>
 
     </data>
