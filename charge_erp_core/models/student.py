@@ -74,6 +74,9 @@ class OpStudent(models.Model):
     user_id = fields.Many2one('res.users', string='User')
     batch_id = fields.Many2one('op.batch', string='Batch')
     program_id = fields.Many2one('op.program', string='Program')
+    department_id = fields.Many2one(
+        'op.department', string='Department',
+        related='program_id.department_id', store=True)
     miscellaneous = fields.Text(string='Miscellaneous')
     enrollment_ids = fields.One2many(
         'op.course.enrollment', 'student_id', string='Enrollments')

@@ -13,6 +13,7 @@
                     <field name="phone"/>
                     <field name="mobile"/>
                     <field name="registration_number"/>
+                    <field name="department_id"/>
                     <field name="category_id"/>
                 </list>
             </field>
@@ -109,6 +110,7 @@
                                         <field name="registration_number"/>
                                         <field name="batch_id"/>
                                         <field name="program_id"/>
+                                        <field name="department_id"/>
                                         <field name="category_id"/>
                                         <field name="is_an_alumni"/>
                                     </group>
