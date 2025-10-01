@@ -6,6 +6,7 @@ class Student(models.Model):
     def action_create_user(self):
         for student in self:
             if not student.user_id:
+                # 1. Create the user record
                 user_vals = {
                     'name': student.name,
                     'login': student.email or student.name.lower().replace(" ", "."),
@@ -15,10 +16,6 @@ class Student(models.Model):
                 user = self.env['res.users'].sudo().create(user_vals)
                 student.user_id = user.id
 
-                # Assign student group
-                student_group = self.env.ref('charge_erp_core.group_op_student')
-                user.sudo().write({'groups_id': [(4, student_group.id)]})
-
-                # Optional: assign portal access
-                portal_group = self.env.ref('base.group_portal')
-                user.sudo().write({'groups_id': [(4, portal_group.id)]})
+                # 2. Grant portal access. This is the correct and safe way
+                # to create a portal user in Odoo 19.
+                user.sudo().write({'share': True})
