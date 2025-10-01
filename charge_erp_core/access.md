@@ -110,3 +110,36 @@ To implement the "Faculty can only see students in their department" feature, we
 3.  A record rule (`op_student_rule_faculty`) with a `domain_force` that filters students based on the faculty member's department.
 
 This combination provides a powerful way to control not just *what* users can see (models), but also *which specific records* they can see.
+
+---
+
+## 4. Managing Access Rights from the Odoo User Interface (UI)
+
+While the most robust way to manage access rights is through the module's code (as described above), you can also view and modify these settings directly from the Odoo UI. This is especially useful for testing or for making small adjustments without changing the code.
+
+### Activating Developer Mode
+
+To access the technical settings, you first need to activate developer mode:
+1.  Go to the **Settings** menu.
+2.  Scroll down and click on **Activate the developer mode**.
+
+### Managing Security Groups from the UI
+
+1.  **Navigate to Groups:** Once in developer mode, go to **Settings > Users & Companies > Groups**.
+2.  **Find the Group:** Use the search bar to find the group you want to inspect, for example, `Faculty`.
+3.  **View and Modify:**
+    *   You can see the users assigned to this group under the **Users** tab.
+    *   You can see which menus, views, and access rights are associated with this group.
+    *   You can add or remove users from the group by clicking **Add a line** in the Users tab.
+
+### Managing Record Rules from the UI
+
+1.  **Navigate to Record Rules:** In developer mode, go to **Settings > Technical > Security > Record Rules**.
+2.  **Find the Rule:** Use the search bar to find the rule you want to inspect. For our example, search for `Faculty can only see students in their department`.
+3.  **View and Modify:**
+    *   **Model:** You can see which model the rule applies to (e.g., `op.student`).
+    *   **Domain:** The **Domain** field shows the filtering logic. For our rule, it will be `[('program_id.department_id', 'in', user.env['op.faculty'].search([('user_id','=',user.id)]).mapped('department_id').ids)]`. You can modify this domain directly in the UI for testing purposes, but be aware that changes will be overridden the next time the module is updated.
+    *   **Groups:** The **Groups** tab shows which security groups this rule applies to (e.g., `charge_erp_core.group_op_faculty`).
+    *   **Permissions:** The `Apply for Read`, `Apply for Write`, `Apply for Create`, and `Apply for Delete` checkboxes correspond to the `perm_read`, `perm_write`, `perm_create`, and `perm_unlink` flags in the XML file.
+
+**Important Note:** Changes made in the UI are not saved in your module's code. If you update the `charge_erp_core` module, any changes you made to the record rules or security groups via the UI will be reset to what is defined in the XML files. The UI is best used for inspection and temporary testing. For permanent changes, it's always best to update the XML files in your module.
