@@ -14,9 +14,6 @@
             <field name="login">aturing</field>
             <field name="password">demo</field>
         </record>
-        <record id="user_faculty_alan_turing" model="res.users">
-            <field name="groups_id" eval="[(4, ref('charge_erp_core.group_op_faculty'))]"/>
-        </record>
         <record id="demo_faculty_alan_turing" model="op.faculty">
             <field name="partner_id" ref="partner_faculty_alan_turing"/>
             <field name="user_id" ref="user_faculty_alan_turing"/>
@@ -39,9 +36,6 @@
             <field name="partner_id" ref="partner_faculty_ada_lovelace"/>
             <field name="login">alovelace</field>
             <field name="password">demo</field>
-        </record>
-        <record id="user_faculty_ada_lovelace" model="res.users">
-            <field name="groups_id" eval="[(4, ref('charge_erp_core.group_op_faculty'))]"/>
         </record>
         <record id="demo_faculty_ada_lovelace" model="op.faculty">
             <field name="partner_id" ref="partner_faculty_ada_lovelace"/>
@@ -66,9 +60,6 @@
             <field name="login">hhalicarnassus</field>
             <field name="password">demo</field>
         </record>
-        <record id="user_faculty_herodotus" model="res.users">
-            <field name="groups_id" eval="[(4, ref('charge_erp_core.group_op_faculty'))]"/>
-        </record>
         <record id="demo_faculty_herodotus" model="op.faculty">
             <field name="partner_id" ref="partner_faculty_herodotus"/>
             <field name="user_id" ref="user_faculty_herodotus"/>
@@ -91,9 +82,6 @@
             <field name="partner_id" ref="partner_faculty_marie_curie"/>
             <field name="login">mcurie</field>
             <field name="password">demo</field>
-        </record>
-        <record id="user_faculty_marie_curie" model="res.users">
-            <field name="groups_id" eval="[(4, ref('charge_erp_core.group_op_faculty'))]"/>
         </record>
         <record id="demo_faculty_marie_curie" model="op.faculty">
             <field name="partner_id" ref="partner_faculty_marie_curie"/>
@@ -118,9 +106,6 @@
             <field name="login">rfranklin</field>
             <field name="password">demo</field>
         </record>
-        <record id="user_faculty_rosalind_franklin" model="res.users">
-            <field name="groups_id" eval="[(4, ref('charge_erp_core.group_op_faculty'))]"/>
-        </record>
         <record id="demo_faculty_rosalind_franklin" model="op.faculty">
             <field name="partner_id" ref="partner_faculty_rosalind_franklin"/>
             <field name="user_id" ref="user_faculty_rosalind_franklin"/>
@@ -142,9 +127,6 @@
             <field name="partner_id" ref="partner_faculty_carl_sagan"/>
             <field name="login">csagan</field>
             <field name="password">demo</field>
-        </record>
-        <record id="user_faculty_carl_sagan" model="res.users">
-            <field name="groups_id" eval="[(4, ref('charge_erp_core.group_op_faculty'))]"/>
         </record>
         <record id="demo_faculty_carl_sagan" model="op.faculty">
             <field name="partner_id" ref="partner_faculty_carl_sagan"/>
@@ -168,9 +150,6 @@
             <field name="login">ghopper</field>
             <field name="password">demo</field>
         </record>
-        <record id="user_faculty_grace_hopper" model="res.users">
-            <field name="groups_id" eval="[(4, ref('charge_erp_core.group_op_faculty'))]"/>
-        </record>
         <record id="demo_faculty_grace_hopper" model="op.faculty">
             <field name="partner_id" ref="partner_faculty_grace_hopper"/>
             <field name="user_id" ref="user_faculty_grace_hopper"/>
@@ -193,9 +172,6 @@
             <field name="login">tathens</field>
             <field name="password">demo</field>
         </record>
-        <record id="user_faculty_thucydides" model="res.users">
-            <field name="groups_id" eval="[(4, ref('charge_erp_core.group_op_faculty'))]"/>
-        </record>
         <record id="demo_faculty_thucydides" model="op.faculty">
             <field name="partner_id" ref="partner_faculty_thucydides"/>
             <field name="user_id" ref="user_faculty_thucydides"/>
@@ -205,6 +181,20 @@
             <field name="birth_date">1954-04-20</field>
             <field name="department_id" ref="demo_department_humanities"/>
             <field name="subject_ids" eval="[(6, 0, [ref('demo_subject_hist101')])]"/>
+        </record>
+
+        <!-- Add all demo faculty users to the Faculty group -->
+        <record id="charge_erp_core.group_op_faculty" model="res.groups">
+            <field name="user_ids" eval="[
+                (4, ref('user_faculty_alan_turing')),
+                (4, ref('user_faculty_ada_lovelace')),
+                (4, ref('user_faculty_herodotus')),
+                (4, ref('user_faculty_marie_curie')),
+                (4, ref('user_faculty_rosalind_franklin')),
+                (4, ref('user_faculty_carl_sagan')),
+                (4, ref('user_faculty_grace_hopper')),
+                (4, ref('user_faculty_thucydides')),
+            ]"/>
         </record>
 
     </data>
