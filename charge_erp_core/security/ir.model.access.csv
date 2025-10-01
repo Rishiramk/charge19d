@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_op_book_issue_faculty,op.book.issue.faculty,model_op_book_issue,charge_erp_core.group_op_faculty,1,0,0,0
 access_op_student_user,access.op.student.user,model_op_student,base.group_user,1,0,0,0
 access_op_course_user,access.op.course.user,model_op_course,base.group_user,1,0,0,0
 access_op_faculty_user,access.op.faculty.user,model_op_faculty,base.group_user,1,0,0,0
