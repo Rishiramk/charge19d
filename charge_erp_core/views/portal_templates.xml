@@ -5,7 +5,7 @@
             <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
 
                 <!-- My Courses (For Students) -->
-                <div t-if="user.has_group('charge_erp_core.group_op_student')" class="col-12 col-md-6 py-2">
+                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student')" class="col-12 col-md-6 py-2">
                     <a class="card text-decoration-none h-100" href="/my/courses">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fa fa-graduation-cap text-primary me-2"/>My Courses</h5>
@@ -15,7 +15,7 @@
                 </div>
 
                 <!-- My Sessions (For Students & Faculty) -->
-                <div t-if="user.has_group('charge_erp_core.group_op_student') or user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6 py-2">
+                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6 py-2">
                      <a class="card text-decoration-none h-100" href="/my/sessions">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fa fa-calendar-alt text-primary me-2"/>My Sessions</h5>
@@ -25,7 +25,7 @@
                 </div>
 
                 <!-- My Library (For Students & Faculty) -->
-                <div t-if="user.has_group('charge_erp_core.group_op_student') or user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6 py-2">
+                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6 py-2">
                     <a class="card text-decoration-none h-100" href="/my/library">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fa fa-book text-primary me-2"/>My Library</h5>
@@ -35,7 +35,7 @@
                 </div>
 
                 <!-- My Faculty (For Students) -->
-                <div t-if="user.has_group('charge_erp_core.group_op_student')" class="col-12 col-md-6 py-2">
+                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student')" class="col-12 col-md-6 py-2">
                     <a class="card text-decoration-none h-100" href="/my/faculty">
                         <div class="card-body">
                             <h5 class="card-title"><i class="fa fa-users text-primary me-2"/>My Faculty</h5>
@@ -100,7 +100,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Course</th>
-                                <th t-if="user.has_group('charge_erp_core.group_op_student')">Faculty</th>
+                                <th t-if="request.env.user.has_group('charge_erp_core.group_op_student')">Faculty</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
                             </tr>
@@ -109,7 +109,7 @@
                             <tr t-foreach="sessions" t-as="session">
                                 <td><span t-field="session.name"/></td>
                                 <td><span t-field="session.course_id.name"/></td>
-                                <td t-if="user.has_group('charge_erp_core.group_op_student')"><span t-field="session.faculty_id.name"/></td>
+                                <td t-if="request.env.user.has_group('charge_erp_core.group_op_student')"><span t-field="session.faculty_id.name"/></td>
                                 <td><span t-field="session.start_datetime" t-options='{"widget": "datetime"}'/></td>
                                 <td><span t-field="session.end_datetime" t-options='{"widget": "datetime"}'/></td>
                             </tr>
