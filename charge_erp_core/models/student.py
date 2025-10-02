@@ -150,15 +150,21 @@ class OpStudent(models.Model):
     def action_create_user(self):
         """
         Creates a new portal user for each student in the recordset.
-        This method is designed to be idempotent and safe for bulk actions.
+        This method is idempotent and follows Odoo 19 best practices.
         """
         student_group = self.env.ref('charge_erp_core.group_op_student')
         for student in self.filtered(lambda s: not s.user_id):
+            # Step 1: Create the user with the 'share' flag for portal access.
             user = self.env['res.users'].create({
                 'name': student.name,
                 'login': student.email or student.name.lower().replace(' ', '.'),
                 'partner_id': student.partner_id.id,
                 'share': True,
-                'groups_id': [(6, 0, [student_group.id])]
             })
+
+            # Step 2: Assign the student group using write().
+            # Note: 'group_op_student' implies 'base.group_portal', so only this assignment is needed.
+            user.write({'groups_id': [(6, 0, [student_group.id])]})
+
+            # Step 3: Link the new user back to the student record.
             student.user_id = user.id

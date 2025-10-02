@@ -362,26 +362,6 @@
             <field name="registration_number">REG-PHY24-004</field>
         </record>
 
-        <!-- Add all demo students to the Student group -->
-        <record id="charge_erp_core.group_op_student" model="res.groups">
-            <field name="user_ids" eval="[(6, 0, [
-                ref('user_student_john_doe'),
-                ref('user_student_jane_smith'),
-                ref('user_student_peter_jones'),
-                ref('user_student_emily_white'),
-                ref('user_student_michael_green'),
-                ref('user_student_sarah_brown'),
-                ref('user_student_david_wilson'),
-                ref('user_student_lisa_taylor'),
-                ref('user_student_james_anderson'),
-                ref('user_student_olivia_thomas'),
-                ref('user_student_chris_lee'),
-                ref('user_student_patricia_harris'),
-                ref('user_student_mark_walker'),
-                ref('user_student_robert_clark'),
-                ref('user_student_linda_lewis')
-            ])]"/>
-        </record>
 
     </data>
 </odoo>

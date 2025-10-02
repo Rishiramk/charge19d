@@ -140,14 +140,23 @@ class OpFaculty(models.Model):
     def action_create_user(self):
         """
         Creates a new system user for each faculty member in the recordset.
-        This method is designed to be idempotent and safe for bulk actions.
+        This method is designed to be idempotent and safe for bulk actions,
+        and it follows the Odoo 19 best practice of separating user creation
+        from group assignment.
         """
         faculty_group = self.env.ref('charge_erp_core.group_op_faculty')
+        base_internal_group = self.env.ref('base.group_user')
+
         for faculty in self.filtered(lambda f: not f.user_id):
+            # Step 1: Create the user without assigning groups.
             user = self.env['res.users'].create({
                 'name': faculty.name,
                 'login': faculty.email or faculty.name.lower().replace(' ', '.'),
                 'partner_id': faculty.partner_id.id,
-                'groups_id': [(6, 0, [faculty_group.id])]
             })
+
+            # Step 2: Assign groups using write().
+            user.write({'groups_id': [(6, 0, [base_internal_group.id, faculty_group.id])]})
+
+            # Step 3: Link the new user back to the faculty record.
             faculty.user_id = user.id
