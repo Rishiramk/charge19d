@@ -69,10 +69,11 @@
 
                         <field name="image_1920" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
+                            <field name="name" invisible="1" force_save="1"/>
                             <h1>
                                 <div class="d-flex align-items-center">
                                     <field name="title" placeholder="Title" options='{"no_open": True}' class="me-1"/>
-                                    <field name="first_name" placeholder="First Name" class="me-1"/>
+                                    <field name="first_name" placeholder="First Name" class="me-1" required="1"/>
                                     <field name="middle_name" placeholder="Middle Name" class="me-1"/>
                                     <field name="last_name" placeholder="Last Name" required="1"/>
                                 </div>
