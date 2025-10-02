@@ -5,56 +5,48 @@
             <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
 
                 <!-- My Courses (For Students) -->
-                <t t-if="request.env.user.has_group('charge_erp_core.group_op_student')">
-                    <div class="col-12 col-md-6">
-                        <a class="o_portal_my_home_entry" href="/my/courses">
-                            <div class="o_portal_my_home_tile">
-                                <i class="fa fa-graduation-cap fa-3x text-primary"/>
-                                <h5>My Courses</h5>
-                                <span class="small">View your enrolled courses and academic progress.</span>
-                            </div>
-                        </a>
-                    </div>
-                </t>
+                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student')" class="col-12 col-md-6">
+                    <a class="o_portal_my_home_entry d-block p-3 border rounded" t-att-href="'/my/courses'">
+                        <i class="fa fa-graduation-cap fa-2x float-start me-3 text-primary"/>
+                        <div class="o_portal_my_home_entry_desc">
+                            <h5>My Courses</h5>
+                            <span>View your enrolled courses and academic progress.</span>
+                        </div>
+                    </a>
+                </div>
 
                 <!-- My Sessions (For Students & Faculty) -->
-                <t t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')">
-                    <div class="col-12 col-md-6">
-                        <a class="o_portal_my_home_entry" href="/my/sessions">
-                            <div class="o_portal_my_home_tile">
-                                <i class="fa fa-calendar-alt fa-3x text-primary"/>
-                                <h5>My Sessions</h5>
-                                <span class="small">Check your class schedule and upcoming events.</span>
-                            </div>
-                        </a>
-                    </div>
-                </t>
+                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6">
+                    <a class="o_portal_my_home_entry d-block p-3 border rounded" t-att-href="'/my/sessions'">
+                        <i class="fa fa-calendar-alt fa-2x float-start me-3 text-primary"/>
+                        <div class="o_portal_my_home_entry_desc">
+                            <h5>My Sessions</h5>
+                            <span>Check your class schedule and upcoming events.</span>
+                        </div>
+                    </a>
+                </div>
 
                 <!-- My Library (For Students & Faculty) -->
-                <t t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')">
-                    <div class="col-12 col-md-6">
-                        <a class="o_portal_my_home_entry" href="/my/library">
-                            <div class="o_portal_my_home_tile">
-                                <i class="fa fa-book fa-3x text-primary"/>
-                                <h5>My Library</h5>
-                                <span class="small">Manage your library account and issued books.</span>
-                            </div>
-                        </a>
-                    </div>
-                </t>
+                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6">
+                    <a class="o_portal_my_home_entry d-block p-3 border rounded" t-att-href="'/my/library'">
+                        <i class="fa fa-book fa-2x float-start me-3 text-primary"/>
+                        <div class="o_portal_my_home_entry_desc">
+                            <h5>My Library</h5>
+                            <span>Manage your library account and issued books.</span>
+                        </div>
+                    </a>
+                </div>
 
                 <!-- My Faculty (For Students) -->
-                <t t-if="request.env.user.has_group('charge_erp_core.group_op_student')">
-                    <div class="col-12 col-md-6">
-                        <a class="o_portal_my_home_entry" href="/my/faculty">
-                            <div class="o_portal_my_home_tile">
-                                <i class="fa fa-users fa-3x text-primary"/>
-                                <h5>My Faculty</h5>
-                                <span class="small">View your assigned faculty members.</span>
-                            </div>
-                        </a>
-                    </div>
-                </t>
+                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student')" class="col-12 col-md-6">
+                    <a class="o_portal_my_home_entry d-block p-3 border rounded" t-att-href="'/my/faculty'">
+                        <i class="fa fa-users fa-2x float-start me-3 text-primary"/>
+                        <div class="o_portal_my_home_entry_desc">
+                            <h5>My Faculty</h5>
+                            <span>View your assigned faculty members.</span>
+                        </div>
+                    </a>
+                </div>
 
             </xpath>
         </template>
