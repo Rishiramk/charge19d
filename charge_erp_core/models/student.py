@@ -150,21 +150,32 @@ class OpStudent(models.Model):
     def action_create_user(self):
         """
         Creates a new portal user for each student in the recordset.
-        This method is idempotent and follows Odoo 19 best practices.
+        This method is idempotent and follows Odoo 19 best practices, ensuring
+        students are correctly assigned to the portal and student groups while
+        explicitly removing them from the internal user group.
         """
         student_group = self.env.ref('charge_erp_core.group_op_student')
+        internal_group = self.env.ref('base.group_user', raise_if_not_found=False)
+
         for student in self.filtered(lambda s: not s.user_id):
             # Step 1: Create the user with the 'share' flag for portal access.
-            user = self.env['res.users'].create({
+            # Odoo automatically adds the user to the Portal group and removes them
+            # from the default Internal User group when 'share' is True.
+            user = self.env['res.users'].sudo().create({
                 'name': student.name,
                 'login': student.email or student.name.lower().replace(' ', '.'),
                 'partner_id': student.partner_id.id,
                 'share': True,
             })
 
-            # Step 2: Assign the student group using write().
-            # Note: 'group_op_student' implies 'base.group_portal', so only this assignment is needed.
-            user.write({'groups_id': [(6, 0, [student_group.id])]})
+            # Step 2: Explicitly manage group assignments for clarity and security.
+            # We ensure the internal user group is removed and the student group is added.
+            # The student group implies portal access.
+            group_updates = [(4, student_group.id)]
+            if internal_group:
+                group_updates.append((3, internal_group.id))
+
+            user.sudo().write({'groups': group_updates})
 
             # Step 3: Link the new user back to the student record.
-            student.user_id = user.id
+            student.user_id = user
