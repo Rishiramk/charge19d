@@ -29,6 +29,7 @@
         'views/academic_year_views.xml',
         'views/tags_views.xml',
         'views/student_user_action.xml',
+        'views/server_actions.xml',
         'views/menu_views.xml',
     ],
     'demo': [

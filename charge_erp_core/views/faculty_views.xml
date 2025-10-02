@@ -23,6 +23,13 @@
             <field name="model">op.faculty</field>
             <field name="arch" type="xml">
                 <form string="Faculty">
+                    <header>
+                        <button name="action_create_user"
+                            string="Create User"
+                            type="object"
+                            class="btn-primary"
+                            invisible="user_id"/>
+                    </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                             <!-- Sessions Smart Button -->
@@ -152,11 +159,6 @@
                                             invisible="not employee_id"/>
                                     </group>
                                     <group string="System Access">
-                                        <button name="action_create_user"
-                                            string="Create System User"
-                                            type="object"
-                                            class="btn-primary"
-                                            invisible="user_id"/>
                                         <field name="user_id"
                                             readonly="1"
                                             invisible="not user_id"/>

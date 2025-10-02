@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Server Action for Creating Faculty Users -->
+        <record id="action_create_faculty_users" model="ir.actions.server">
+            <field name="name">Create Users for Faculty</field>
+            <field name="model_id" ref="model_op_faculty"/>
+            <field name="binding_model_id" ref="model_op_faculty"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.action_create_user()
+            </field>
+        </record>
+
+        <!-- Server Action for Creating Student Users -->
+        <record id="action_create_student_users" model="ir.actions.server">
+            <field name="name">Create Users for Students</field>
+            <field name="model_id" ref="model_op_student"/>
+            <field name="binding_model_id" ref="model_op_student"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.action_create_user()
+            </field>
+        </record>
+
+    </data>
+</odoo>

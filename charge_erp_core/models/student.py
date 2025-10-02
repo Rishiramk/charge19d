@@ -146,3 +146,19 @@ class OpStudent(models.Model):
 
     def action_view_attendance(self):
         raise UserError("The 'Attendance' module is not yet installed.")
+
+    def action_create_user(self):
+        """
+        Creates a new portal user for each student in the recordset.
+        This method is designed to be idempotent and safe for bulk actions.
+        """
+        student_group = self.env.ref('charge_erp_core.group_op_student')
+        for student in self.filtered(lambda s: not s.user_id):
+            user = self.env['res.users'].create({
+                'name': student.name,
+                'login': student.email or student.name.lower().replace(' ', '.'),
+                'partner_id': student.partner_id.id,
+                'share': True,
+                'groups_id': [(6, 0, [student_group.id])]
+            })
+            student.user_id = user.id

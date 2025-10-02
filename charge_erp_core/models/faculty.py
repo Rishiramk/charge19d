@@ -138,19 +138,16 @@ class OpFaculty(models.Model):
         }
 
     def action_create_user(self):
-        """Create a new system user for the faculty member."""
-        for faculty in self:
-            if not faculty.user_id:
-                user_vals = {
-                    'name': faculty.name,
-                    'login': faculty.email or faculty.name.lower().replace(" ", "."),
-                    'email': faculty.email,
-                    'partner_id': faculty.partner_id.id,
-                }
-                # Step 1: Create the user
-                user = self.env['res.users'].create(user_vals)
-                faculty.user_id = user.id
-
-                # Step 2: Assign the 'Faculty' group
-                faculty_group = self.env.ref('charge_erp_core.group_op_faculty')
-                faculty_group.users = [(4, user.id)]
+        """
+        Creates a new system user for each faculty member in the recordset.
+        This method is designed to be idempotent and safe for bulk actions.
+        """
+        faculty_group = self.env.ref('charge_erp_core.group_op_faculty')
+        for faculty in self.filtered(lambda f: not f.user_id):
+            user = self.env['res.users'].create({
+                'name': faculty.name,
+                'login': faculty.email or faculty.name.lower().replace(' ', '.'),
+                'partner_id': faculty.partner_id.id,
+                'groups_id': [(6, 0, [faculty_group.id])]
+            })
+            faculty.user_id = user.id

@@ -26,6 +26,11 @@
             <field name="arch" type="xml">
                 <form string="Student">
                     <header>
+                        <button name="action_create_user"
+                            string="Create User"
+                            type="object"
+                            class="btn-primary"
+                            invisible="user_id"/>
                         <field name="status" widget="statusbar" statusbar_visible="active,graduated,on_leave"/>
                     </header>
                     <sheet>
