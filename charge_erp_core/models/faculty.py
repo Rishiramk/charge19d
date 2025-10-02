@@ -149,14 +149,14 @@ class OpFaculty(models.Model):
 
         for faculty in self.filtered(lambda f: not f.user_id):
             # Step 1: Create the user without assigning groups.
-            user = self.env['res.users'].create({
+            user = self.env['res.users'].sudo().create({
                 'name': faculty.name,
                 'login': faculty.email or faculty.name.lower().replace(' ', '.'),
                 'partner_id': faculty.partner_id.id,
             })
 
             # Step 2: Assign groups using write().
-            user.write({'groups_ids': [(6, 0, [base_internal_group.id, faculty_group.id])]})
+            user.sudo().write({'groups': [(6, 0, [base_internal_group.id, faculty_group.id])]})
 
             # Step 3: Link the new user back to the faculty record.
-            faculty.user_id = user.id
+            faculty.user_id = user
