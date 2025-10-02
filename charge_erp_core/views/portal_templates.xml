@@ -5,44 +5,56 @@
             <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
 
                 <!-- My Courses (For Students) -->
-                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student')" class="col-12 col-md-6 py-2">
-                    <a class="card text-decoration-none h-100" href="/my/courses">
-                        <div class="card-body">
-                            <h5 class="card-title"><i class="fa fa-graduation-cap text-primary me-2"/>My Courses</h5>
-                            <p class="card-text small">View your enrolled courses and academic progress.</p>
-                        </div>
-                    </a>
-                </div>
+                <t t-if="request.env.user.has_group('charge_erp_core.group_op_student')">
+                    <div class="col-12 col-md-6">
+                        <a class="o_portal_my_home_entry" href="/my/courses">
+                            <div class="o_portal_my_home_tile">
+                                <i class="fa fa-graduation-cap fa-3x text-primary"/>
+                                <h5>My Courses</h5>
+                                <span class="small">View your enrolled courses and academic progress.</span>
+                            </div>
+                        </a>
+                    </div>
+                </t>
 
                 <!-- My Sessions (For Students & Faculty) -->
-                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6 py-2">
-                     <a class="card text-decoration-none h-100" href="/my/sessions">
-                        <div class="card-body">
-                            <h5 class="card-title"><i class="fa fa-calendar-alt text-primary me-2"/>My Sessions</h5>
-                            <p class="card-text small">Check your class schedule and upcoming events.</p>
-                        </div>
-                    </a>
-                </div>
+                <t t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')">
+                    <div class="col-12 col-md-6">
+                        <a class="o_portal_my_home_entry" href="/my/sessions">
+                            <div class="o_portal_my_home_tile">
+                                <i class="fa fa-calendar-alt fa-3x text-primary"/>
+                                <h5>My Sessions</h5>
+                                <span class="small">Check your class schedule and upcoming events.</span>
+                            </div>
+                        </a>
+                    </div>
+                </t>
 
                 <!-- My Library (For Students & Faculty) -->
-                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6 py-2">
-                    <a class="card text-decoration-none h-100" href="/my/library">
-                        <div class="card-body">
-                            <h5 class="card-title"><i class="fa fa-book text-primary me-2"/>My Library</h5>
-                            <p class="card-text small">Manage your library account and issued books.</p>
-                        </div>
-                    </a>
-                </div>
+                <t t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')">
+                    <div class="col-12 col-md-6">
+                        <a class="o_portal_my_home_entry" href="/my/library">
+                            <div class="o_portal_my_home_tile">
+                                <i class="fa fa-book fa-3x text-primary"/>
+                                <h5>My Library</h5>
+                                <span class="small">Manage your library account and issued books.</span>
+                            </div>
+                        </a>
+                    </div>
+                </t>
 
                 <!-- My Faculty (For Students) -->
-                <div t-if="request.env.user.has_group('charge_erp_core.group_op_student')" class="col-12 col-md-6 py-2">
-                    <a class="card text-decoration-none h-100" href="/my/faculty">
-                        <div class="card-body">
-                            <h5 class="card-title"><i class="fa fa-users text-primary me-2"/>My Faculty</h5>
-                            <p class="card-text small">View your assigned faculty members.</p>
-                        </div>
-                    </a>
-                </div>
+                <t t-if="request.env.user.has_group('charge_erp_core.group_op_student')">
+                    <div class="col-12 col-md-6">
+                        <a class="o_portal_my_home_entry" href="/my/faculty">
+                            <div class="o_portal_my_home_tile">
+                                <i class="fa fa-users fa-3x text-primary"/>
+                                <h5>My Faculty</h5>
+                                <span class="small">View your assigned faculty members.</span>
+                            </div>
+                        </a>
+                    </div>
+                </t>
 
             </xpath>
         </template>
