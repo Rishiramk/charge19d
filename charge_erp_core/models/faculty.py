@@ -156,7 +156,7 @@ class OpFaculty(models.Model):
             })
 
             # Step 2: Assign groups using write().
-            user.write({'groups_id': [(6, 0, [base_internal_group.id, faculty_group.id])]})
+            user.write({'groups_ids': [(6, 0, [base_internal_group.id, faculty_group.id])]})
 
             # Step 3: Link the new user back to the faculty record.
             faculty.user_id = user.id
