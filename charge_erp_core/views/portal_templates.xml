@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="portal_my_home_school" name="Portal My Home: School" inherit_id="portal.portal_my_home" priority="40">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+
+                <!-- My Courses (For Students) -->
+                <div t-if="user.has_group('charge_erp_core.group_op_student')" class="col-12 col-md-6 py-2">
+                    <a class="card text-decoration-none h-100" href="/my/courses">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fa fa-graduation-cap text-primary me-2"/>My Courses</h5>
+                            <p class="card-text small">View your enrolled courses and academic progress.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- My Sessions (For Students & Faculty) -->
+                <div t-if="user.has_group('charge_erp_core.group_op_student') or user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6 py-2">
+                     <a class="card text-decoration-none h-100" href="/my/sessions">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fa fa-calendar-alt text-primary me-2"/>My Sessions</h5>
+                            <p class="card-text small">Check your class schedule and upcoming events.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- My Library (For Students & Faculty) -->
+                <div t-if="user.has_group('charge_erp_core.group_op_student') or user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6 py-2">
+                    <a class="card text-decoration-none h-100" href="/my/library">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fa fa-book text-primary me-2"/>My Library</h5>
+                            <p class="card-text small">Manage your library account and issued books.</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- My Faculty (For Students) -->
+                <div t-if="user.has_group('charge_erp_core.group_op_student')" class="col-12 col-md-6 py-2">
+                    <a class="card text-decoration-none h-100" href="/my/faculty">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fa fa-users text-primary me-2"/>My Faculty</h5>
+                            <p class="card-text small">View your assigned faculty members.</p>
+                        </div>
+                    </a>
+                </div>
+
+            </xpath>
+        </template>
+
+        <!-- My Courses Page Template -->
+        <template id="portal_my_courses_template" name="My Courses">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs" t-value="[
+                    ('Home', '/my'),
+                    ('My Courses', '/my/courses')
+                ]"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">My Courses</t>
+                </t>
+                <div t-if="courses" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Course Code</th>
+                                <th>Course Name</th>
+                                <th>Department</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="courses" t-as="course">
+                                <td><span t-field="course.code"/></td>
+                                <td><span t-field="course.name"/></td>
+                                <td><span t-field="course.department_id.name"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div t-if="not courses" class="alert alert-info">
+                    You are not enrolled in any courses.
+                </div>
+                <div t-if="pager" class="o_portal_pager">
+                    <t t-call="portal.pager"/>
+                </div>
+            </t>
+        </template>
+
+        <!-- My Sessions Page Template -->
+        <template id="portal_my_sessions_template" name="My Sessions">
+            <t t-call="portal.portal_layout">
+                 <t t-set="breadcrumbs" t-value="[
+                    ('Home', '/my'),
+                    ('My Sessions', '/my/sessions')
+                ]"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">My Sessions</t>
+                </t>
+                <div t-if="sessions" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Course</th>
+                                <th t-if="user.has_group('charge_erp_core.group_op_student')">Faculty</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="sessions" t-as="session">
+                                <td><span t-field="session.name"/></td>
+                                <td><span t-field="session.course_id.name"/></td>
+                                <td t-if="user.has_group('charge_erp_core.group_op_student')"><span t-field="session.faculty_id.name"/></td>
+                                <td><span t-field="session.start_datetime" t-options='{"widget": "datetime"}'/></td>
+                                <td><span t-field="session.end_datetime" t-options='{"widget": "datetime"}'/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div t-if="not sessions" class="alert alert-info">
+                    You have no scheduled sessions.
+                </div>
+                <div t-if="pager" class="o_portal_pager">
+                    <t t-call="portal.pager"/>
+                </div>
+            </t>
+        </template>
+
+        <!-- My Library Page Template -->
+        <template id="portal_my_library_template" name="My Library">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs" t-value="[
+                    ('Home', '/my'),
+                    ('My Library', '/my/library')
+                ]"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">My Library</t>
+                </t>
+                <div t-if="issued_books" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Book</th>
+                                <th>Issue Date</th>
+                                <th>Return Date</th>
+                                <th>State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="issued_books" t-as="book">
+                                <td><span t-field="book.book_id.name"/></td>
+                                <td><span t-field="book.issue_date" t-options='{"widget": "date"}'/></td>
+                                <td><span t-field="book.return_date" t-options='{"widget": "date"}'/></td>
+                                <td><span t-field="book.state"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div t-if="not issued_books" class="alert alert-info">
+                    You have no books issued from the library.
+                </div>
+                <div t-if="pager" class="o_portal_pager">
+                    <t t-call="portal.pager"/>
+                </div>
+            </t>
+        </template>
+
+        <!-- My Faculty Page Template -->
+        <template id="portal_my_faculty_template" name="My Faculty">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs" t-value="[
+                    ('Home', '/my'),
+                    ('My Faculty', '/my/faculty')
+                ]"/>
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">My Faculty</t>
+                </t>
+                <div t-if="faculty_members" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="faculty_members" t-as="faculty">
+                                <td>
+                                    <img t-att-src="image_data_uri(faculty.image_128)" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;" alt="Faculty"/>
+                                    <span t-field="faculty.name"/>
+                                </td>
+                                <td><span t-field="faculty.email"/></td>
+                                <td><span t-field="faculty.department_id.name"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div t-if="not faculty_members" class="alert alert-info">
+                    No faculty members are assigned to your courses.
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

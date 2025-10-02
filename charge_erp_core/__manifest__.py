@@ -12,6 +12,7 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        'views/portal_templates.xml',
         'wizard/attendee_wizard_views.xml',
         'views/session_views.xml',
         'views/student_views.xml',
