@@ -1,149 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!--
-      This template correctly inherits from portal.portal_my_home to achieve a
-      full-width layout by removing the default sidebar and expanding the main content area.
-    -->
+    <!-- ============================================================ -->
+    <!-- FULL-WIDTH STUDENT DASHBOARD TEMPLATE                        -->
+    <!-- ============================================================ -->
     <template id="portal_my_home_dashboard" name="Portal My Home: Dashboard" inherit_id="portal.portal_my_home" priority="20">
-        <!-- 1. Remove the right-hand sidebar (the user's contact card) -->
+
+        <!-- 1. Remove the right-hand sidebar / user details wrapper -->
         <xpath expr="//div[hasclass('o_portal_my_details')]" position="replace"/>
 
-        <!-- 2. Replace the main content area to make it full-width -->
+        <!-- 2. Remove the restrictive portal content wrapper (col-lg-8 etc.) -->
         <xpath expr="//div[hasclass('o_portal_content')]" position="replace">
-            <div class="o_portal_content col-12">
-                <!-- The custom dashboard content is placed here -->
-                <div class="o_portal_my_home" style="background-color: #f8f9fa;">
-                    <div class="row">
-                        <div class="col-12">
+            <div class="o_portal_content w-100">
+                <!-- Main dashboard content -->
+                <div class="o_portal_my_home">
 
-                            <!-- Centered Profile Image -->
-                            <div class="text-center mb-4">
-                                <img t-att-src="image_data_uri(student.image_1920)" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" alt="Student Profile"/>
+                    <!-- Profile Card -->
+                    <div class="card shadow-sm mb-4 text-center">
+                        <div class="card-body">
+                            <img t-att-src="image_data_uri(student.image_1920)" class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" alt="Student Profile"/>
+                            <h3 class="mb-1"><t t-esc="student.name"/></h3>
+                            <p class="text-muted mb-2"><t t-esc="student.program_id.name"/></p>
+                            <div class="d-flex justify-content-center gap-4 small text-muted mb-3">
+                                <div><i class="fa fa-id-card-o me-1"/> <t t-esc="student.roll_number"/></div>
+                                <div><i class="fa fa-envelope-o me-1"/> <t t-esc="student.email"/></div>
+                                <div><i class="fa fa-phone me-1"/> <t t-esc="student.phone"/></div>
                             </div>
-
-                            <!-- Profile Overview Card -->
-                            <div class="card shadow-sm mb-4">
-                                <div class="card-body p-4 text-center">
-                                    <h3 class="mb-1"><t t-esc="student.name"/></h3>
-                                    <p class="text-muted mb-2"><t t-esc="student.program_id.name"/></p>
-                                    <div class="d-flex flex-wrap justify-content-center small text-muted mb-3">
-                                        <div class="me-4"><i class="fa fa-id-card-o me-1"/> <t t-esc="student.roll_number"/></div>
-                                        <div class="me-4"><i class="fa fa-envelope-o me-1"/> <t t-esc="student.email"/></div>
-                                        <div><i class="fa fa-phone me-1"/> <t t-esc="student.phone"/></div>
-                                    </div>
-                                    <a href="/my/details" class="btn btn-light btn-sm border-0" style="background-color: #e9ecef;">
-                                        <i class="fa fa-pencil me-1"/> Edit Information
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Academic Progress / My Courses Card -->
-                            <div class="card shadow-sm mb-4">
-                                <div class="card-header bg-white pb-0 border-0">
-                                    <h4 class="mb-0"><i class="fa fa-graduation-cap me-2 text-primary"/> My Academic Progress</h4>
-                                </div>
-                                <div class="card-body p-4">
-                                    <p class="card-text text-muted">A visual overview of your performance in key subjects.</p>
-                                    <div t-component="academic_chart"/>
-                                    <t t-else="">
-                                        <div class="alert alert-info mb-0">You are not enrolled in any courses.</div>
-                                    </t>
-                                </div>
-                            </div>
+                            <a href="/my/details" class="btn btn-light btn-sm border-0">
+                                <i class="fa fa-pencil me-1"/> Edit Information
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Row for former sidebar cards -->
+                    <!-- Dashboard Cards Row -->
                     <div class="row">
+
+                        <!-- My Courses / Academic Progress -->
                         <div class="col-lg-4 mb-4">
-                            <!-- Notifications Card -->
                             <div class="card shadow-sm h-100">
-                                <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0"><i class="fa fa-bell-o me-2 text-warning"/> Notifications</h5>
-                                    <span class="badge bg-danger rounded-pill">3</span>
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0"><i class="fa fa-graduation-cap me-2 text-primary"/> My Courses</h5>
                                 </div>
-                                <div class="list-group list-group-flush">
-                                    <a href="#" class="list-group-item list-group-item-action">Fee payment reminder</a>
-                                    <a href="#" class="list-group-item list-group-item-action">New grade posted for CS101</a>
-                                    <a href="#" class="list-group-item list-group-item-action">Library book "Odoo Development" is due soon.</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-4">
-                            <!-- Upcoming Sessions Card -->
-                            <div class="card shadow-sm h-100">
-                               <div class="card-header bg-white">
-                                    <h5 class="mb-0"><i class="fa fa-calendar-alt me-2 text-info"/> Upcoming Sessions</h5>
-                               </div>
-                               <div class="card-body p-2">
-                                    <t t-if="sessions">
-                                        <div class="list-group list-group-flush">
-                                            <t t-foreach="sessions" t-as="session">
-                                                <div class="list-group-item border-0">
-                                                    <div class="d-flex w-100 justify-content-between">
-                                                        <h6 class="mb-1"><t t-esc="session.course_id.name"/></h6>
-                                                        <small><span t-field="session.start_datetime" t-options='{"widget": "date"}'/></small>
-                                                    </div>
-                                                    <p class="mb-1 small text-muted">
-                                                        <t t-esc="session.faculty_id.name"/> &amp;mdash; <span t-field="session.start_datetime" t-options='{"widget": "time"}'/> - <span t-field="session.end_datetime" t-options='{"widget": "time"}'/>
-                                                    </p>
-                                                </div>
-                                            </t>
-                                        </div>
+                                <div class="card-body p-2">
+                                    <t t-if="courses">
+                                        <ul class="list-unstyled mb-0 p-3">
+                                            <li t-foreach="courses" t-as="course" class="mb-2">
+                                                <strong><t t-esc="course.name"/></strong>
+                                            </li>
+                                        </ul>
                                     </t>
                                     <t t-else="">
-                                        <div class="p-3 text-center text-muted">No upcoming sessions.</div>
+                                        <div class="text-center text-muted p-3">You are not enrolled in any courses.</div>
                                     </t>
-                               </div>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- Upcoming Sessions -->
                         <div class="col-lg-4 mb-4">
-                            <!-- Library Card -->
                             <div class="card shadow-sm h-100">
-                               <div class="card-header bg-white">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0"><i class="fa fa-calendar-alt me-2 text-info"/> My Timetable</h5>
+                                </div>
+                                <div class="card-body p-2">
+                                    <t t-if="sessions">
+                                        <ul class="list-unstyled mb-0 p-3">
+                                            <li t-foreach="sessions" t-as="session" class="mb-2">
+                                                <strong><t t-esc="session.course_id.name"/></strong> &amp;mdash;
+                                                <span t-field="session.start_datetime" t-options='{"widget": "time"}'/> -
+                                                <span t-field="session.end_datetime" t-options='{"widget": "time"}'/>
+                                            </li>
+                                        </ul>
+                                    </t>
+                                    <t t-else="">
+                                        <div class="text-center text-muted p-3">No upcoming sessions.</div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Library -->
+                        <div class="col-lg-4 mb-4">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-header bg-white">
                                     <h5 class="mb-0"><i class="fa fa-book me-2 text-success"/> My Library</h5>
-                               </div>
+                                </div>
                                 <div class="card-body p-2">
                                     <t t-if="issued_books">
-                                        <ul class="list-unstyled mb-0">
-                                            <li t-foreach="issued_books" t-as="book" class="mb-2 p-2">
+                                        <ul class="list-unstyled mb-0 p-3">
+                                            <li t-foreach="issued_books" t-as="book" class="mb-2">
                                                 <strong><t t-esc="book.name"/></strong><br/>
                                                 <small class="text-muted">Due: <span t-field="book.due_date" t-options='{"widget": "date"}'/></small>
                                             </li>
                                         </ul>
                                     </t>
                                     <t t-else="">
-                                        <div class="p-3 text-center text-muted">No books issued.</div>
+                                        <div class="text-center text-muted p-3">No books issued.</div>
                                     </t>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+
+                    </div> <!-- end row -->
+                </div> <!-- end o_portal_my_home -->
+            </div> <!-- end o_portal_content -->
         </xpath>
-    </template>
 
-    <!-- ================================================================= -->
-    <!--                  OWL COMPONENT TEMPLATES                          -->
-    <!-- ================================================================= -->
-
-    <template id="AcademicChart" name="Academic Chart Component" t-name="charge_erp_core.AcademicChart">
-        <div class="academic-chart-container" style="height: 300px;">
-            <canvas t-ref="academicChart"/>
-        </div>
-    </template>
-
-    <!--
-      This corrective template finds any wrapper div that another module might
-      have placed around our dashboard and removes it by replacing the wrapper
-      with its own content. This is the correct, surgical fix.
-    -->
-    <template id="portal_dashboard_unwrap_fix" inherit_id="portal.portal_my_home" priority="99">
-        <xpath expr="//div[hasclass('o_portal_content')][div[hasclass('o_portal_my_home')]]" position="replace">
-            <t t-raw="0"/>
-        </xpath>
     </template>
 
 </odoo>
