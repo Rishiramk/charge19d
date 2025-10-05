@@ -23,7 +23,17 @@ class Session(models.Model):
     course_id = fields.Many2one('op.course', ondelete='cascade', string="Course", required=True)
     attendee_ids = fields.Many2many(
         'op.student', 'op_session_student_rel', 'session_id', 'student_id', string="Attendees")
+    student_partner_ids = fields.Many2many(
+        'res.partner',
+        string="Student Partners",
+        compute='_compute_student_partner_ids',
+        store=True)
     academic_year_id = fields.Many2one('op.academic.year', string='Academic Year')
+
+    @api.depends('attendee_ids.partner_id')
+    def _compute_student_partner_ids(self):
+        for session in self:
+            session.student_partner_ids = session.attendee_ids.mapped('partner_id')
 
     @api.constrains('seats', 'attendee_ids')
     def _check_seats(self):
