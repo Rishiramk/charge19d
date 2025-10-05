@@ -165,7 +165,7 @@
     <!--            PORTAL MENU CUSTOMIZATIONS (CSS METHOD)                -->
     <!-- ================================================================= -->
 
-    <template id="portal_menu_and_style_customizations" name="Portal Menu and Style Customizations" inherit_id="portal.portal_layout" priority="100">
+    <template id="portal_menu_and_style_customizations" name="Portal Menu &amp; Style Customizations" inherit_id="portal.portal_layout" priority="100">
         <xpath expr="//head" position="inside">
             <style type="text/css">
                 /* Safely hide the default portal menu items */
@@ -176,7 +176,7 @@
                     display: none !important;
                 }
 
-                /* Safely rename the 'Connection & Security' link */
+                /* Safely rename the 'Connection and Security' link */
                 .o_portal_sidebar a[href='/my/security'] {
                     font-size: 0 !important; /* Hide original text */
                 }
