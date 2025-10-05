@@ -176,7 +176,6 @@
                                 <th>Book</th>
                                 <th>Issue Date</th>
                                 <th>Return Date</th>
-                                <th>State</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -184,7 +183,6 @@
                                 <td><span t-field="book.book_id.name"/></td>
                                 <td><span t-field="book.issue_date" t-options='{"widget": "date"}'/></td>
                                 <td><span t-field="book.return_date" t-options='{"widget": "date"}'/></td>
-                                <td><span t-field="book.state"/></td>
                             </tr>
                         </tbody>
                     </table>
