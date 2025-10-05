@@ -2,17 +2,18 @@
 <odoo>
 
     <!--
-      Full-width student dashboard template for Odoo 19 CE.
-      This template replaces the main content area with a full-width container,
-      which is the most robust and upgrade-safe method to achieve the desired layout.
+      This is the final, correct template for the student dashboard.
+      It replaces the entire content of the 'portal.portal_my_home' view
+      with a custom, full-width layout, which is the robust and upgrade-safe
+      way to resolve the dynamic rendering issue.
     -->
     <template id="portal_my_home_full_width_dashboard" name="Portal My Home: Full-Width Dashboard" inherit_id="portal.portal_my_home" priority="99">
 
-        <!-- Replace the main portal content column with our full-width dashboard -->
-        <xpath expr="//div[hasclass('o_portal_content')]" position="replace">
-            <div class="o_portal_content col-12">
-                <!-- Main dashboard content -->
-                <div class="o_portal_my_home">
+        <!-- Replace the entire 'o_portal_my_home' div with our custom dashboard -->
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="replace">
+            <div class="o_portal_my_home">
+                <!-- Full-width dashboard content starts here -->
+                <div class="o_portal_content col-12">
 
                     <!-- Profile Card -->
                     <div class="card shadow-sm mb-4 text-center">
@@ -103,10 +104,9 @@
                         </div>
 
                     </div> <!-- end row -->
-                </div> <!-- end o_portal_my_home -->
-            </div> <!-- end o_portal_content -->
+                </div> <!-- end o_portal_content -->
+            </div>
         </xpath>
-
     </template>
 
 </odoo>
