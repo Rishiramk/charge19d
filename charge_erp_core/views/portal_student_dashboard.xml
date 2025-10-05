@@ -3,14 +3,12 @@
 
     <!--
       Full-width student dashboard template for Odoo 19 CE.
-      Removes the right-hand sidebar and makes main content stretch across the page.
+      This template replaces the main content area with a full-width container,
+      which is the most robust and upgrade-safe method to achieve the desired layout.
     -->
     <template id="portal_my_home_full_width_dashboard" name="Portal My Home: Full-Width Dashboard" inherit_id="portal.portal_my_home" priority="99">
 
-        <!-- 1. Remove the entire right-hand sidebar column. This is now robust and optional. -->
-        <xpath expr="//div[contains(@class, 'col-lg-4')]" position="replace" optional="True"/>
-
-        <!-- 2. Replace the main content column to make it full-width -->
+        <!-- Replace the main portal content column with our full-width dashboard -->
         <xpath expr="//div[hasclass('o_portal_content')]" position="replace">
             <div class="o_portal_content col-12">
                 <!-- Main dashboard content -->
