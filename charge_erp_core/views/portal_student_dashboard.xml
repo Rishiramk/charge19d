@@ -18,7 +18,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingProfile">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProfile" aria-expanded="true" aria-controls="collapseProfile">
-                                        <i class="fa fa-user fa-fw me-2"/> My Profile
+                                        <i class="fa fa-user fa-fw me-2"></i> My Profile
                                     </button>
                                 </h2>
                                 <div id="collapseProfile" class="accordion-collapse collapse show" aria-labelledby="headingProfile" data-bs-parent="#studentDashboardAccordion">
@@ -32,7 +32,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingCourses">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCourses" aria-expanded="false" aria-controls="collapseCourses">
-                                        <i class="fa fa-graduation-cap fa-fw me-2"/> My Courses
+                                        <i class="fa fa-graduation-cap fa-fw me-2"></i> My Courses
                                     </button>
                                 </h2>
                                 <div id="collapseCourses" class="accordion-collapse collapse" aria-labelledby="headingCourses" data-bs-parent="#studentDashboardAccordion">
@@ -46,7 +46,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTimetable">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTimetable" aria-expanded="false" aria-controls="collapseTimetable">
-                                        <i class="fa fa-calendar-alt fa-fw me-2"/> My Timetable
+                                        <i class="fa fa-calendar-alt fa-fw me-2"></i> My Timetable
                                     </button>
                                 </h2>
                                 <div id="collapseTimetable" class="accordion-collapse collapse" aria-labelledby="headingTimetable" data-bs-parent="#studentDashboardAccordion">
@@ -60,7 +60,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingLibrary">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLibrary" aria-expanded="false" aria-controls="collapseLibrary">
-                                        <i class="fa fa-book fa-fw me-2"/> My Library
+                                        <i class="fa fa-book fa-fw me-2"></i> My Library
                                     </button>
                                 </h2>
                                 <div id="collapseLibrary" class="accordion-collapse collapse" aria-labelledby="headingLibrary" data-bs-parent="#studentDashboardAccordion">
@@ -162,36 +162,11 @@
     </template>
 
     <!-- ================================================================= -->
-    <!--            PORTAL MENU CUSTOMIZATIONS AND STYLES                  -->
+    <!--            PORTAL MENU CUSTOMIZATIONS                             -->
     <!-- ================================================================= -->
 
     <template id="portal_menu_and_style_customizations" name="Portal Menu and Style Customizations" inherit_id="portal.portal_layout" priority="100">
-        <!-- 1. Add embedded CSS for accordion and menu hiding -->
-        <xpath expr="//body" position="inside">
-            <style type="text/css">
-                /* Accordion styles for a cleaner look */
-                .accordion-button:not(.collapsed) {
-                    color: #0d6efd;
-                    background-color: #e7f1ff;
-                    box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
-                }
-                .accordion-button:focus {
-                    z-index: 3;
-                    border-color: #86b7fe;
-                    outline: 0;
-                    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
-                }
-                /* Safely hide the default portal menu items */
-                .o_portal_sidebar a[href='/my/address'],
-                .o_portal_sidebar a[href$='/my/quotes'],
-                .o_portal_sidebar a[href$='/my/orders'],
-                .o_portal_sidebar a[href$='/my/invoices'] {
-                    display: none !important;
-                }
-            </style>
-        </xpath>
-
-        <!-- 2. Rename the 'Connection & Security' link -->
+        <!-- Rename the 'Connection & Security' link -->
         <xpath expr="//a[@href='/my/security']" position="replace">
             <a href="/my/security" t-att-class="'list-group-item list-group-item-action ' + ('active' if page_name == 'security' else '')">
                 Password Management

@@ -1,0 +1,21 @@
+/* Accordion styles for a cleaner look */
+.accordion-button:not(.collapsed) {
+    color: #0d6efd;
+    background-color: #e7f1ff;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+}
+
+.accordion-button:focus {
+    z-index: 3;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
+/* Safely hide the default portal menu items */
+.o_portal_sidebar a[href='/my/address'],
+.o_portal_sidebar a[href$='/my/quotes'],
+.o_portal_sidebar a[href$='/my/orders'],
+.o_portal_sidebar a[href$='/my/invoices'] {
+    display: none !important;
+}

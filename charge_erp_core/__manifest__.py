@@ -47,4 +47,9 @@
     ],
     'installable': True,
     'application': True,
+    'assets': {
+        'web.assets_frontend': [
+            'charge_erp_core/static/src/scss/portal_dashboard.scss',
+        ],
+    },
 }
