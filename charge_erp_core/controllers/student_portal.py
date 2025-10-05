@@ -41,6 +41,7 @@ class StudentPortal(CustomerPortal):
             values.update({
                 'student': student,
                 'courses': courses,
+                'course_count': len(courses),
                 'sessions': sessions,
                 'issued_books': issued_books,
             })

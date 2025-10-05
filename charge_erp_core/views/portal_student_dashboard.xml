@@ -4,73 +4,121 @@
     <!--
       This is the main template for the new student dashboard.
       It inherits the default portal homepage and replaces its content
-      with a modern, responsive accordion layout.
+      with a modern, responsive, card-based layout.
     -->
     <template id="portal_student_dashboard" name="Student Dashboard" inherit_id="portal.portal_my_home">
         <xpath expr="//div[@id='portal_common_category']" position="replace">
-            <div class="container o_portal_my_home py-4">
+            <div class="container o_portal_my_home py-4" style="background-color: #f8f9fa;">
+
+                <!-- Page Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="mb-0">My Dashboard</h2>
+                    <!-- Optional: Quick actions like "New Message" or "Settings" could go here -->
+                </div>
+
                 <div class="row">
-                    <div class="col-12">
-                        <h3 class="mb-4">Student Dashboard</h3>
-                        <div class="accordion" id="studentDashboardAccordion">
+                    <!-- Main Content Column -->
+                    <div class="col-lg-8">
 
-                            <!-- Profile Section -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingProfile">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProfile" aria-expanded="true" aria-controls="collapseProfile">
-                                        <i class="fa fa-user fa-fw me-2"></i> My Profile
-                                    </button>
-                                </h2>
-                                <div id="collapseProfile" class="accordion-collapse collapse show" aria-labelledby="headingProfile" data-bs-parent="#studentDashboardAccordion">
-                                    <div class="accordion-body">
-                                        <t t-call="charge_erp_core.portal_profile_content"/>
+                        <!-- Profile Overview Card -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-body p-4">
+                                <div class="row align-items-center">
+                                    <div class="col-md-3 text-center">
+                                        <img t-att-src="image_data_uri(student.image_1920)" class="img-fluid rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;" alt="Student Profile"/>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h3 class="mb-1"><t t-esc="student.name"/></h3>
+                                        <p class="text-muted mb-2"><t t-esc="student.program_id.name"/></p>
+                                        <div class="d-flex flex-wrap small text-muted">
+                                            <div class="me-4"><i class="fa fa-id-card-o me-1"/> <t t-esc="student.roll_number"/></div>
+                                            <div class="me-4"><i class="fa fa-envelope-o me-1"/> <t t-esc="student.email"/></div>
+                                            <div><i class="fa fa-phone me-1"/> <t t-esc="student.phone"/></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Courses Section -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingCourses">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCourses" aria-expanded="false" aria-controls="collapseCourses">
-                                        <i class="fa fa-graduation-cap fa-fw me-2"></i> My Courses
-                                    </button>
-                                </h2>
-                                <div id="collapseCourses" class="accordion-collapse collapse" aria-labelledby="headingCourses" data-bs-parent="#studentDashboardAccordion">
-                                    <div class="accordion-body">
-                                        <t t-call="charge_erp_core.portal_courses_content"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Timetable Section -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingTimetable">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTimetable" aria-expanded="false" aria-controls="collapseTimetable">
-                                        <i class="fa fa-calendar-alt fa-fw me-2"></i> My Timetable
-                                    </button>
-                                </h2>
-                                <div id="collapseTimetable" class="accordion-collapse collapse" aria-labelledby="headingTimetable" data-bs-parent="#studentDashboardAccordion">
-                                    <div class="accordion-body">
-                                        <t t-call="charge_erp_core.portal_timetable_content"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Library Section -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingLibrary">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLibrary" aria-expanded="false" aria-controls="collapseLibrary">
-                                        <i class="fa fa-book fa-fw me-2"></i> My Library
-                                    </button>
-                                </h2>
-                                <div id="collapseLibrary" class="accordion-collapse collapse" aria-labelledby="headingLibrary" data-bs-parent="#studentDashboardAccordion">
-                                    <div class="accordion-body">
-                                        <t t-call="charge_erp_core.portal_library_content"/>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
+
+                        <!-- Academic Progress / My Courses Card -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white pb-0 border-0">
+                                <h4 class="mb-0"><i class="fa fa-graduation-cap me-2 text-primary"></i>My Courses</h4>
+                            </div>
+                            <div class="card-body p-4">
+                                <p class="card-text text-muted">A visual overview of your performance in key subjects.</p>
+                                <div t-component="academic_chart"/>
+                                <t t-else="">
+                                    <div class="alert alert-info mb-0">You are not enrolled in any courses.</div>
+                                </t>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Sidebar Column -->
+                    <div class="col-lg-4">
+
+                        <!-- Notifications Card -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0"><i class="fa fa-bell-o me-2 text-warning"></i>Notifications</h5>
+                                <span class="badge bg-danger rounded-pill">3</span>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action">Fee payment reminder</a>
+                                <a href="#" class="list-group-item list-group-item-action">New grade posted for CS101</a>
+                                <a href="#" class="list-group-item list-group-item-action">Library book "Odoo Development" is due soon.</a>
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Sessions Card -->
+                        <div class="card shadow-sm mb-4">
+                           <div class="card-header bg-white">
+                                <h5 class="mb-0"><i class="fa fa-calendar-alt me-2 text-info"></i>Upcoming Sessions</h5>
+                           </div>
+                           <div class="card-body p-2">
+                                <t t-if="sessions">
+                                    <div class="list-group list-group-flush">
+                                        <t t-foreach="sessions" t-as="session">
+                                            <div class="list-group-item border-0">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h6 class="mb-1"><t t-esc="session.course_id.name"/></h6>
+                                                    <small><span t-field="session.start_datetime" t-options='{"widget": "date"}'/></small>
+                                                </div>
+                                                <p class="mb-1 small text-muted">
+                                                    <t t-esc="session.faculty_id.name"/> &amp;mdash; <span t-field="session.start_datetime" t-options='{"widget": "time"}'/> - <span t-field="session.end_datetime" t-options='{"widget": "time"}'/>
+                                                </p>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </t>
+                                <t t-else="">
+                                    <div class="p-3 text-center text-muted">No upcoming sessions.</div>
+                                </t>
+                           </div>
+                        </div>
+
+                        <!-- Library Card -->
+                        <div class="card shadow-sm mb-4">
+                           <div class="card-header bg-white">
+                                <h5 class="mb-0"><i class="fa fa-book me-2 text-success"></i>My Library</h5>
+                           </div>
+                            <div class="card-body p-2">
+                                <t t-if="issued_books">
+                                    <ul class="list-unstyled">
+                                        <li t-foreach="issued_books" t-as="book" class="mb-2 p-2">
+                                            <strong><t t-esc="book.name"/></strong><br/>
+                                            <small class="text-muted">Due: <span t-field="book.due_date" t-options='{"widget": "date"}'/></small>
+                                        </li>
+                                    </ul>
+                                </t>
+                                <t t-else="">
+                                    <div class="p-3 text-center text-muted">No books issued.</div>
+                                </t>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -78,87 +126,13 @@
     </template>
 
     <!-- ================================================================= -->
-    <!--            CONTENT TEMPLATES FOR EACH ACCORDION PANEL             -->
+    <!--                  OWL COMPONENT TEMPLATES                          -->
     <!-- ================================================================= -->
 
-    <template id="portal_profile_content" name="Portal Profile Content">
-        <div class="row">
-            <div class="col-md-4 text-center">
-                <img t-att-src="image_data_uri(student.image_1920 if student else faculty.image_1920)" class="img-fluid rounded-circle mb-3" style="max-width: 150px; object-fit: cover;" alt="User Profile"/>
-                <h3><t t-esc="student.name if student else faculty.name"/></h3>
-                <p class="text-muted"><t t-esc="student.program_id.name if student else faculty.department_id.name"/></p>
-            </div>
-            <div class="col-md-8">
-                <h4>Personal Information</h4>
-                <hr/>
-                <div class="row mt-2"><div class="col-sm-4"><strong>Email:</strong></div><div class="col-sm-8"><t t-esc="student.email if student else faculty.email"/></div></div>
-                <div class="row mt-2"><div class="col-sm-4"><strong>Phone:</strong></div><div class="col-sm-8"><t t-esc="student.phone if student else faculty.phone"/></div></div>
-                <div class="row mt-2"><div class="col-sm-4"><strong>Gender:</strong></div><div class="col-sm-8 text-capitalize"><t t-esc="student.gender if student else faculty.gender"/></div></div>
-                <div class="row mt-2"><div class="col-sm-4"><strong>Date of Birth:</strong></div><div class="col-sm-8"><t t-esc="student.birth_date" t-options='{"widget": "date"}'/></div></div>
-            </div>
+    <template id="AcademicChart" name="Academic Chart Component" t-name="charge_erp_core.AcademicChart">
+        <div class="academic-chart-container" style="height: 300px;">
+            <canvas t-ref="academicChart"/>
         </div>
-    </template>
-
-    <template id="portal_courses_content" name="Portal Courses Content">
-        <t t-if="courses">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead><tr class="bg-light"><th>Course Code</th><th>Course Name</th><th>Department</th></tr></thead>
-                    <tbody>
-                        <tr t-foreach="courses" t-as="course">
-                            <td><span t-field="course.code"/></td>
-                            <td><span t-field="course.name"/></td>
-                            <td><span t-field="course.department_id.name"/></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </t>
-        <t t-else="">
-            <div class="alert alert-info">You are not enrolled in any courses.</div>
-        </t>
-    </template>
-
-    <template id="portal_timetable_content" name="Portal Timetable Content">
-        <t t-if="sessions">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead><tr class="bg-light"><th>Session</th><th>Course</th><th>Faculty</th><th>Start Time</th><th>End Time</th></tr></thead>
-                    <tbody>
-                        <tr t-foreach="sessions" t-as="session">
-                            <td><span t-field="session.name"/></td>
-                            <td><span t-field="session.course_id.name"/></td>
-                            <td><span t-field="session.faculty_id.name"/></td>
-                            <td><span t-field="session.start_datetime" t-options='{"widget": "datetime"}'/></td>
-                            <td><span t-field="session.end_datetime" t-options='{"widget": "datetime"}'/></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </t>
-        <t t-else="">
-            <div class="alert alert-info">You have no scheduled sessions.</div>
-        </t>
-    </template>
-
-    <template id="portal_library_content" name="Portal Library Content">
-        <t t-if="issued_books">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead><tr class="bg-light"><th>Book</th><th>Issue Date</th><th>Due Date</th></tr></thead>
-                    <tbody>
-                        <tr t-foreach="issued_books" t-as="book">
-                            <td><span t-field="book.name"/></td>
-                            <td><span t-field="book.issue_date" t-options='{"widget": "date"}'/></td>
-                            <td><span t-field="book.due_date" t-options='{"widget": "date"}'/></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </t>
-        <t t-else="">
-            <div class="alert alert-info">You have no books issued from the library.</div>
-        </t>
     </template>
 
 </odoo>

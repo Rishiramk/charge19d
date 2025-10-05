@@ -1,30 +1,66 @@
-/* Accordion styles for a cleaner look */
-.accordion-button:not(.collapsed) {
-    color: #0d6efd;
-    background-color: #e7f1ff;
-    box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
-}
+/*
+ * Custom SCSS for the Student Portal Dashboard
+ */
 
-.accordion-button:focus {
-    z-index: 3;
-    border-color: #86b7fe;
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
-}
+// Override Bootstrap variables or define custom ones if needed
+$card-border-radius: 0.75rem;
+$card-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 
-/* Safely hide the default portal menu items */
-.o_portal_sidebar a[href='/my/address'],
-.o_portal_sidebar a[href$='/my/quotes'],
-.o_portal_sidebar a[href$='/my/orders'],
-.o_portal_sidebar a[href$='/my/invoices'] {
-    display: none !important;
-}
+.o_portal_my_home {
+    // Main dashboard container styling
+    .card {
+        border: none;
+        border-radius: $card-border-radius;
+        box-shadow: $card-box-shadow;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
-/* Safely rename the 'Connection and Security' link */
-.o_portal_sidebar a[href='/my/security'] {
-    font-size: 0 !important; /* Hide original text */
-}
-.o_portal_sidebar a[href='/my/security']::before {
-    content: "Password Management";
-    font-size: 1rem; /* Restore text size */
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 1rem 1.5rem;
+
+            h4, h5 {
+                font-weight: 600;
+            }
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .list-group-item {
+            border-bottom: 1px solid #f0f0f0;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+
+    // Profile card specific styles
+    .profile-card-body {
+        .img-fluid {
+            border: 4px solid #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    // Table styling within cards
+    .table-borderless {
+        tbody tr {
+            td {
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                vertical-align: middle;
+            }
+            border-bottom: 1px solid #f5f5f5;
+            &:last-child {
+              border-bottom: none;
+            }
+        }
+    }
 }
