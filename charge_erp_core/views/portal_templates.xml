@@ -3,7 +3,7 @@
     <data>
         <!-- Portal Homepage Extension -->
         <template id="portal_my_home_school" name="Portal My Home: School" inherit_id="portal.portal_my_home" priority="40">
-            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <xpath expr="//div[hasclass('o_portal_my_home')]//div[hasclass('o_portal_docs')]" position="inside">
 
                 <!-- My Profile -->
                 <div t-if="request.env.user.has_group('charge_erp_core.group_op_student') or request.env.user.has_group('charge_erp_core.group_op_faculty')" class="col-12 col-md-6">
