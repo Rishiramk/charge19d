@@ -162,15 +162,29 @@
     </template>
 
     <!-- ================================================================= -->
-    <!--            PORTAL MENU CUSTOMIZATIONS                             -->
+    <!--            PORTAL MENU CUSTOMIZATIONS (CSS METHOD)                -->
     <!-- ================================================================= -->
 
     <template id="portal_menu_and_style_customizations" name="Portal Menu and Style Customizations" inherit_id="portal.portal_layout" priority="100">
-        <!-- Rename the 'Connection & Security' link -->
-        <xpath expr="//a[@href='/my/security']" position="replace">
-            <a href="/my/security" t-att-class="'list-group-item list-group-item-action ' + ('active' if page_name == 'security' else '')">
-                Password Management
-            </a>
+        <xpath expr="//head" position="inside">
+            <style type="text/css">
+                /* Safely hide the default portal menu items */
+                .o_portal_sidebar a[href='/my/address'],
+                .o_portal_sidebar a[href$='/my/quotes'],
+                .o_portal_sidebar a[href$='/my/orders'],
+                .o_portal_sidebar a[href$='/my/invoices'] {
+                    display: none !important;
+                }
+
+                /* Safely rename the 'Connection & Security' link */
+                .o_portal_sidebar a[href='/my/security'] {
+                    font-size: 0 !important; /* Hide original text */
+                }
+                .o_portal_sidebar a[href='/my/security']::before {
+                    content: "Password Management";
+                    font-size: 1rem; /* Restore text size */
+                }
+            </style>
         </xpath>
     </template>
 
