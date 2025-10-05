@@ -194,7 +194,9 @@
 
         <!-- Portal Menu Customization: Hide Addresses -->
         <template id="portal_layout_menu_hide_addresses" name="Portal Layout: Hide Addresses" inherit_id="portal.portal_layout" priority="50">
-            <xpath expr="//li[a[@href='/my/address']]" position="replace"/>
+            <xpath expr="//li[a[@href='/my/address']]" position="attributes">
+                <attribute name="class" add="d-none" separator=" "/>
+            </xpath>
         </template>
 
         <!-- Portal Menu Customization: Rename Security Link -->
