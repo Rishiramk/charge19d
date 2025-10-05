@@ -135,4 +135,12 @@
         </div>
     </template>
 
+    <!--
+      This template removes the default contact details panel from the portal sidebar,
+      creating a cleaner view focused on the new dashboard content.
+    -->
+    <template id="remove_portal_user_details_panel" inherit_id="portal.portal_my_home" name="Hide Portal Contact Details">
+        <xpath expr="//div[hasclass('o_portal_my_details')]" position="replace"/>
+    </template>
+
 </odoo>
