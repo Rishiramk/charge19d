@@ -7,7 +7,7 @@
       with a custom, full-width layout, which is the robust and upgrade-safe
       way to resolve the dynamic rendering issue.
     -->
-    <template id="portal_my_home_full_width_dashboard" name="Portal My Home: Full-Width Dashboard" inherit_id="portal.portal_my_home" priority="99">
+    <template id="portal_student_dashboard" name="Portal My Home: Full-Width Dashboard" inherit_id="portal.portal_my_home" priority="99">
 
         <!-- Replace the entire 'o_portal_my_home' div with our custom dashboard -->
         <xpath expr="//div[hasclass('o_portal_my_home')]" position="replace">
