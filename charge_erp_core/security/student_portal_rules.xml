@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ================================================================= -->
+        <!--            RECORD RULES FOR THE STUDENT/FACULTY PORTAL            -->
+        <!-- ================================================================= -->
+
+        <!-- Rule for Students to see their own profile -->
+        <record id="rule_portal_student_self" model="ir.rule">
+            <field name="name">Portal: Student can see own profile</field>
+            <field name="model_id" ref="model_op_student"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Rule for Faculty to see their own profile -->
+        <record id="rule_portal_faculty_self" model="ir.rule">
+            <field name="name">Portal: Faculty can see own profile</field>
+            <field name="model_id" ref="model_op_faculty"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Rule for Students to see their own course enrollments -->
+        <record id="rule_portal_course_enrollment_student" model="ir.rule">
+            <field name="name">Portal: Student can see own course enrollments</field>
+            <field name="model_id" ref="model_op_course_enrollment"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('student_id.user_id', '=', user.id)]</field>
+        </record>
+
+        <!-- Rule for Students to see their own sessions -->
+        <record id="rule_portal_session_student" model="ir.rule">
+            <field name="name">Portal: Student can see own sessions</field>
+            <field name="model_id" ref="model_op_session"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('student_partner_ids', 'in', [user.partner_id.id])]</field>
+        </record>
+
+        <!-- Rule for Faculty to see their own sessions -->
+        <record id="rule_portal_session_faculty" model="ir.rule">
+            <field name="name">Portal: Faculty can see own sessions</field>
+            <field name="model_id" ref="model_op_session"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('faculty_id.user_id', '=', user.id)]</field>
+        </record>
+
+        <!-- Rule for Students to see their own book issues -->
+        <record id="rule_portal_book_issue_student" model="ir.rule">
+            <field name="name">Portal: Student can see own book issues</field>
+            <field name="model_id" ref="model_op_book_issue"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('student_id.user_id', '=', user.id)]</field>
+        </record>
+
+        <!-- Rule for Faculty to see their own book issues -->
+        <record id="rule_portal_book_issue_faculty" model="ir.rule">
+            <field name="name">Portal: Faculty can see own book issues</field>
+            <field name="model_id" ref="model_op_book_issue"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('faculty_id.user_id', '=', user.id)]</field>
+        </record>
+
+    </data>
+</odoo>

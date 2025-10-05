@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+      This is the main template for the new student dashboard.
+      It inherits the default portal homepage and replaces its content
+      with a modern, responsive accordion layout.
+    -->
+    <template id="portal_student_dashboard" name="Student Dashboard" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="replace">
+            <div class="container o_portal_my_home py-4">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="mb-4">Student Dashboard</h3>
+                        <div class="accordion" id="studentDashboardAccordion">
+
+                            <!-- Profile Section -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingProfile">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProfile" aria-expanded="true" aria-controls="collapseProfile">
+                                        <i class="fa fa-user fa-fw me-2"/> My Profile
+                                    </button>
+                                </h2>
+                                <div id="collapseProfile" class="accordion-collapse collapse show" aria-labelledby="headingProfile" data-bs-parent="#studentDashboardAccordion">
+                                    <div class="accordion-body">
+                                        <t t-call="charge_erp_core.portal_profile_content"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Courses Section -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingCourses">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCourses" aria-expanded="false" aria-controls="collapseCourses">
+                                        <i class="fa fa-graduation-cap fa-fw me-2"/> My Courses
+                                    </button>
+                                </h2>
+                                <div id="collapseCourses" class="accordion-collapse collapse" aria-labelledby="headingCourses" data-bs-parent="#studentDashboardAccordion">
+                                    <div class="accordion-body">
+                                        <t t-call="charge_erp_core.portal_courses_content"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Timetable Section -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTimetable">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTimetable" aria-expanded="false" aria-controls="collapseTimetable">
+                                        <i class="fa fa-calendar-alt fa-fw me-2"/> My Timetable
+                                    </button>
+                                </h2>
+                                <div id="collapseTimetable" class="accordion-collapse collapse" aria-labelledby="headingTimetable" data-bs-parent="#studentDashboardAccordion">
+                                    <div class="accordion-body">
+                                        <t t-call="charge_erp_core.portal_timetable_content"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Library Section -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingLibrary">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLibrary" aria-expanded="false" aria-controls="collapseLibrary">
+                                        <i class="fa fa-book fa-fw me-2"/> My Library
+                                    </button>
+                                </h2>
+                                <div id="collapseLibrary" class="accordion-collapse collapse" aria-labelledby="headingLibrary" data-bs-parent="#studentDashboardAccordion">
+                                    <div class="accordion-body">
+                                        <t t-call="charge_erp_core.portal_library_content"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- ================================================================= -->
+    <!--            CONTENT TEMPLATES FOR EACH ACCORDION PANEL             -->
+    <!-- ================================================================= -->
+
+    <template id="portal_profile_content" name="Portal Profile Content">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img t-att-src="image_data_uri(student.image_1920 if student else faculty.image_1920)" class="img-fluid rounded-circle mb-3" style="max-width: 150px; object-fit: cover;" alt="User Profile"/>
+                <h3><t t-esc="student.name if student else faculty.name"/></h3>
+                <p class="text-muted"><t t-esc="student.program_id.name if student else faculty.department_id.name"/></p>
+            </div>
+            <div class="col-md-8">
+                <h4>Personal Information</h4>
+                <hr/>
+                <div class="row mt-2"><div class="col-sm-4"><strong>Email:</strong></div><div class="col-sm-8"><t t-esc="student.email if student else faculty.email"/></div></div>
+                <div class="row mt-2"><div class="col-sm-4"><strong>Phone:</strong></div><div class="col-sm-8"><t t-esc="student.phone if student else faculty.phone"/></div></div>
+                <div class="row mt-2"><div class="col-sm-4"><strong>Gender:</strong></div><div class="col-sm-8 text-capitalize"><t t-esc="student.gender if student else faculty.gender"/></div></div>
+                <div class="row mt-2"><div class="col-sm-4"><strong>Date of Birth:</strong></div><div class="col-sm-8"><t t-esc="student.birth_date" t-options='{"widget": "date"}'/></div></div>
+            </div>
+        </div>
+    </template>
+
+    <template id="portal_courses_content" name="Portal Courses Content">
+        <t t-if="courses">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead><tr class="bg-light"><th>Course Code</th><th>Course Name</th><th>Department</th></tr></thead>
+                    <tbody>
+                        <tr t-foreach="courses" t-as="course">
+                            <td><span t-field="course.code"/></td>
+                            <td><span t-field="course.name"/></td>
+                            <td><span t-field="course.department_id.name"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+        <t t-else="">
+            <div class="alert alert-info">You are not enrolled in any courses.</div>
+        </t>
+    </template>
+
+    <template id="portal_timetable_content" name="Portal Timetable Content">
+        <t t-if="sessions">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead><tr class="bg-light"><th>Session</th><th>Course</th><th>Faculty</th><th>Start Time</th><th>End Time</th></tr></thead>
+                    <tbody>
+                        <tr t-foreach="sessions" t-as="session">
+                            <td><span t-field="session.name"/></td>
+                            <td><span t-field="session.course_id.name"/></td>
+                            <td><span t-field="session.faculty_id.name"/></td>
+                            <td><span t-field="session.start_datetime" t-options='{"widget": "datetime"}'/></td>
+                            <td><span t-field="session.end_datetime" t-options='{"widget": "datetime"}'/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+        <t t-else="">
+            <div class="alert alert-info">You have no scheduled sessions.</div>
+        </t>
+    </template>
+
+    <template id="portal_library_content" name="Portal Library Content">
+        <t t-if="issued_books">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead><tr class="bg-light"><th>Book</th><th>Issue Date</th><th>Due Date</th></tr></thead>
+                    <tbody>
+                        <tr t-foreach="issued_books" t-as="book">
+                            <td><span t-field="book.name"/></td>
+                            <td><span t-field="book.issue_date" t-options='{"widget": "date"}'/></td>
+                            <td><span t-field="book.due_date" t-options='{"widget": "date"}'/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+        <t t-else="">
+            <div class="alert alert-info">You have no books issued from the library.</div>
+        </t>
+    </template>
+
+    <!-- ================================================================= -->
+    <!--            PORTAL MENU CUSTOMIZATIONS AND STYLES                  -->
+    <!-- ================================================================= -->
+
+    <template id="portal_menu_and_style_customizations" name="Portal Menu and Style Customizations" inherit_id="portal.portal_layout" priority="100">
+        <!-- 1. Add embedded CSS for accordion and menu hiding -->
+        <xpath expr="//body" position="inside">
+            <style type="text/css">
+                /* Accordion styles for a cleaner look */
+                .accordion-button:not(.collapsed) {
+                    color: #0d6efd;
+                    background-color: #e7f1ff;
+                    box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+                }
+                .accordion-button:focus {
+                    z-index: 3;
+                    border-color: #86b7fe;
+                    outline: 0;
+                    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+                }
+                /* Safely hide the default portal menu items */
+                .o_portal_sidebar a[href='/my/address'],
+                .o_portal_sidebar a[href$='/my/quotes'],
+                .o_portal_sidebar a[href$='/my/orders'],
+                .o_portal_sidebar a[href$='/my/invoices'] {
+                    display: none !important;
+                }
+            </style>
+        </xpath>
+
+        <!-- 2. Rename the 'Connection & Security' link -->
+        <xpath expr="//a[@href='/my/security']" position="replace">
+            <a href="/my/security" t-att-class="'list-group-item list-group-item-action ' + ('active' if page_name == 'security' else '')">
+                Password Management
+            </a>
+        </xpath>
+    </template>
+
+</odoo>

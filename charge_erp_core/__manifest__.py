@@ -11,8 +11,9 @@
     'depends': ['base', 'mail', 'hr'],
     'data': [
         'security/security.xml',
+        'security/student_portal_rules.xml',
         'security/ir.model.access.csv',
-        'views/portal_templates.xml',
+        'views/portal_student_dashboard.xml',
         'wizard/attendee_wizard_views.xml',
         'views/session_views.xml',
         'views/student_views.xml',
