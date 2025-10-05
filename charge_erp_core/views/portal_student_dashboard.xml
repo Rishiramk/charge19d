@@ -2,9 +2,8 @@
 <odoo>
 
     <!--
-      This is the final, correct template for the student dashboard.
-      It surgically removes the dynamic sidebar and expands the main content
-      area to achieve a full-width layout, as per the user's analysis.
+      Full-width student dashboard template for Odoo 19 CE.
+      Removes the right-hand sidebar and makes main content stretch across the page.
     -->
     <template id="portal_my_home_full_width_dashboard" name="Portal My Home: Full-Width Dashboard" inherit_id="portal.portal_my_home" priority="99">
 
@@ -20,7 +19,9 @@
                     <!-- Profile Card -->
                     <div class="card shadow-sm mb-4 text-center">
                         <div class="card-body">
-                            <img t-att-src="image_data_uri(student.image_1920)" class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" alt="Student Profile"/>
+                            <img t-att-src="image_data_uri(student.image_1920)" class="rounded-circle mb-3"
+                                 style="width: 120px; height: 120px; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
+                                 alt="Student Profile"/>
                             <h3 class="mb-1"><t t-esc="student.name"/></h3>
                             <p class="text-muted mb-2"><t t-esc="student.program_id.name"/></p>
                             <div class="d-flex justify-content-center gap-4 small text-muted mb-3">
