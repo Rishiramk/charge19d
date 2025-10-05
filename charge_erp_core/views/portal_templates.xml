@@ -191,5 +191,17 @@
                 <div t-if="pager" class="o_portal_pager"><t t-call="portal.pager"/></div>
             </t>
         </template>
+
+        <!-- Portal Menu Customization: Hide Addresses -->
+        <template id="portal_layout_menu_hide_addresses" name="Portal Layout: Hide Addresses" inherit_id="portal.portal_layout" priority="50">
+            <xpath expr="//a[@href='/my/address']/.." position="replace"/>
+        </template>
+
+        <!-- Portal Menu Customization: Rename Security Link -->
+        <template id="portal_layout_menu_rename_security" name="Portal Layout: Rename Security" inherit_id="portal.portal_layout" priority="51">
+            <xpath expr="//a[@href='/my/security']/span" position="replace">
+                <span>Password Management</span>
+            </xpath>
+        </template>
     </data>
 </odoo>
