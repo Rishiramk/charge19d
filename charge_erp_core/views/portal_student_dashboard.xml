@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ============================================================ -->
-    <!-- FULL-WIDTH STUDENT DASHBOARD TEMPLATE                        -->
-    <!-- ============================================================ -->
-    <template id="portal_my_home_dashboard" name="Portal My Home: Dashboard" inherit_id="portal.portal_my_home" priority="20">
+    <!--
+      This is the final, correct template for the student dashboard.
+      It surgically removes the dynamic sidebar and expands the main content
+      area to achieve a full-width layout, as per the user's analysis.
+    -->
+    <template id="portal_my_home_full_width_dashboard" name="Portal My Home: Full-Width Dashboard" inherit_id="portal.portal_my_home" priority="99">
 
-        <!-- 1. Remove the right-hand sidebar / user details wrapper -->
-        <xpath expr="//div[hasclass('o_portal_my_details')]" position="replace"/>
+        <!-- 1. Remove the entire right-hand sidebar column injected by the portal layout -->
+        <xpath expr="//div[contains(@class, 'd-lg-flex') and contains(@class, 'col-lg-4')]" position="replace"/>
 
-        <!-- 2. Remove the restrictive portal content wrapper (col-lg-8 etc.) -->
+        <!-- 2. Replace the main content column to make it full-width -->
         <xpath expr="//div[hasclass('o_portal_content')]" position="replace">
-            <div class="o_portal_content w-100">
+            <div class="o_portal_content col-12">
                 <!-- Main dashboard content -->
                 <div class="o_portal_my_home">
 
@@ -35,7 +37,7 @@
                     <!-- Dashboard Cards Row -->
                     <div class="row">
 
-                        <!-- My Courses / Academic Progress -->
+                        <!-- My Courses -->
                         <div class="col-lg-4 mb-4">
                             <div class="card shadow-sm h-100">
                                 <div class="card-header bg-white">
@@ -56,7 +58,7 @@
                             </div>
                         </div>
 
-                        <!-- Upcoming Sessions -->
+                        <!-- My Timetable -->
                         <div class="col-lg-4 mb-4">
                             <div class="card shadow-sm h-100">
                                 <div class="card-header bg-white">
@@ -79,7 +81,7 @@
                             </div>
                         </div>
 
-                        <!-- Library -->
+                        <!-- My Library -->
                         <div class="col-lg-4 mb-4">
                             <div class="card shadow-sm h-100">
                                 <div class="card-header bg-white">
