@@ -29,7 +29,7 @@ class SchoolPortal(CustomerPortal):
 
         if student:
             course_count = request.env['op.course.enrollment'].search_count([('student_id', '=', student.id)])
-            session_count = request.env['op.session'].search_count([('student_ids', 'in', [student.id])])
+            session_count = request.env['op.session'].search_count([('attendee_ids', 'in', [student.id])])
             library_count = request.env['op.book.issue'].search_count([('student_id', '=', student.id), ('state', '=', 'issue')])
         elif faculty:
             course_count = request.env['op.course'].search_count([('faculty_ids', 'in', [faculty.id])])
@@ -97,7 +97,7 @@ class SchoolPortal(CustomerPortal):
         faculty = self._get_faculty()
 
         if student:
-            domain = [('student_ids', 'in', [student.id])]
+            domain = [('attendee_ids', 'in', [student.id])]
         elif faculty:
             domain = [('faculty_id', '=', faculty.id)]
         else:
