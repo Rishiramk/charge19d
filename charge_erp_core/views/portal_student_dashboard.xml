@@ -7,8 +7,8 @@
     -->
     <template id="portal_my_home_full_width_dashboard" name="Portal My Home: Full-Width Dashboard" inherit_id="portal.portal_my_home" priority="99">
 
-        <!-- 1. Remove the entire right-hand sidebar column, making the expression optional and more robust to prevent errors -->
-        <xpath expr="//div[hasclass('o_portal_my_details')]/.." position="replace" optional="1"/>
+        <!-- 1. Remove the entire right-hand sidebar column. This is now robust and optional. -->
+        <xpath expr="//div[contains(@class, 'col-lg-4')]" position="replace" optional="True"/>
 
         <!-- 2. Replace the main content column to make it full-width -->
         <xpath expr="//div[hasclass('o_portal_content')]" position="replace">
