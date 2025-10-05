@@ -7,7 +7,7 @@
       with a modern, responsive accordion layout.
     -->
     <template id="portal_student_dashboard" name="Student Dashboard" inherit_id="portal.portal_my_home">
-        <xpath expr="//div[hasclass('o_portal_my_home')]" position="replace">
+        <xpath expr="//div[@id='portal_common_category']" position="replace">
             <div class="container o_portal_my_home py-4">
                 <div class="row">
                     <div class="col-12">
