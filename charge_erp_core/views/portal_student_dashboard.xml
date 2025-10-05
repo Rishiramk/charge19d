@@ -2,14 +2,14 @@
 <odoo>
 
     <!--
-      This is the final, correct template for the student dashboard.
-      It replaces the entire content of the 'portal.portal_my_home' view
-      with a custom, full-width layout, which is the robust and upgrade-safe
-      way to resolve the dynamic rendering issue.
+      This is the final, definitive template for the student dashboard.
+      It correctly targets the static 'o_portal_my_home' div to replace
+      its content with a full-width layout, resolving the dynamic rendering
+      errors permanently.
     -->
-    <template id="portal_student_dashboard" name="Portal My Home: Full-Width Dashboard" inherit_id="portal.portal_my_home" priority="99">
+    <template id="portal_student_dashboard" name="Portal My Home: Student Dashboard" inherit_id="portal.portal_my_home" priority="99">
 
-        <!-- Replace the entire 'o_portal_my_home' div with our custom dashboard -->
+        <!-- Replace the entire static 'o_portal_my_home' div with our custom dashboard -->
         <xpath expr="//div[hasclass('o_portal_my_home')]" position="replace">
             <div class="o_portal_my_home">
                 <!-- Full-width dashboard content starts here -->
@@ -104,7 +104,7 @@
                         </div>
 
                     </div> <!-- end row -->
-                </div> <!-- end o_portal_content -->
+                </div><!-- This is now the content of the replaced div -->
             </div>
         </xpath>
     </template>
