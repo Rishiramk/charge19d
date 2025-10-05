@@ -19,3 +19,12 @@
 .o_portal_sidebar a[href$='/my/invoices'] {
     display: none !important;
 }
+
+/* Safely rename the 'Connection and Security' link */
+.o_portal_sidebar a[href='/my/security'] {
+    font-size: 0 !important; /* Hide original text */
+}
+.o_portal_sidebar a[href='/my/security']::before {
+    content: "Password Management";
+    font-size: 1rem; /* Restore text size */
+}
