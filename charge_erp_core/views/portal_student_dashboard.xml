@@ -4,7 +4,7 @@
     <!--
       This is the main template for the new student dashboard.
       It inherits the default portal homepage and replaces its content
-      with a modern, responsive, card-based layout.
+      with a modern, full-width layout.
     -->
     <template id="portal_student_dashboard" name="Student Dashboard" inherit_id="portal.portal_my_home">
         <xpath expr="//div[@id='portal_common_category']" position="replace">
@@ -13,37 +13,36 @@
                 <!-- Page Header -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="mb-0">My Dashboard</h2>
-                    <!-- Optional: Quick actions like "New Message" or "Settings" could go here -->
                 </div>
 
                 <div class="row">
-                    <!-- Main Content Column -->
-                    <div class="col-lg-8">
+                    <div class="col-12">
+
+                        <!-- Centered Profile Image -->
+                        <div class="text-center mb-4">
+                            <img t-att-src="image_data_uri(student.image_1920)" class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" alt="Student Profile"/>
+                        </div>
 
                         <!-- Profile Overview Card -->
                         <div class="card shadow-sm mb-4">
-                            <div class="card-body p-4">
-                                <div class="row align-items-center">
-                                    <div class="col-md-3 text-center">
-                                        <img t-att-src="image_data_uri(student.image_1920)" class="img-fluid rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;" alt="Student Profile"/>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <h3 class="mb-1"><t t-esc="student.name"/></h3>
-                                        <p class="text-muted mb-2"><t t-esc="student.program_id.name"/></p>
-                                        <div class="d-flex flex-wrap small text-muted">
-                                            <div class="me-4"><i class="fa fa-id-card-o me-1"/> <t t-esc="student.roll_number"/></div>
-                                            <div class="me-4"><i class="fa fa-envelope-o me-1"/> <t t-esc="student.email"/></div>
-                                            <div><i class="fa fa-phone me-1"/> <t t-esc="student.phone"/></div>
-                                        </div>
-                                    </div>
+                            <div class="card-body p-4 text-center">
+                                <h3 class="mb-1"><t t-esc="student.name"/></h3>
+                                <p class="text-muted mb-2"><t t-esc="student.program_id.name"/></p>
+                                <div class="d-flex flex-wrap justify-content-center small text-muted mb-3">
+                                    <div class="me-4"><i class="fa fa-id-card-o me-1"/> <t t-esc="student.roll_number"/></div>
+                                    <div class="me-4"><i class="fa fa-envelope-o me-1"/> <t t-esc="student.email"/></div>
+                                    <div><i class="fa fa-phone me-1"/> <t t-esc="student.phone"/></div>
                                 </div>
+                                <a href="/my/details" class="btn btn-light btn-sm border-0" style="background-color: #e9ecef;">
+                                    <i class="fa fa-pencil me-1"/> Edit Information
+                                </a>
                             </div>
                         </div>
 
                         <!-- Academic Progress / My Courses Card -->
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-white pb-0 border-0">
-                                <h4 class="mb-0"><i class="fa fa-graduation-cap me-2 text-primary"></i>My Courses</h4>
+                                <h4 class="mb-0"><i class="fa fa-graduation-cap me-2 text-primary"/> My Academic Progress</h4>
                             </div>
                             <div class="card-body p-4">
                                 <p class="card-text text-muted">A visual overview of your performance in key subjects.</p>
@@ -53,16 +52,16 @@
                                 </t>
                             </div>
                         </div>
-
                     </div>
+                </div>
 
-                    <!-- Sidebar Column -->
-                    <div class="col-lg-4">
-
+                <!-- Row for former sidebar cards -->
+                <div class="row">
+                    <div class="col-lg-4 mb-4">
                         <!-- Notifications Card -->
-                        <div class="card shadow-sm mb-4">
+                        <div class="card shadow-sm h-100">
                             <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0"><i class="fa fa-bell-o me-2 text-warning"></i>Notifications</h5>
+                                <h5 class="mb-0"><i class="fa fa-bell-o me-2 text-warning"/> Notifications</h5>
                                 <span class="badge bg-danger rounded-pill">3</span>
                             </div>
                             <div class="list-group list-group-flush">
@@ -71,11 +70,12 @@
                                 <a href="#" class="list-group-item list-group-item-action">Library book "Odoo Development" is due soon.</a>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="col-lg-4 mb-4">
                         <!-- Upcoming Sessions Card -->
-                        <div class="card shadow-sm mb-4">
+                        <div class="card shadow-sm h-100">
                            <div class="card-header bg-white">
-                                <h5 class="mb-0"><i class="fa fa-calendar-alt me-2 text-info"></i>Upcoming Sessions</h5>
+                                <h5 class="mb-0"><i class="fa fa-calendar-alt me-2 text-info"/> Upcoming Sessions</h5>
                            </div>
                            <div class="card-body p-2">
                                 <t t-if="sessions">
@@ -98,15 +98,16 @@
                                 </t>
                            </div>
                         </div>
-
+                    </div>
+                    <div class="col-lg-4 mb-4">
                         <!-- Library Card -->
-                        <div class="card shadow-sm mb-4">
+                        <div class="card shadow-sm h-100">
                            <div class="card-header bg-white">
-                                <h5 class="mb-0"><i class="fa fa-book me-2 text-success"></i>My Library</h5>
+                                <h5 class="mb-0"><i class="fa fa-book me-2 text-success"/> My Library</h5>
                            </div>
                             <div class="card-body p-2">
                                 <t t-if="issued_books">
-                                    <ul class="list-unstyled">
+                                    <ul class="list-unstyled mb-0">
                                         <li t-foreach="issued_books" t-as="book" class="mb-2 p-2">
                                             <strong><t t-esc="book.name"/></strong><br/>
                                             <small class="text-muted">Due: <span t-field="book.due_date" t-options='{"widget": "date"}'/></small>
@@ -118,7 +119,6 @@
                                 </t>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
