@@ -2,14 +2,14 @@
 <odoo>
 
     <!--
-      This is the final, definitive template for the student dashboard.
-      It correctly targets the static 'o_portal_my_home' div to replace
-      its content with a full-width layout, resolving the dynamic rendering
-      errors permanently.
+      This is the final, definitive template for the student dashboard,
+      following the user's expert guidance. It uses a single, robust xpath
+      to replace the main content area, ensuring an error-free,
+      upgrade-safe, and full-width layout.
     -->
     <template id="portal_student_dashboard" name="Portal My Home: Student Dashboard" inherit_id="portal.portal_my_home" priority="99">
 
-        <!-- Replace the entire static 'o_portal_my_home' div with our custom dashboard -->
+        <!-- Replace the entire 'o_portal_my_home' div with our custom dashboard -->
         <xpath expr="//div[hasclass('o_portal_my_home')]" position="replace">
             <div class="o_portal_my_home">
                 <!-- Full-width dashboard content starts here -->
@@ -37,18 +37,35 @@
                     <!-- Dashboard Cards Row -->
                     <div class="row">
 
-                        <!-- My Courses -->
-                        <div class="col-lg-4 mb-4">
+                        <!-- My Academic Info -->
+                        <div class="col-lg-6 mb-4">
                             <div class="card shadow-sm h-100">
-                                <div class="card-header bg-white">
-                                    <h5 class="mb-0"><i class="fa fa-graduation-cap me-2 text-primary"/> My Courses</h5>
+                                <div class="card-header bg-light fw-bold">
+                                    <h5 class="mb-0"><i class="fa fa-graduation-cap me-2 text-primary"/> My Academic Info</h5>
                                 </div>
-                                <div class="card-body p-2">
+                                <div class="card-body">
+                                    <p class="mb-2"><strong>Program:</strong> <t t-esc="student.program_id.name"/></p>
+                                    <p class="mb-2"><strong>Batch:</strong> <t t-esc="student.batch_id.name"/></p>
+                                    <p class="mb-0"><strong>Enrollment Date:</strong> <t t-esc="student.admission_date" t-options='{"widget": "date"}'/></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- My Courses -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-header bg-light fw-bold">
+                                    <h5 class="mb-0"><i class="fa fa-book me-2 text-primary"/> My Courses</h5>
+                                </div>
+                                <div class="card-body p-3">
                                     <t t-if="courses">
-                                        <ul class="list-unstyled mb-0 p-3">
-                                            <li t-foreach="courses" t-as="course" class="mb-2">
-                                                <strong><t t-esc="course.name"/></strong>
-                                            </li>
+                                        <ul class="list-unstyled mb-0">
+                                            <t t-foreach="courses" t-as="course">
+                                                <li class="mb-2">
+                                                    <strong><t t-esc="course.name"/></strong>
+                                                    <span t-if="course.faculty_id" class="text-muted small"> - <t t-esc="course.faculty_id.name"/></span>
+                                                </li>
+                                            </t>
                                         </ul>
                                     </t>
                                     <t t-else="">
@@ -59,19 +76,20 @@
                         </div>
 
                         <!-- My Timetable -->
-                        <div class="col-lg-4 mb-4">
+                        <div class="col-lg-6 mb-4">
                             <div class="card shadow-sm h-100">
-                                <div class="card-header bg-white">
-                                    <h5 class="mb-0"><i class="fa fa-calendar-alt me-2 text-info"/> My Timetable</h5>
+                                <div class="card-header bg-light fw-bold">
+                                    <h5 class="mb-0"><i class="fa fa-calendar-alt me-2 text-info"/> My Timetable (Next 5)</h5>
                                 </div>
-                                <div class="card-body p-2">
+                                <div class="card-body p-3">
                                     <t t-if="sessions">
-                                        <ul class="list-unstyled mb-0 p-3">
-                                            <li t-foreach="sessions" t-as="session" class="mb-2">
-                                                <strong><t t-esc="session.course_id.name"/></strong> &amp;mdash;
-                                                <span t-field="session.start_datetime" t-options='{"widget": "time"}'/> -
-                                                <span t-field="session.end_datetime" t-options='{"widget": "time"}'/>
-                                            </li>
+                                        <ul class="list-unstyled mb-0">
+                                            <t t-foreach="sessions" t-as="session">
+                                                <li class="mb-2">
+                                                    <strong><t t-esc="session.course_id.name"/></strong><br/>
+                                                    <small class="text-muted"><t t-esc="session.start_datetime" t-options='{"widget": "datetime"}'/></small>
+                                                </li>
+                                            </t>
                                         </ul>
                                     </t>
                                     <t t-else="">
@@ -82,18 +100,20 @@
                         </div>
 
                         <!-- My Library -->
-                        <div class="col-lg-4 mb-4">
+                        <div class="col-lg-6 mb-4">
                             <div class="card shadow-sm h-100">
-                                <div class="card-header bg-white">
-                                    <h5 class="mb-0"><i class="fa fa-book me-2 text-success"/> My Library</h5>
+                                <div class="card-header bg-light fw-bold">
+                                    <h5 class="mb-0"><i class="fa fa-book-reader me-2 text-success"/> My Library</h5>
                                 </div>
-                                <div class="card-body p-2">
+                                <div class="card-body p-3">
                                     <t t-if="issued_books">
-                                        <ul class="list-unstyled mb-0 p-3">
-                                            <li t-foreach="issued_books" t-as="book" class="mb-2">
-                                                <strong><t t-esc="book.name"/></strong><br/>
-                                                <small class="text-muted">Due: <span t-field="book.due_date" t-options='{"widget": "date"}'/></small>
-                                            </li>
+                                        <ul class="list-unstyled mb-0">
+                                            <t t-foreach="issued_books" t-as="book">
+                                                <li class="mb-2">
+                                                    <strong><t t-esc="book.name"/></strong><br/>
+                                                    <small class="text-muted">Due: <span t-field="book.due_date" t-options='{"widget": "date"}'/></small>
+                                                </li>
+                                            </t>
                                         </ul>
                                     </t>
                                     <t t-else="">

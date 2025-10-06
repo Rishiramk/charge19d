@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import http
+from odoo import http, fields
 from odoo.http import request
 from odoo.addons.portal.controllers.portal import CustomerPortal
 
@@ -21,12 +21,11 @@ class StudentPortal(CustomerPortal):
     @http.route(['/my', '/my/home'], type='http', auth="user", website=True)
     def home(self, **kw):
         """
-        Overrides the default portal homepage to render the new
-        accordion-style student dashboard.
+        Overrides the default portal homepage to render the new, enhanced
+        student dashboard.
 
         This single method fetches all data required for the dashboard
-        panels (Profile, Courses, Timetable, Library) and passes it
-        to the custom QWeb template.
+        cards and passes it to the custom QWeb template.
         """
         values = self._prepare_portal_layout_values()
 
@@ -34,19 +33,27 @@ class StudentPortal(CustomerPortal):
         faculty = self._get_faculty()
 
         if student:
+            # Fetch enrolled courses
             courses = request.env['op.course.enrollment'].search([('student_id', '=', student.id)]).mapped('course_id')
-            sessions = request.env['op.session'].search([('attendee_ids', 'in', [student.id])])
+
+            # Fetch the next 5 upcoming sessions
+            sessions = request.env['op.session'].search([
+                ('attendee_ids', 'in', [student.id]),
+                ('start_datetime', '>=', fields.Datetime.now())
+            ], order='start_datetime asc', limit=5)
+
+            # Fetch issued library books
             issued_books = request.env['op.book.issue'].search([('student_id', '=', student.id)])
 
             values.update({
                 'student': student,
                 'courses': courses,
-                'course_count': len(courses),
                 'sessions': sessions,
                 'issued_books': issued_books,
             })
 
         elif faculty:
+            # Fallback for faculty users, can be enhanced later
             courses = request.env['op.course'].search([('faculty_ids', 'in', [faculty.id])])
             sessions = request.env['op.session'].search([('faculty_id', '=', faculty.id)])
             issued_books = request.env['op.book.issue'].search([('faculty_id', '=', faculty.id)])
