@@ -15,44 +15,22 @@
                 <!-- Full-width dashboard content starts here -->
                 <div class="o_portal_content col-12">
 
-                    <!-- Profile Banner -->
-                    <div class="card shadow-sm mb-4">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center">
-                                <!-- Profile Image -->
-                                <img t-att-src="image_data_uri(student.image_1920)"
-                                     class="rounded-circle me-4"
-                                     style="width: 100px; height: 100px; object-fit: cover; border: 3px solid #dee2e6;"
-                                     alt="Student Profile"/>
-
-                                <!-- Profile Info -->
-                                <div class="flex-grow-1">
-                                    <h2 class="mb-1"><t t-esc="student.name"/></h2>
-                                    <p class="text-muted mb-2 fs-5"><t t-esc="student.program_id.name"/></p>
-
-                                    <div class="d-flex flex-wrap gap-3 small text-muted">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fa fa-id-badge fa-fw me-2 text-primary"/>
-                                            <span><t t-esc="student.roll_number"/></span>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <i class="fa fa-envelope-o fa-fw me-2 text-primary"/>
-                                            <span><t t-esc="student.email"/></span>
-                                        </div>
-                                        <div t-if="student.phone" class="d-flex align-items-center">
-                                            <i class="fa fa-phone fa-fw me-2 text-primary"/>
-                                            <span><t t-esc="student.phone"/></span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Edit Button -->
-                                <div class="ms-auto">
-                                    <a href="/my/details" class="btn btn-light">
-                                        <i class="fa fa-pencil me-1"/> Edit
-                                    </a>
-                                </div>
+                    <!-- Profile Card -->
+                    <div class="card shadow-sm mb-4 text-center">
+                        <div class="card-body">
+                            <img t-att-src="image_data_uri(student.image_1920)" class="rounded-circle mb-3"
+                                 style="width: 120px; height: 120px; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
+                                 alt="Student Profile"/>
+                            <h3 class="mb-1"><t t-esc="student.name"/></h3>
+                            <p class="text-muted mb-2"><t t-esc="student.program_id.name"/></p>
+                            <div class="d-flex justify-content-center gap-4 small text-muted mb-3">
+                                <div><i class="fa fa-id-card-o me-1"/> <t t-esc="student.roll_number"/></div>
+                                <div><i class="fa fa-envelope-o me-1"/> <t t-esc="student.email"/></div>
+                                <div><i class="fa fa-phone me-1"/> <t t-esc="student.phone"/></div>
                             </div>
+                            <a href="/my/details" class="btn btn-light btn-sm border-0">
+                                <i class="fa fa-pencil me-1"/> Edit Information
+                            </a>
                         </div>
                     </div>
 
@@ -68,7 +46,8 @@
                                 <div class="card-body">
                                     <p class="mb-2"><strong>Program:</strong> <t t-esc="student.program_id.name"/></p>
                                     <p class="mb-2"><strong>Batch:</strong> <t t-esc="student.batch_id.name"/></p>
-                                    <p class="mb-0"><strong>Enrollment Date:</strong> <t t-esc="student.admission_date" t-options='{"widget": "date"}'/></p>
+                                    <!-- The 'Enrollment Date' feature is temporarily disabled pending the Admission module release. -->
+                                    <!-- <p class="mb-0"><strong>Enrollment Date:</strong> <t t-esc="student.admission_date" t-options='{"widget": "date"}'/></p> -->
                                 </div>
                             </div>
                         </div>

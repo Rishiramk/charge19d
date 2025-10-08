@@ -10,7 +10,7 @@ class Session(models.Model):
     _description = 'Open Academy Sessions'
 
     name = fields.Char(required=True)
-    start_datetime = fields.Datetime(string="Start Time", default=fields.Datetime.now)
+    start_date = fields.Date()
     duration = fields.Float(digits=(6, 2), help="Duration in days")
     state = fields.Selection([
         ('draft', 'Draft'),
