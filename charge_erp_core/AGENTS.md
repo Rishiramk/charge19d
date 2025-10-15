@@ -117,14 +117,21 @@ def action_create_user(self):
 
 #### For Student Users (Portal)
 
-The `op.student` model demonstrates the correct way to create a **portal user**.
+The `op.student` model demonstrates the correct and most robust way to create a **portal user**. This method is specifically designed to be defensive against dual-role conflicts that can arise from legacy data or unusual environment configurations.
 
 ```python
 # From charge_erp_core/models/student.py
 def action_create_user(self):
+    """
+    Creates a new portal user for each student in the recordset.
+    This method is idempotent and follows Odoo 19 best practices.
+    It includes a safeguard to handle potential dual-role conflicts from legacy data or environment issues.
+    """
+    student_group = self.env.ref('charge_erp_core.group_op_student')
+
     for student in self.filtered(lambda s: not s.user_id):
         # Step 1: Create the user with 'share'=True.
-        # This automatically handles portal/internal group assignment.
+        # This is the primary mechanism to signal intent for a portal user.
         user = self.env['res.users'].create({
             'name': student.name,
             'login': student.email or student.name.lower().replace(' ', '.'),
@@ -132,15 +139,17 @@ def action_create_user(self):
             'share': True,
         })
 
-        # Step 2: Add the student-specific application group.
-        student_group = self.env.ref('charge_erp_core.group_op_student')
-        user.write({'group_ids': [(4, student_group.id)]})
+        # Step 2: Forcefully set the correct groups.
+        # We use (6, 0, ...) to REPLACE all groups with ONLY the student group.
+        # This is the most robust way to ensure the user is ONLY a student portal user
+        # and that the 'base.group_user' is definitively removed.
+        user.write({'group_ids': [(6, 0, [student_group.id])]})
 
         # Step 3: Link the new user back to the student record.
         student.user_id = user.id
 ```
-- **Key Point:** The user is created with `share=True`, which is the standard Odoo 19 way to create a portal user. This automatically adds `base.group_portal` and removes `base.group_user`.
-- **Best Practice:** The application-specific group (`group_op_student`) is *added* using `(4, group_id)`. This is safe and does not interfere with the base groups Odoo manages via the `share` flag.
+- **Key Point:** The user is created with `share=True`, which signals to Odoo that this is a portal user.
+- **Best Practice (Robustness):** Groups are forcefully set using `(6, 0, [group_id])`. Because `group_op_student` implies `base.group_portal`, this single operation correctly and safely sets the user's access rights, removing any possibility of a conflicting `base.group_user` being present.
 
 ## 2. Extending the School Portal
 
