@@ -84,6 +84,64 @@ The following process is the approved standard for this project.
 
 By following this refined approach, our demo users are created correctly, have the exact permissions they need, and the demo data setup is clean and repeatable.
 
+### Programmatic User Creation
+
+When creating users via Python code (e.g., from a server action or wizard), the same principles apply. The `action_create_user` methods on the `op.faculty` and `op.student` models serve as the official best-practice examples.
+
+#### For Faculty Users (Internal)
+
+The `op.faculty` model demonstrates the correct way to create an **internal user**.
+
+```python
+# From charge_erp_core/models/faculty.py
+def action_create_user(self):
+    faculty_group = self.env.ref('charge_erp_core.group_op_faculty')
+    base_internal_group = self.env.ref('base.group_user')
+
+    for faculty in self.filtered(lambda f: not f.user_id):
+        # Step 1: Create the user. By default, they are internal users.
+        user = self.env['res.users'].create({
+            'name': faculty.name,
+            'login': faculty.email or faculty.name.lower().replace(' ', '.'),
+            'partner_id': faculty.partner_id.id,
+        })
+
+        # Step 2: Idempotently set their groups.
+        user.write({'group_ids': [(6, 0, [base_internal_group.id, faculty_group.id])]})
+
+        # Step 3: Link the new user back to the faculty record.
+        faculty.user_id = user.id
+```
+- **Key Point:** The user is created without the `share` flag, making them a full internal user.
+- **Best Practice:** Groups are set using `(6, 0, [group_ids])` to ensure the user has *exactly* the specified groups and nothing more.
+
+#### For Student Users (Portal)
+
+The `op.student` model demonstrates the correct way to create a **portal user**.
+
+```python
+# From charge_erp_core/models/student.py
+def action_create_user(self):
+    for student in self.filtered(lambda s: not s.user_id):
+        # Step 1: Create the user with 'share'=True.
+        # This automatically handles portal/internal group assignment.
+        user = self.env['res.users'].create({
+            'name': student.name,
+            'login': student.email or student.name.lower().replace(' ', '.'),
+            'partner_id': student.partner_id.id,
+            'share': True,
+        })
+
+        # Step 2: Add the student-specific application group.
+        student_group = self.env.ref('charge_erp_core.group_op_student')
+        user.write({'group_ids': [(4, student_group.id)]})
+
+        # Step 3: Link the new user back to the student record.
+        student.user_id = user.id
+```
+- **Key Point:** The user is created with `share=True`, which is the standard Odoo 19 way to create a portal user. This automatically adds `base.group_portal` and removes `base.group_user`.
+- **Best Practice:** The application-specific group (`group_op_student`) is *added* using `(4, group_id)`. This is safe and does not interfere with the base groups Odoo manages via the `share` flag.
+
 ## 2. Extending the School Portal
 
 The school portal is designed to be easily extensible. To add a new section (e.g., "My Fees," "My Attendance"), follow this five-step pattern. This ensures consistency with the existing portal structure and maintains security.

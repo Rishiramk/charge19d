@@ -153,7 +153,10 @@ class OpStudent(models.Model):
         This method is idempotent and follows Odoo 19 best practices.
         """
         for student in self.filtered(lambda s: not s.user_id):
-            # Step 1: Create the user with the 'share' flag for portal access.
+            # Step 1: Create the user correctly in a single step.
+            # Setting 'share': True ensures Odoo creates a portal user,
+            # automatically adding them to 'base.group_portal' and
+            # removing them from 'base.group_user'.
             user = self.env['res.users'].create({
                 'name': student.name,
                 'login': student.email or student.name.lower().replace(' ', '.'),
@@ -161,14 +164,9 @@ class OpStudent(models.Model):
                 'share': True,
             })
 
-            # Step 2: Assign groups as per instruction.
-            portal_group = self.env.ref('base.group_portal')
-            internal_group = self.env.ref('base.group_user')
-            # Remove internal group (Role / Member)
-            user.sudo().write({'group_ids': [(3, internal_group.id)]})
-
-            # Add portal group (Role / Portal)
-            user.sudo().write({'group_ids': [(4, portal_group.id)]})
+            # Step 2: Add the student-specific application group.
+            student_group = self.env.ref('charge_erp_core.group_op_student')
+            user.write({'group_ids': [(4, student_group.id)]})
 
             # Step 3: Link the new user back to the student record.
             student.user_id = user.id
