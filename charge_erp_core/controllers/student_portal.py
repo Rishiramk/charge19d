@@ -28,9 +28,17 @@ class StudentPortal(CustomerPortal):
         cards and passes it to the custom QWeb template.
         """
         values = self._prepare_portal_layout_values()
-
         student = self._get_student()
         faculty = self._get_faculty()
+
+        # Initialize variables to ensure they are always in the context
+        values.update({
+            'student': None,
+            'faculty': None,
+            'courses': request.env['op.course'].browse(),
+            'sessions': request.env['op.session'].browse(),
+            'issued_books': request.env['op.book.issue'].browse(),
+        })
 
         if student:
             # Fetch enrolled courses
@@ -64,5 +72,8 @@ class StudentPortal(CustomerPortal):
                 'sessions': sessions,
                 'issued_books': issued_books,
             })
+
+        # For other internal users, no specific data is loaded,
+        # but the page will still render without a KeyError.
 
         return request.render("charge_erp_core.portal_student_dashboard", values)
