@@ -1,6 +1,6 @@
 # Charge ERP Core Module
 
-Welcome to the Charge ERP Core module. This module provides the foundational features for a comprehensive School Information System (SIS) built on Odoo 19. It includes the core data models, security structure, and user interface for managing students, faculty, courses, and other academic entities.
+Welcome to the Charge ERP Core module. This module provides the foundational features for a comprehensive School Information System (SIS) built on Charge ERP (Odoo 19 CE). It includes the core data models, security structure, and user interface for managing students, faculty, courses, and other academic entities.
 
 This module has recently undergone a major "Phase 1" refactoring to establish a robust and secure foundation for future development.
 
@@ -30,7 +30,7 @@ This module has recently undergone a major "Phase 1" refactoring to establish a 
 
 ## Access Control and Security Setup
 
-The security of the Charge ERP Core module is built around a role-based access control system. We have defined three primary roles with specific permissions, in addition to the standard Odoo Administrator.
+The security of the Charge ERP Core module is built around a role-based access control system. We have defined three primary roles with specific permissions, in addition to the standard Charge ERP Administrator.
 
 ### Roles and Permissions
 
@@ -48,7 +48,7 @@ The security of the Charge ERP Core module is built around a role-based access c
 
 4.  **System Administrator (`base.group_system`)**
     - **Permissions**: Full CRUD access to all models.
-    - **Description**: The standard Odoo Administrator group has been granted full permissions for all models in this module. Any user in this group (like the `devops` user) will have complete access, including the ability to see all "New" buttons.
+    - **Description**: The standard Charge ERP Administrator group has been granted full permissions for all models in this module. Any user in this group (like the `devops` user) will have complete access, including the ability to see all "New" buttons.
 
 ### Record-Level Security
 

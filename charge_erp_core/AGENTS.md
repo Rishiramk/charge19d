@@ -1,15 +1,15 @@
 # Agent Instructions for Charge ERP Core
 
-This document provides guidelines and best practices for developers working on the Charge ERP Core module. Following these instructions will ensure consistency, stability, and adherence to Odoo 19 standards.
+This document provides guidelines and best practices for developers working on the Charge ERP Core module. Following these instructions will ensure consistency, stability, and adherence to Charge ERP (Odoo 19 CE) standards.
 
 ## 1. Creating Demo Users
 
-Creating users in Odoo 19 via XML data files requires a specific and careful process, especially when distinguishing between internal users (like Faculty) and portal users (like Students).
+Creating users in Charge ERP (Odoo 19 CE) via XML data files requires a specific and careful process, especially when distinguishing between internal users (like Faculty) and portal users (like Students).
 
 ### Analysis of Security Configuration
 
 *   **`security.xml`**: This file defines our application-specific groups: `group_op_student` and `group_op_faculty`.
-    *   `group_op_student` correctly implies `base.group_portal`, which is the standard Odoo method for creating a specific *type* of portal user. Any user added to `group_op_student` will automatically be treated as a portal user.
+    *   `group_op_student` correctly implies `base.group_portal`, which is the standard Charge ERP method for creating a specific *type* of portal user. Any user added to `group_op_student` will automatically be treated as a portal user.
     *   `group_op_faculty` implies `base.group_user`, correctly making them full internal users.
     *   This file also contains record rules that properly restrict data visibility, for instance, ensuring faculty can only see students within their own department.
 *   **`ir.model.access.csv`**: This file is critical. It grants the actual permissions (read, write, create, delete) for each model to our specific groups.
@@ -124,7 +124,7 @@ The `op.student` model demonstrates the correct and most robust way to create a 
 def action_create_user(self):
     """
     Creates a new portal user for each student in the recordset.
-    This method is idempotent and follows Odoo 19 best practices.
+    This method is idempotent and follows Charge ERP (Odoo 19 CE) best practices.
     It includes a safeguard to handle potential dual-role conflicts from legacy data or environment issues.
     """
     student_group = self.env.ref('charge_erp_core.group_op_student')
@@ -148,7 +148,7 @@ def action_create_user(self):
         # Step 3: Link the new user back to the student record.
         student.user_id = user.id
 ```
-- **Key Point:** The user is created with `share=True`, which signals to Odoo that this is a portal user.
+- **Key Point:** The user is created with `share=True`, which signals to Charge ERP that this is a portal user.
 - **Best Practice (Robustness):** Groups are forcefully set using `(6, 0, [group_id])`. Because `group_op_student` implies `base.group_portal`, this single operation correctly and safely sets the user's access rights, removing any possibility of a conflicting `base.group_user` being present.
 
 ## 2. Extending the School Portal

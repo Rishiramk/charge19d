@@ -5,8 +5,8 @@
     'description': """
         This is the core module for the Charge ERP system.
     """,
-    'author': 'Charge',
-    'website': 'https://www.charge-erp.com',
+    'author': 'Tarcin Robotic',
+    'website': 'https://charge19.tarcin.in',
     'category': 'Education',
     'depends': ['base', 'mail', 'hr', 'portal'],
     'data': [

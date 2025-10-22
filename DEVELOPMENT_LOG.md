@@ -34,7 +34,7 @@ The core data model was strengthened by establishing critical bi-directional rel
 
 ### 2. Course Enrollment Refactoring
 
-To improve clarity and align with Odoo best practices, the student enrollment system was refactored:
+To improve clarity and align with Charge ERP best practices, the student enrollment system was refactored:
 
 -   **Model Rename:** The ambiguous `op.student.course` model was renamed to `op.course.enrollment`.
 -   **Field Rename:** The corresponding `One2many` fields on the student and course models were renamed to the more intuitive `enrollment_ids`.
@@ -65,7 +65,7 @@ To facilitate testing, demonstrations, and future development (like the dashboar
 
 -   **Data Includes:** Departments, Programs, Academic Years, Subjects, Courses, Faculty, Batches, Students, and Course Enrollments.
 -   **Image Placeholders:** The demo files for Students, Faculty, and Programs have been updated to include placeholder image references. This prepares the system to display images once they are added to the `static/img` directory.
--   **Implementation:** The data is loaded via standard Odoo XML files located in the `charge_erp_core/demo/` directory.
+-   **Implementation:** The data is loaded via standard Charge ERP XML files located in the `charge_erp_core/demo/` directory.
 
 ---
 
@@ -75,8 +75,8 @@ During development, two key issues were identified and resolved.
 
 ### Bug 1: Invalid Search View Syntax
 
--   **Issue:** The initial implementation of the new search views used an invalid `<group expand="0">` tag to define the "Group By" options. This is not a valid structure for search views in Odoo and would have caused rendering errors.
--   **Fix:** The invalid `<group>` wrapper was removed from the search views for Students, Faculty, Courses, and Sessions. The "Group By" filters were placed directly within the `<search>` element, which is the standard and correct Odoo implementation.
+-   **Issue:** The initial implementation of the new search views used an invalid `<group expand="0">` tag to define the "Group By" options. This is not a valid structure for search views in Charge ERP and would have caused rendering errors.
+-   **Fix:** The invalid `<group>` wrapper was removed from the search views for Students, Faculty, Courses, and Sessions. The "Group By" filters were placed directly within the `<search>` element, which is the standard and correct Charge ERP implementation.
 
 ### Bug 2: Broken "Sessions" Smart Button on Student Form
 
