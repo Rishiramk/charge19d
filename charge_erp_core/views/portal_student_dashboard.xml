@@ -20,6 +20,9 @@
 
         <!-- 3. Replace the dashboard content -->
         <xpath expr="//div[hasclass('o_portal_my_home')]" position="replace">
+            <!-- Defensively create the 'student' variable if it doesn't exist -->
+            <t t-set="student" t-value="student if 'student' in locals() else None"/>
+
             <div class="o_portal_my_home container py-4">
 
                 <!-- Conditional Rendering: Only show dashboard if the user is a student -->
