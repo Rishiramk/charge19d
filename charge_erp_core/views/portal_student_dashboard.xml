@@ -9,6 +9,16 @@
                      content area, ensuring an error-free and upgrade-safe layout.
     -->
     <template id="portal_student_dashboard" name="Portal My Home: Student Dashboard" inherit_id="portal.portal_my_home" priority="99">
+
+        <!-- 1. Remove the sidebar -->
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="replace"/>
+
+        <!-- 2. Widen the main content area to full width -->
+        <xpath expr="//div[hasclass('o_portal_my_home')]/parent::div" position="attributes">
+            <attribute name="class">col-12</attribute>
+        </xpath>
+
+        <!-- 3. Replace the dashboard content -->
         <xpath expr="//div[hasclass('o_portal_my_home')]" position="replace">
             <div class="o_portal_my_home container py-4">
 
