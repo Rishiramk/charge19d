@@ -5,11 +5,17 @@
         <field name="model">slide.slide</field>
         <field name="inherit_id" ref="website_slides.view_slide_slide_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='main_group']" position="after">
+            <!--
+              Instead of targeting a group by name, which can be unreliable,
+              we now target the 'html_content' field, which is a stable part
+              of the slide form. The new group will be placed directly after it.
+            -->
+            <xpath expr="//field[@name='html_content']" position="after">
                 <group string="Interactive Lesson" name="interactive_lesson_group">
                     <field name="is_interactive_lesson"/>
                     <field name="interactive_html"
-                           attrs="{'invisible': [('is_interactive_lesson', '=', False)], 'required': [('is_interactive_lesson', '=', True)]}"/>
+                           attrs="{'invisible': [('is_interactive_lesson', '=', False)], 'required': [('is_interactive_lesson', '=', True)]}"
+                           placeholder="Paste the full HTML for your interactive lesson here..."/>
                 </group>
             </xpath>
         </field>
