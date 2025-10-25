@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+      This template defines the layout for the interactive lesson content.
+      It ensures a consistent page structure and renders the raw HTML.
+    -->
+    <template id="interactive_lesson_content_container" name="Interactive Lesson Container">
+        <div class="page-container">
+            <div class="main-layout">
+                <div class="content-area o_wslide_interactive_content">
+                    <t t-if="slide.is_interactive_lesson and slide.interactive_html">
+                        <div t-raw="slide.interactive_html"/>
+                    </t>
+                    <t t-else="">
+                        <div class="alert alert-warning" role="alert">
+                            This slide is marked as an interactive lesson, but no HTML content has been provided.
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!--
+      This template inherits the main slide content view from 'website_slides'.
+      It replaces the default slide viewer with our custom interactive lesson
+      container if the 'is_interactive_lesson' flag is true.
+    -->
+    <template id="slide_content_inherited_interactive" inherit_id="website_slides.slide_content">
+        <xpath expr="//div[hasclass('o_wslide_fs_content_render')]" position="replace">
+            <t t-if="slide.is_interactive_lesson">
+                <t t-call="custom_interactive_lessons.interactive_lesson_content_container"/>
+            </t>
+            <t t-else="">
+                <!-- This is the original content from website_slides. Keep it for non-interactive slides. -->
+                <div class="o_wslide_fs_content_render d-flex flex-column h-100"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>
